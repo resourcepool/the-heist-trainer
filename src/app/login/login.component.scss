@@ -1,0 +1,23 @@
+.login-component {
+  width: 40vw;
+  min-width: 400px;
+  border: 1px solid black;
+  margin: auto;
+
+  .title {
+    text-align: center;
+
+    h1 {
+      text-transform: uppercase;
+      margin-bottom: 15px;
+    }
+
+    .subtitle {
+      text-align: center;
+    }
+  }
+
+  .btn__submit {
+    text-align: center;
+  }
+}
