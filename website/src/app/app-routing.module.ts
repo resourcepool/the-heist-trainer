@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { HomeGuard } from './_guards/home.guard';
+import { LogoutGuard } from './_guards/logout.guard';
 
 
 const routes: Routes = [
@@ -15,6 +16,11 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
+  },
+  {
+    path: 'logout',
+    redirectTo: 'login',
+    canActivate: [LogoutGuard],
   },
   {
     path: '**',

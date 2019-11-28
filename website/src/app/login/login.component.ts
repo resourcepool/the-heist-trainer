@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService } from '../_services/authentication.service';
 import { Router } from '@angular/router';
+import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-login',
@@ -16,6 +17,8 @@ export class LoginComponent implements OnInit {
   ) { }
 
   loginForm: FormGroup = new FormGroup({});
+  error: string;
+  loading: boolean;
 
   ngOnInit() {
     this.loginForm.addControl('username', new FormControl(null, [Validators.required]));
@@ -23,14 +26,21 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log('submit');
+    this.loading = true;
     const username = this.loginForm.get('username').value;
     const password = this.loginForm.get('password').value;
-    const logged = this._authService.authenticate(username, password);
-    console.log(logged);
-    if (logged) {
-      this._router.navigate(['/']);
-    }
+    this._authService.authenticate(username, password)
+      .pipe(first())
+      .subscribe(
+        () => {
+          this._router.navigate(['/']);
+        },
+        response  => {
+          this.error = response.status === 401 ? 'The username/password is invalid' : 'An error occured';
+          this.loading = false;
+        },
+        () => { this.loading = false; }
+      );
   }
 
 }

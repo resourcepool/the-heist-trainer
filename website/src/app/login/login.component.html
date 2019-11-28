@@ -19,7 +19,12 @@
     <input type="password" id="logpass" autocomplete="new-password" placeholder="" formControlName="password">
   </div>
 
-  <div class="submit__field">
-    <button class="btn__submit" type="submit" (click)="onSubmit()" [disabled]="loginForm.invalid">Login</button>
+  <div class="error" *ngIf="error">
+    {{ error }}
+  </div>
+
+  <div class="submit__field" align="center">
+    <loader size="0.5" [hidden]="!loading"></loader>
+    <button class="btn__submit" type="submit" (click)="onSubmit()" [hidden]="loading" [disabled]="loginForm.invalid">Login</button>
   </div>
 </div>
