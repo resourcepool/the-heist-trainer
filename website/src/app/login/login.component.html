@@ -1,16 +1,25 @@
-<div class="login-component">
+<div class="login-component" [formGroup]="loginForm">
+
+  <div class="logo">
+    <img src="/assets/logo.png" alt="">
+  </div>
+
   <div class="title">
     <h1>National Security Agency</h1>
     <span>High Level Access required</span>
   </div>
 
-  <div>
-    <label for="username">Username :</label>
-    <input type="text" id="username" autocomplete="new-password">
+  <div class="login__field">
+    <label for="loguser">Username :</label>
+    <input type="text" id="loguser" autocomplete="new-password" placeholder="ex : smith" formControlName="username">
   </div>
-  <div>
-    <label for="password">Password :</label>
-    <input type="password" id="password" autocomplete="new-password">
+
+  <div class="login__field">
+    <label for="logpass">Password :</label>
+    <input type="password" id="logpass" autocomplete="new-password" placeholder="" formControlName="password">
   </div>
-  <button class="btn__submit">Login</button>
+
+  <div class="submit__field">
+    <button class="btn__submit" type="submit" (click)="onSubmit()" [disabled]="loginForm.invalid">Login</button>
+  </div>
 </div>

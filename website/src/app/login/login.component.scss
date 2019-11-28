@@ -1,8 +1,19 @@
 .login-component {
   width: 40vw;
   min-width: 400px;
-  border: 1px solid black;
+  //border: 1px solid black;
+  background: rgba(0,0,0,0.2);
+  padding: 30px;
   margin: auto;
+
+  .logo {
+    width: 100%;
+    text-align: center;
+
+    img {
+      width: 50%;
+    }
+  }
 
   .title {
     text-align: center;
@@ -17,7 +28,45 @@
     }
   }
 
-  .btn__submit {
-    text-align: center;
+  .login__field {
+    padding: 15px;
+
+    label {
+      font-size: 1.1em;
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    input {
+      width: calc(100% - 20px);
+      font-size: 1.1em;
+      padding: 10px 5px;
+    }
+  }
+
+  .submit__field {
+    padding: 10px 25%;
+    .btn__submit {
+      width: 100%;
+      margin:auto;
+      padding: 10px 0;
+      font-size: 1.2em;
+      text-align: center;
+      background: #841010;
+      border: none;
+      color: white;
+      font-weight: bold;
+      text-transform: uppercase;
+      cursor: pointer;
+
+      &:hover, &:active {
+        background: #901010;
+      }
+      &:disabled {
+        background: #490909;
+        color: #555555;
+        cursor: not-allowed;
+      }
+    }
   }
 }
