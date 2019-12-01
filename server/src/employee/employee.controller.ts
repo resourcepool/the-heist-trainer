@@ -14,7 +14,7 @@ export class EmployeeController {
     }
 
     @Get('/:userId')
-    getEmployee(@Param('userId', new ParseUUIDPipe({version: '5'})) userId): Employee {
+    getEmployee(@Param('userId', new ParseUUIDPipe({version: '4'})) userId): Employee {
         try {
             return this.employeeService.getEmployee(userId);
         } catch (e) {
