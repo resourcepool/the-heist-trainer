@@ -1,0 +1,32 @@
+:host {
+  display: inline-flex;
+
+  .folder {
+    width: 130px;
+    text-align: center;
+    padding: 20px;
+    border: 1px solid transparent;
+
+    .folder_icon {
+      margin: auto;
+      width: 100px;
+      height: 100px;
+      background: url('/assets/folder_icon_closed.png') center center;
+      background-size: contain;
+    }
+
+    &:active {
+      border: 1px dashed #2c6bd8;
+
+      .folder_icon {
+        background: url('/assets/folder_icon_open.png') center center;
+        background-size: contain;
+      }
+    }
+
+    .title {
+      text-align: center;
+      font-size: 1.1em;
+    }
+  }
+}

@@ -9,13 +9,19 @@ import { AuthenticationService } from './_services/authentication.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LoaderComponent } from './shared';
 import { HttpClientModule } from '@angular/common/http';
+import { FolderComponent } from './folders/folder/folder.component';
+import { FolderDetailComponent } from './folder-detail/folder-detail.component';
+import { FoldersComponent } from './folders/folders.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     HomeComponent,
-    LoaderComponent
+    LoaderComponent,
+    FolderComponent,
+    FolderDetailComponent,
+    FoldersComponent,
   ],
   imports: [
     BrowserModule,

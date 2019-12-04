@@ -2,7 +2,12 @@
 
   font-family: monospace, "Lucida Console", sans-serif;
 
+  .content {
+    min-height: calc(100vh - 70px);
+  }
+
   .footer {
+    height: 0;
     text-align: center;
     color: white;
     font-size: 0.8em;

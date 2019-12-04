@@ -4,14 +4,26 @@ import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { HomeGuard } from './_guards/home.guard';
 import { LogoutGuard } from './_guards/logout.guard';
+import { FoldersComponent } from './folders/folders.component';
+import { FolderComponent } from './folders/folder/folder.component';
+import { FolderDetailComponent } from './folder-detail/folder-detail.component';
 
 
 const routes: Routes = [
   {
     path: '',
-    pathMatch: 'full',
     component: HomeComponent,
     canActivate: [HomeGuard],
+    children: [
+      {
+        path: '',
+        component: FoldersComponent,
+      },
+      {
+        path: 'folder',
+        component: FolderDetailComponent,
+      },
+    ]
   },
   {
     path: 'login',
@@ -29,7 +41,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { enableTracing: true })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
