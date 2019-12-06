@@ -8,6 +8,7 @@ import { FoldersComponent } from './folders/folders.component';
 import { FolderComponent } from './folders/folder/folder.component';
 import { FolderDetailComponent } from './folder-detail/folder-detail.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { TnsaEmployeesComponent } from './tnsa-employees/tnsa-employees.component';
 
 
 const routes: Routes = [
@@ -19,6 +20,10 @@ const routes: Routes = [
       {
         path: '',
         component: FoldersComponent,
+      },
+      {
+        path: 'folder/tnsa-employees',
+        component: TnsaEmployeesComponent,
       },
       {
         path: 'folder/:folder',

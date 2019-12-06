@@ -16,7 +16,7 @@ export class AuthenticationController {
     @Post('login')
     login(@Body() loginDto: LoginDto) {
         try {
-            this.authenticationService.login(loginDto.username, loginDto.password);
+            return this.authenticationService.login(loginDto.username, loginDto.password);
         } catch (e) {
             throw new UnauthorizedException(e);
         }

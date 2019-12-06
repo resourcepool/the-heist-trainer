@@ -1,0 +1,39 @@
+:host {
+
+  .previous {
+    text-align: right;
+    a {
+      color: red;
+    }
+  }
+
+  .content {
+    width: 90%;
+    margin: 20px auto;
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+
+      thead {
+        tr {
+          background: black;
+        }
+        td {
+          font-weight: bold;
+        }
+      }
+
+      tbody {
+        tr:nth-child(odd) {
+          background: rgba(255, 255, 255, 0.1);
+        }
+      }
+
+      td {
+        padding: 10px;
+        border: 2px solid white;
+      }
+    }
+  }
+}

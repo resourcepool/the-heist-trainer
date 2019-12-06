@@ -51,5 +51,14 @@ export const folders = {
         name: 'Alien Medical',
       },
     ]
+  },
+  "tnsa-employees": {
+    files: [
+      {
+        type: 'url',
+        url: '/tnsa-employees',
+        name: 'TNSA EMPLOYEES',
+      },
+    ]
   }
 };

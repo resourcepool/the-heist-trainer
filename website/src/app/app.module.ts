@@ -13,6 +13,7 @@ import { FolderComponent } from './folders/folder/folder.component';
 import { FolderDetailComponent } from './folder-detail/folder-detail.component';
 import { FoldersComponent } from './folders/folders.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { TnsaEmployeesComponent } from './tnsa-employees/tnsa-employees.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     FolderDetailComponent,
     FoldersComponent,
     PageNotFoundComponent,
+    TnsaEmployeesComponent,
   ],
   imports: [
     BrowserModule,
