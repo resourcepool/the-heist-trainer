@@ -21,6 +21,9 @@ export class LoginComponent implements OnInit {
   loading: boolean;
 
   ngOnInit() {
+    if (this._authService.isLogged()) {
+      this._router.navigate(['/']);
+    }
     this.loginForm.addControl('username', new FormControl(null, [Validators.required]));
     this.loginForm.addControl('password', new FormControl(null, [Validators.required]));
   }

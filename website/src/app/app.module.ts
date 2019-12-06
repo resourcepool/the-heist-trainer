@@ -12,6 +12,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FolderComponent } from './folders/folder/folder.component';
 import { FolderDetailComponent } from './folder-detail/folder-detail.component';
 import { FoldersComponent } from './folders/folders.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { FoldersComponent } from './folders/folders.component';
     FolderComponent,
     FolderDetailComponent,
     FoldersComponent,
+    PageNotFoundComponent,
   ],
   imports: [
     BrowserModule,

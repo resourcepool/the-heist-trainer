@@ -1,5 +1,18 @@
 :host {
-  display: inline-flex;
+
+  .previous {
+    text-align: right;
+    a {
+      color: darkred;
+    }
+  }
+
+  .folders {
+    display: flex;
+    width: 700px;
+    flex-wrap: wrap;
+    margin: auto;
+  }
 
   .folder {
     width: 130px;
@@ -7,21 +20,20 @@
     padding: 20px;
     border: 1px solid transparent;
 
+    .folder_link {
+      color: white;
+      text-decoration: none;
+    }
+
     .folder_icon {
       margin: auto;
       width: 100px;
       height: 100px;
-      background: url('/assets/folder_icon_closed.png') center center;
-      background-size: contain;
+      display: block;
     }
 
     &:active {
       border: 1px dashed #2c6bd8;
-
-      .folder_icon {
-        background: url('/assets/folder_icon_open.png') center center;
-        background-size: contain;
-      }
     }
 
     .title {

@@ -7,6 +7,7 @@ import { LogoutGuard } from './_guards/logout.guard';
 import { FoldersComponent } from './folders/folders.component';
 import { FolderComponent } from './folders/folder/folder.component';
 import { FolderDetailComponent } from './folder-detail/folder-detail.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 
 const routes: Routes = [
@@ -20,9 +21,13 @@ const routes: Routes = [
         component: FoldersComponent,
       },
       {
-        path: 'folder',
+        path: 'folder/:folder',
         component: FolderDetailComponent,
       },
+      {
+        path: '**',
+        component: PageNotFoundComponent,
+      }
     ]
   },
   {
@@ -41,7 +46,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { enableTracing: true })],
+  imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

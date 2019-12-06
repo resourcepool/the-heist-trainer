@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { User } from '../_models/user.model';
 import { Observable } from 'rxjs';
@@ -7,8 +7,6 @@ import { map } from 'rxjs/operators';
 
 @Injectable()
 export class AuthenticationService {
-
-  private _isLogged = false;
 
   constructor(
     private http: HttpClient,
@@ -26,7 +24,6 @@ export class AuthenticationService {
         if (data) {
           localStorage.setItem('user', JSON.stringify(data));
         }
-        this._isLogged = true;
         return data;
       }));
   }
@@ -36,7 +33,8 @@ export class AuthenticationService {
    * @returns boolean if user is logged
    */
   isLogged(): boolean {
-    return this._isLogged;
+    console.log(localStorage.getItem('user'));
+    return Boolean(localStorage.getItem('user'));
   }
 
   getUser(): boolean {
@@ -46,6 +44,5 @@ export class AuthenticationService {
 
   logout() {
     localStorage.removeItem('user');
-    this._isLogged = false;
   }
 }

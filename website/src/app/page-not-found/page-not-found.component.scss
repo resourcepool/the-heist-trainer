@@ -1,0 +1,18 @@
+:host {
+  .access-denied {
+    text-align: center;
+    h1 {
+      color: #CC0000;
+      text-transform: uppercase;
+    }
+
+    h3 {
+      text-transform: uppercase;
+    }
+
+    .back {
+      margin-top: 50px;
+      color: white;
+    }
+  }
+}

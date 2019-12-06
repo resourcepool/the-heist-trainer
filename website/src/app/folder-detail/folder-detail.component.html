@@ -1,3 +1,16 @@
-<div class="folder">
-  FOLDER DETAIL
+<div class="folder-detail">
+  <div class="previous">
+    <a routerLink="/">BACK TO MAIN PAGE</a>
+  </div>
+
+  <div class="folders">
+    <ng-container *ngFor="let file of folder.files">
+      <div class="folder">
+        <a [href]="file.url" target="_blank" class="folder_link">
+          <img [src]="'/assets/icon-'+ file.type +'.png'" alt="" class="folder_icon">
+          {{ file.name }}
+        </a>
+      </div>
+    </ng-container>
+  </div>
 </div>
