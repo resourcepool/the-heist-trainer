@@ -18,9 +18,9 @@ public:
   void tick();
 private:
   NFCService* nfcService;
-  uint8_t parsedBytes;
-  uint8_t shownBytes;
-  char cmdBuffer[128];
+  uint16_t parsedBytes;
+  uint16_t shownBytes;
+  char cmdBuffer[512];
   void showHelp();
   void parseCommand();
   void processCommand();

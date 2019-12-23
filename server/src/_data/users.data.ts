@@ -4,11 +4,17 @@ export const data = [
     firstName: 'Danny',
     lastName: 'Ocean',
     accessLevel: 2,
+    dateOfBirth: [2000, 1, 15],
+    dateOfHiring: [2013, 1, 7],
+    lastLogin: [2019, 11, 23, 15, 19, 25],
   },
   {
     userId: '4c78e64b-1dcd-40ba-999e-74e05d6459a2',
     firstName: 'Michael',
     lastName: 'Scofield',
     accessLevel: 6,
+    dateOfBirth: [1989, 8, 27],
+    dateOfHiring: [2001, 8, 10],
+    lastLogin: [2019, 10, 20, 10, 20, 37],
   },
 ];

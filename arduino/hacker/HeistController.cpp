@@ -33,7 +33,7 @@ void HeistController::parseCommand() {
       while (Serial.available()) {
         cmdBuffer[parsedBytes++] = Serial.read();
       }
-      for (uint8_t i = shownBytes; i < parsedBytes; i++) {
+      for (uint16_t i = shownBytes; i < parsedBytes; i++) {
         Serial.print(cmdBuffer[i]);
       }
       shownBytes = parsedBytes;
@@ -91,28 +91,20 @@ void HeistController::writeNFCBlock() {
 }
 
 void HeistController::resetNFCTag() {
-  Serial.println("Enter Raw Employee Hex Dump line by line");
+  Serial.println("Enter Raw Employee Hex Dump");
   Serial.print("> ");
   parseCommand();
   byte firstName[32];
-  getHexBytes(cmdBuffer, firstName, 32);
+  getHexBytes(cmdBuffer, firstName, 0, 32);
   Serial.println("OK Line 1");
-  Serial.print("> ");
-  parseCommand();
   byte lastName[32] = "";
-  getHexBytes(cmdBuffer, lastName, 32);
-  
+  getHexBytes(cmdBuffer, lastName, 32, 32);
   Serial.println("OK Line 2");
-  Serial.print("> ");
-  parseCommand();
   byte employeeId[16];
-  getHexBytes(cmdBuffer, employeeId, 16);
-  
+  getHexBytes(cmdBuffer, employeeId, 64, 16);
   Serial.println("OK Line 3");
-  Serial.print("> ");
-  parseCommand();
   byte dates[16];
-  getHexBytes(cmdBuffer, dates, 16);
+  getHexBytes(cmdBuffer, dates, 80, 16);
   Serial.println("OK Line 4");
   Serial.println("Place card on device when ready");
 
