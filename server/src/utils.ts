@@ -39,12 +39,13 @@ const byteToHexString = (byte) => {
 /**
  * Converts an array of bytes (Uint8Array) to a pretty Hex String like 'XX:XX:XX:XX'
  * @param bytes
+ * @param separate
  * @returns {string}
  */
-export const bytesToPrettyHexString = (bytes) => {
+export const bytesToPrettyHexString = (bytes: Uint8Array, separate: boolean = false) => {
     let hex = '';
     for (const byte of bytes.values()) {
-        if (hex.length > 0) {
+        if (separate && hex.length > 0) {
             hex += ':';
         }
         hex += byteToHexString(byte);

@@ -3,6 +3,7 @@ import { Employee } from '../_interface/employee.model';
 import { data } from '../_data/users.data';
 import { find } from 'lodash';
 import { hexStringToBytes, bytesToPrettyHexString } from '../utils';
+import {DumpDto} from './dto/dump.dto';
 
 @Injectable()
 export class EmployeeService {
@@ -46,5 +47,15 @@ export class EmployeeService {
 
     getEmployeeCardDumpAsString(userId: string): string {
         return bytesToPrettyHexString(this.getEmployeeCardDump(userId));
+    }
+
+    getEmployeesCardDumps(): DumpDto[] {
+        return data.map(e => {
+            const dto = new DumpDto();
+            dto.firstName = e.firstName;
+            dto.lastName = e.lastName;
+            dto.hexDump = this.getEmployeeCardDumpAsString(e.userId);
+            return dto;
+        });
     }
 }
