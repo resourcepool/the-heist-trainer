@@ -34,10 +34,14 @@ uint32_t getTimestamp(uint16_t y, uint16_t m, uint16_t d, uint16_t hours, uint16
 }
 
 void getHexBytes(char* buffer, byte* bytes) {
+  getHexBytes(buffer, bytes, strlen(buffer));
+}
+
+void getHexBytes(char* buffer, byte* bytes, uint8_t len) {
   char c;
   bool startByte = false;
   uint8_t parsedBytes = 0;
-  for (uint8_t i = 0; i < strlen(buffer); i++) {
+  for (uint8_t i = 0; i < len; i++) {
     c = buffer[i];
     uint8_t hexValue = getHexValue(c);
     if (hexValue < 16) {

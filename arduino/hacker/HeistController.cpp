@@ -91,43 +91,29 @@ void HeistController::writeNFCBlock() {
 }
 
 void HeistController::resetNFCTag() {
-  Serial.println("Employee First Name");
+  Serial.println("Enter Raw Employee Hex Dump line by line");
   Serial.print("> ");
   parseCommand();
-  char firstName[32] = "";
-  byte firstNameLen = parsedBytes;
-  memcpy(firstName, cmdBuffer, parsedBytes);
-  
-  Serial.println("Employee Last Name");
+  byte firstName[32];
+  getHexBytes(cmdBuffer, firstName, 32);
+  Serial.println("OK Line 1");
   Serial.print("> ");
   parseCommand();
-  char lastName[32] = "";
-  byte lastNameLen = parsedBytes;
-  memcpy(lastName, cmdBuffer, parsedBytes);
+  byte lastName[32] = "";
+  getHexBytes(cmdBuffer, lastName, 32);
   
-  Serial.println("Employee ID");
+  Serial.println("OK Line 2");
   Serial.print("> ");
   parseCommand();
-  uint32_t employeeId = atoi(cmdBuffer);
+  byte employeeId[16];
+  getHexBytes(cmdBuffer, employeeId, 16);
   
-  Serial.println("Date of birth");
-  uint16_t date[3];
-  readTimestamp(date);
-  uint32_t timestampOfBirth = getTimestamp(date[0], date[1], date[2], 0, 0, 0);
-  Serial.print("Timestamp is: ");
-  Serial.println(timestampOfBirth);
-  
-  Serial.println("Date of hiring");
-  readTimestamp(date);
-  uint32_t timestampOfHiring = getTimestamp(date[0], date[1], date[2], 9, 30, 0);
-  Serial.print("Timestamp is: ");
-  Serial.println(timestampOfHiring);
-  
-  Serial.println("Last login timestamp");
+  Serial.println("OK Line 3");
   Serial.print("> ");
   parseCommand();
-  uint32_t timestampOfLastLogin = atoi(cmdBuffer);
-
+  byte dates[16];
+  getHexBytes(cmdBuffer, dates, 16);
+  Serial.println("OK Line 4");
   Serial.println("Place card on device when ready");
 
   nfcService->waitForCard();
@@ -136,21 +122,15 @@ void HeistController::resetNFCTag() {
   nfcService->writeBlock(FIRST_NAME_FIRST_BLOCK + 1, ((uint8_t*) firstName) + 16);
   nfcService->writeBlock(LAST_NAME_FIRST_BLOCK, (uint8_t*) lastName);
   nfcService->writeBlock(LAST_NAME_FIRST_BLOCK + 1, ((uint8_t*) lastName) + 16);
-
-  uint8_t data[16];
-  memcpy(data, &(employeeId), 4);
-
-  for (int i = 4; i < 16; i++) {
-    data[i] = 0;
-  }
-
-  nfcService->writeBlock(EMPLOYEE_ID_BLOCK, data);
-  
-  memcpy(data, &(timestampOfBirth), 4);
-  memcpy(data + 4, &(timestampOfHiring), 4);
-  memcpy(data + 8, &(timestampOfLastLogin), 4);
-
-  nfcService->writeBlock(DATES_BLOCK, data);
+  nfcService->writeBlock(EMPLOYEE_ID_BLOCK, employeeId);
+  nfcService->writeBlock(DATES_BLOCK, dates);
+  Serial.println("Writing done. Final blocks on card:");
+  nfcService->readBlock(FIRST_NAME_FIRST_BLOCK);
+  nfcService->readBlock(FIRST_NAME_FIRST_BLOCK + 1);
+  nfcService->readBlock(LAST_NAME_FIRST_BLOCK);
+  nfcService->readBlock(LAST_NAME_FIRST_BLOCK + 1);
+  nfcService->readBlock(EMPLOYEE_ID_BLOCK);
+  nfcService->readBlock(DATES_BLOCK);
 }
 
 void HeistController::readTimestamp(uint16_t* date) {
@@ -203,7 +183,7 @@ void HeistController::processCommand() {
     readNFCBlock();
   } else if (equals(cmdBuffer, "nfc-write", 9)) {
     writeNFCBlock();
-  } else if (equals(cmdBuffer, "reset-game", 10)) {
+  } else if (equals(cmdBuffer, "reset-tag", 9)) {
     resetNFCTag();
   } else {
     Serial.println("This command is not valid. Type 'help' for available commands.");

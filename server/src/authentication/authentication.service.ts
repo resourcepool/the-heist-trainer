@@ -21,6 +21,6 @@ export class AuthenticationService {
             throw new NotFoundException('User not found');
         }
 
-        return user.accessLevel === SAFE_ACCESS_LEVEL;
+        return user.accessLevel >= SAFE_ACCESS_LEVEL;
     }
 }

@@ -20,7 +20,7 @@ private:
   NFCService* nfcService;
   uint8_t parsedBytes;
   uint8_t shownBytes;
-  char cmdBuffer[64];
+  char cmdBuffer[128];
   void showHelp();
   void parseCommand();
   void processCommand();
