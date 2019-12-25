@@ -1,6 +1,5 @@
 #include <Arduino.h>
 #include "utils.h"
-#include "BruteForceService.h"
 
 #define FIRST_NAME_FIRST_BLOCK 4
 #define LAST_NAME_FIRST_BLOCK 8
@@ -9,7 +8,7 @@
 
 
 class NFCService;
-
+class BruteForceService;
 
 
 class HeistController {

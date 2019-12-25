@@ -155,5 +155,3 @@ void BruteForceService::sendTouch(byte touch) {
             break;
     }
 }
-
-
