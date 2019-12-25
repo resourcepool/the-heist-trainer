@@ -1,186 +1,186 @@
 #include "HeistController.h"
 #include "NFCService.h"
 #include "utils.h"
+#include "BruteForceService.h"
 
 HeistController::HeistController() {
-  nfcService = new NFCService();
+    nfcService = new NFCService();
+    bruteForceService = new BruteForceService();
 }
 
 void HeistController::init() {
-  Serial.begin(115200);
-  nfcService->init();
-  Serial.println("\r\nWelcome to our Heist Hacking Device!");
-  showHelp();
-  Serial.println("Enter command, and hit Return:");
-  Serial.print(">");
-  Serial.flush();
+    Serial.begin(115200);
+    nfcService->init();
+    Serial.println("\r\nWelcome to our Heist Hacking Device!");
+    showHelp();
+    Serial.println("Enter command, and hit Return:");
+    Serial.print(">");
+    Serial.flush();
 }
-
 
 
 void HeistController::tick() {
-  parseCommand();
-  processCommand();
+    parseCommand();
+    processCommand();
 }
 
 void HeistController::parseCommand() {
-  parsedBytes = 0;
-  shownBytes = 0;
-  bool crlf = false;
-  bool lfcr = false;
-  while (!crlf && !lfcr) {
-    if (Serial.available()) {
-      while (Serial.available()) {
-        cmdBuffer[parsedBytes++] = Serial.read();
-      }
-      for (uint16_t i = shownBytes; i < parsedBytes; i++) {
-        Serial.print(cmdBuffer[i]);
-      }
-      shownBytes = parsedBytes;
+    parsedBytes = 0;
+    shownBytes = 0;
+    bool crlf = false;
+    bool lfcr = false;
+    while (!crlf && !lfcr) {
+        if (Serial.available()) {
+            while (Serial.available()) {
+                cmdBuffer[parsedBytes++] = Serial.read();
+            }
+            for (uint16_t i = shownBytes; i < parsedBytes; i++) {
+                Serial.print(cmdBuffer[i]);
+            }
+            shownBytes = parsedBytes;
+        }
+        crlf = parsedBytes >= 2 && (cmdBuffer[parsedBytes - 2] == '\r' && cmdBuffer[parsedBytes - 1] == '\n');
+        lfcr = parsedBytes >= 2 && (cmdBuffer[parsedBytes - 2] == '\n' && cmdBuffer[parsedBytes - 1] == '\r');
     }
-    crlf = parsedBytes >= 2 && (cmdBuffer[parsedBytes - 2] == '\r' && cmdBuffer[parsedBytes - 1] == '\n');
-    lfcr = parsedBytes >= 2 && (cmdBuffer[parsedBytes - 2] == '\n' && cmdBuffer[parsedBytes - 1] == '\r');
-  }
 }
 
 void HeistController::showHelp() {
-  Serial.println("Commands available:");
-  Serial.println("'bruteforce': Perform a bruteforce attack using Digital I/O");
-  Serial.println("'nfc-dump': dump memory of MiFare Classic NFC Tag");
-  Serial.println("'nfc-read': read a memory-block on a MiFare Classic NFC Tag");
-  Serial.println("'nfc-write': write a memory-block on a MiFare Classic NFC Tag");
-  Serial.println("'help': get Help");
+    Serial.println("Commands available:");
+    Serial.println("'bruteforce': Perform a bruteforce attack using Digital I/O");
+    Serial.println("'nfc-dump': dump memory of MiFare Classic NFC Tag");
+    Serial.println("'nfc-read': read a memory-block on a MiFare Classic NFC Tag");
+    Serial.println("'nfc-write': write a memory-block on a MiFare Classic NFC Tag");
+    Serial.println("'help': get Help");
 }
 
 void HeistController::bruteforce() {
-  // TODO
-  Serial.println("Not implemented yet.");
+    bruteForceService->startBruteForce();
 }
 
 void HeistController::writeNFCBlock() {
-  Serial.println("Which memory block would you like to write? (0-63)");
-  Serial.print("> ");
-  parseCommand();
-  uint8_t block = atoi(cmdBuffer);
-  if (block >= 64) {
-    Serial.println("Wrong block. Only valid blocks are supported.");
-    return;
-  }
-  if (block % 4 == 3) {
-    Serial.println("This block is a permissions block. Are you sure you want to override it? (y/n)");
+    Serial.println("Which memory block would you like to write? (0-63)");
+    Serial.print("> ");
     parseCommand();
-    if (!equals(cmdBuffer, "y", 1)) {
-      Serial.println("Aborted");
-      return;
+    uint8_t block = atoi(cmdBuffer);
+    if (block >= 64) {
+        Serial.println("Wrong block. Only valid blocks are supported.");
+        return;
     }
-  }
-  Serial.println("Please enter the hex value of the new block, and hit return.");
-  Serial.println("Example: FFEEDDCC-BBAA9988-77665544-33221100");
-  Serial.print("> ");
-  parseCommand();
-  byte data[16];
-  getHexBytes(cmdBuffer, data);
-  nfcService->waitForCard();
-  nfcService->readBlock(block);
-  Serial.println("Writing new block:");
-  bool success = nfcService->writeBlock(block, data);
-  if (success) {
-    Serial.println("Block written successfully");
+    if (block % 4 == 3) {
+        Serial.println("This block is a permissions block. Are you sure you want to override it? (y/n)");
+        parseCommand();
+        if (!equals(cmdBuffer, "y", 1)) {
+            Serial.println("Aborted");
+            return;
+        }
+    }
+    Serial.println("Please enter the hex value of the new block, and hit return.");
+    Serial.println("Example: FFEEDDCC-BBAA9988-77665544-33221100");
+    Serial.print("> ");
+    parseCommand();
+    byte data[16];
+    getHexBytes(cmdBuffer, data);
+    nfcService->waitForCard();
     nfcService->readBlock(block);
-  }
+    Serial.println("Writing new block:");
+    bool success = nfcService->writeBlock(block, data);
+    if (success) {
+        Serial.println("Block written successfully");
+        nfcService->readBlock(block);
+    }
 }
 
 void HeistController::resetNFCTag() {
-  Serial.println("Enter Raw Employee Hex Dump");
-  Serial.print("> ");
-  parseCommand();
-  byte firstName[32];
-  getHexBytes(cmdBuffer, firstName, 0, 32);
-  Serial.println("OK Line 1");
-  byte lastName[32] = "";
-  getHexBytes(cmdBuffer, lastName, 32, 32);
-  Serial.println("OK Line 2");
-  byte employeeId[16];
-  getHexBytes(cmdBuffer, employeeId, 64, 16);
-  Serial.println("OK Line 3");
-  byte dates[16];
-  getHexBytes(cmdBuffer, dates, 80, 16);
-  Serial.println("OK Line 4");
-  Serial.println("Place card on device when ready");
+    Serial.println("Enter Raw Employee Hex Dump");
+    Serial.print("> ");
+    parseCommand();
+    byte firstName[32];
+    getHexBytes(cmdBuffer, firstName, 0, 32);
+    Serial.println("OK Line 1");
+    byte lastName[32] = "";
+    getHexBytes(cmdBuffer, lastName, 32, 32);
+    Serial.println("OK Line 2");
+    byte employeeId[16];
+    getHexBytes(cmdBuffer, employeeId, 64, 16);
+    Serial.println("OK Line 3");
+    byte dates[16];
+    getHexBytes(cmdBuffer, dates, 80, 16);
+    Serial.println("OK Line 4");
+    Serial.println("Place card on device when ready");
 
-  nfcService->waitForCard();
+    nfcService->waitForCard();
 
-  nfcService->writeBlock(FIRST_NAME_FIRST_BLOCK, (uint8_t*) firstName);
-  nfcService->writeBlock(FIRST_NAME_FIRST_BLOCK + 1, ((uint8_t*) firstName) + 16);
-  nfcService->writeBlock(LAST_NAME_FIRST_BLOCK, (uint8_t*) lastName);
-  nfcService->writeBlock(LAST_NAME_FIRST_BLOCK + 1, ((uint8_t*) lastName) + 16);
-  nfcService->writeBlock(EMPLOYEE_ID_BLOCK, employeeId);
-  nfcService->writeBlock(DATES_BLOCK, dates);
-  Serial.println("Writing done. Final blocks on card:");
-  nfcService->readBlock(FIRST_NAME_FIRST_BLOCK);
-  nfcService->readBlock(FIRST_NAME_FIRST_BLOCK + 1);
-  nfcService->readBlock(LAST_NAME_FIRST_BLOCK);
-  nfcService->readBlock(LAST_NAME_FIRST_BLOCK + 1);
-  nfcService->readBlock(EMPLOYEE_ID_BLOCK);
-  nfcService->readBlock(DATES_BLOCK);
+    nfcService->writeBlock(FIRST_NAME_FIRST_BLOCK, (uint8_t *) firstName);
+    nfcService->writeBlock(FIRST_NAME_FIRST_BLOCK + 1, ((uint8_t *) firstName) + 16);
+    nfcService->writeBlock(LAST_NAME_FIRST_BLOCK, (uint8_t *) lastName);
+    nfcService->writeBlock(LAST_NAME_FIRST_BLOCK + 1, ((uint8_t *) lastName) + 16);
+    nfcService->writeBlock(EMPLOYEE_ID_BLOCK, employeeId);
+    nfcService->writeBlock(DATES_BLOCK, dates);
+    Serial.println("Writing done. Final blocks on card:");
+    nfcService->readBlock(FIRST_NAME_FIRST_BLOCK);
+    nfcService->readBlock(FIRST_NAME_FIRST_BLOCK + 1);
+    nfcService->readBlock(LAST_NAME_FIRST_BLOCK);
+    nfcService->readBlock(LAST_NAME_FIRST_BLOCK + 1);
+    nfcService->readBlock(EMPLOYEE_ID_BLOCK);
+    nfcService->readBlock(DATES_BLOCK);
 }
 
-void HeistController::readTimestamp(uint16_t* date) {
-  Serial.println("year (yyyy)");
-  Serial.print("> ");
-  parseCommand();
-  date[0] = atoi(cmdBuffer);
-  Serial.println("month (mm)");
-  Serial.print("> ");
-  parseCommand();
-  date[1] = atoi(cmdBuffer);
-  Serial.println("day (DD)");
-  Serial.print("> ");
-  parseCommand();
-  date[2] = atoi(cmdBuffer);
+void HeistController::readTimestamp(uint16_t *date) {
+    Serial.println("year (yyyy)");
+    Serial.print("> ");
+    parseCommand();
+    date[0] = atoi(cmdBuffer);
+    Serial.println("month (mm)");
+    Serial.print("> ");
+    parseCommand();
+    date[1] = atoi(cmdBuffer);
+    Serial.println("day (DD)");
+    Serial.print("> ");
+    parseCommand();
+    date[2] = atoi(cmdBuffer);
 }
 
 void HeistController::readNFCBlock() {
-  Serial.println("Which memory block would you like to read? (0-63)");
-  Serial.print("> ");
-  parseCommand();
-  uint8_t block = atoi(cmdBuffer);
-  if (block >= 64) {
-    Serial.println("Wrong block. Only valid blocks are supported.");
-    return;
-  }
-  nfcService->waitForCard();
-  nfcService->readBlock(block);
-  Serial.println("Would you like to read another block? (y/n)");
-  parseCommand();
-  if (equals(cmdBuffer, "y", 1)) {
-    readNFCBlock();
-  }
+    Serial.println("Which memory block would you like to read? (0-63)");
+    Serial.print("> ");
+    parseCommand();
+    uint8_t block = atoi(cmdBuffer);
+    if (block >= 64) {
+        Serial.println("Wrong block. Only valid blocks are supported.");
+        return;
+    }
+    nfcService->waitForCard();
+    nfcService->readBlock(block);
+    Serial.println("Would you like to read another block? (y/n)");
+    parseCommand();
+    if (equals(cmdBuffer, "y", 1)) {
+        readNFCBlock();
+    }
 }
 
 void HeistController::processCommand() {
-  bool crlf = (cmdBuffer[parsedBytes - 2] == '\r' && cmdBuffer[parsedBytes - 1] == '\n');
-  bool lfcr = (cmdBuffer[parsedBytes - 2] == '\n' && cmdBuffer[parsedBytes - 1] == '\r');
-  if (!crlf && !lfcr) {
-    return;
-  }
-  // Finished parsing command
-  if (equals(cmdBuffer, "help", 4)) {
-    showHelp();
-  } else if (equals(cmdBuffer, "bruteforce", 10)) {
-    bruteforce();
-  } else if (equals(cmdBuffer, "nfc-dump", 8)) {
-    nfcService->dumpCard();
-  } else if (equals(cmdBuffer, "nfc-read", 8)) {
-    readNFCBlock();
-  } else if (equals(cmdBuffer, "nfc-write", 9)) {
-    writeNFCBlock();
-  } else if (equals(cmdBuffer, "reset-tag", 9)) {
-    resetNFCTag();
-  } else {
-    Serial.println("This command is not valid. Type 'help' for available commands.");
-  }
-  Serial.println("Enter command ('help' for available commands), and hit Return:");
-  Serial.print(">");
-  Serial.flush();
+    bool crlf = (cmdBuffer[parsedBytes - 2] == '\r' && cmdBuffer[parsedBytes - 1] == '\n');
+    bool lfcr = (cmdBuffer[parsedBytes - 2] == '\n' && cmdBuffer[parsedBytes - 1] == '\r');
+    if (!crlf && !lfcr) {
+        return;
+    }
+    // Finished parsing command
+    if (equals(cmdBuffer, "help", 4)) {
+        showHelp();
+    } else if (equals(cmdBuffer, "bruteforce", 10)) {
+        bruteforce();
+    } else if (equals(cmdBuffer, "nfc-dump", 8)) {
+        nfcService->dumpCard();
+    } else if (equals(cmdBuffer, "nfc-read", 8)) {
+        readNFCBlock();
+    } else if (equals(cmdBuffer, "nfc-write", 9)) {
+        writeNFCBlock();
+    } else if (equals(cmdBuffer, "reset-tag", 9)) {
+        resetNFCTag();
+    } else {
+        Serial.println("This command is not valid. Type 'help' for available commands.");
+    }
+    Serial.println("Enter command ('help' for available commands), and hit Return:");
+    Serial.print(">");
+    Serial.flush();
 }

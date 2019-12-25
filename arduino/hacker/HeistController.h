@@ -1,5 +1,6 @@
 #include <Arduino.h>
 #include "utils.h"
+#include "BruteForceService.h"
 
 #define FIRST_NAME_FIRST_BLOCK 4
 #define LAST_NAME_FIRST_BLOCK 8
@@ -18,6 +19,7 @@ public:
   void tick();
 private:
   NFCService* nfcService;
+  BruteForceService* bruteForceService;
   uint16_t parsedBytes;
   uint16_t shownBytes;
   char cmdBuffer[512];
