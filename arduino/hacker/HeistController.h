@@ -19,9 +19,9 @@ public:
 private:
   NFCService* nfcService;
   BruteForceService* bruteForceService;
-  uint16_t parsedBytes;
-  uint16_t shownBytes;
-  char cmdBuffer[512];
+  uint8_t parsedBytes;
+  uint8_t shownBytes;
+  char cmdBuffer[200];
   void showHelp();
   void parseCommand();
   void processCommand();

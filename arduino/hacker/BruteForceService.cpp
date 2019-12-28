@@ -1,18 +1,4 @@
 #include "BruteForceService.h"
-#include <Arduino.h>
-
-#define COL0 12
-#define COL1 11
-#define COL2 10
-#define COL3 9
-#define LIN0 8
-#define LIN1 7
-#define LIN2 6
-#define LIN3 5
-#define SUCCESS_PIN 4
-
-#define CLR(x, y) (x&=(~(1<<y)))
-#define SET(x, y) (x|=(1<<y))
 
 BruteForceService::BruteForceService() {}
 

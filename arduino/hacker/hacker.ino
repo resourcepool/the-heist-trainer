@@ -17,10 +17,6 @@
 */
 /**************************************************************************/
 
-#define PN532DEBUG
-
-#include <Wire.h>
-#include <SPI.h>
 #include "HeistController.h"
 
 HeistController ctrl = HeistController();

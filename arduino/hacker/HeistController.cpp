@@ -34,7 +34,7 @@ void HeistController::parseCommand() {
             while (Serial.available()) {
                 cmdBuffer[parsedBytes++] = Serial.read();
             }
-            for (uint16_t i = shownBytes; i < parsedBytes; i++) {
+            for (uint8_t i = shownBytes; i < parsedBytes; i++) {
                 Serial.print(cmdBuffer[i]);
             }
             shownBytes = parsedBytes;
@@ -94,28 +94,24 @@ void HeistController::resetNFCTag() {
     Serial.println("Enter Raw Employee Hex Dump");
     Serial.print("> ");
     parseCommand();
-    byte firstName[32];
-    getHexBytes(cmdBuffer, firstName, 0, 32);
-    Serial.println("OK Line 1");
-    byte lastName[32] = "";
-    getHexBytes(cmdBuffer, lastName, 32, 32);
-    Serial.println("OK Line 2");
-    byte employeeId[16];
-    getHexBytes(cmdBuffer, employeeId, 64, 16);
-    Serial.println("OK Line 3");
-    byte dates[16];
-    getHexBytes(cmdBuffer, dates, 80, 16);
-    Serial.println("OK Line 4");
     Serial.println("Place card on device when ready");
-
     nfcService->waitForCard();
-
-    nfcService->writeBlock(FIRST_NAME_FIRST_BLOCK, (uint8_t *) firstName);
-    nfcService->writeBlock(FIRST_NAME_FIRST_BLOCK + 1, ((uint8_t *) firstName) + 16);
-    nfcService->writeBlock(LAST_NAME_FIRST_BLOCK, (uint8_t *) lastName);
-    nfcService->writeBlock(LAST_NAME_FIRST_BLOCK + 1, ((uint8_t *) lastName) + 16);
-    nfcService->writeBlock(EMPLOYEE_ID_BLOCK, employeeId);
-    nfcService->writeBlock(DATES_BLOCK, dates);
+    byte name[32];
+    getHexBytes(cmdBuffer, name, 0, 32);
+    nfcService->writeBlock(FIRST_NAME_FIRST_BLOCK, (uint8_t *) name);
+    nfcService->writeBlock(FIRST_NAME_FIRST_BLOCK + 1, ((uint8_t *) name) + 16);
+    Serial.println("OK Line 1");
+    getHexBytes(cmdBuffer, name, 32, 32);
+    nfcService->writeBlock(LAST_NAME_FIRST_BLOCK, (uint8_t *) name);
+    nfcService->writeBlock(LAST_NAME_FIRST_BLOCK + 1, ((uint8_t *) name) + 16);
+    Serial.println("OK Line 2");
+    byte metadata[16];
+    getHexBytes(cmdBuffer, metadata, 64, 16);
+    nfcService->writeBlock(EMPLOYEE_ID_BLOCK, metadata);
+    Serial.println("OK Line 3");
+    getHexBytes(cmdBuffer, metadata, 80, 16);
+    nfcService->writeBlock(DATES_BLOCK, metadata);
+    Serial.println("OK Line 4");
     Serial.println("Writing done. Final blocks on card:");
     nfcService->readBlock(FIRST_NAME_FIRST_BLOCK);
     nfcService->readBlock(FIRST_NAME_FIRST_BLOCK + 1);

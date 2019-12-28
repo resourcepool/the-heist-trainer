@@ -27,14 +27,16 @@ void WifiService::init() {
   Serial.println(WiFi.localIP());
 }
 
-bool WifiService::isAuthorized(uint32_t employeeId, uint32_t lastLoginTimestamp) {
+bool WifiService::isAuthorized(char* employeeId, uint32_t lastLoginTimestamp) {
   HTTPClient http;
   http.begin(authUrl);
-  http.addHeader("Content-Type", "application/json;charset=utf-8");
-  char dto[64];
-  int len = sprintf(dto, "{userId:%d, lastLogin:%d}", employeeId, lastLoginTimestamp);
+  http.addHeader("Content-Type", "application/json");
+  char dto[128];
+  int len = sprintf(dto, "{\"userId\":\"%s\", \"lastLogin\":%d}", employeeId, lastLoginTimestamp);
+  Serial.println(dto);
   int httpCode = http.POST(dto);
-  http.end();
   Serial.println(httpCode);
+  Serial.println(http.getString());
+  http.end();
   return httpCode > 0 && (httpCode - 200) < 100; // Result 2XX
 }
