@@ -45,6 +45,7 @@ void BruteForceService::setupPinForBruteforce() {
     digitalWrite(LIN1, HIGH);
     digitalWrite(LIN2, HIGH);
     digitalWrite(LIN3, HIGH);
+
 }
 
 
@@ -56,88 +57,57 @@ void BruteForceService::send4DigitCode(int code) {
     sendTouch(digit);
 }
 
-//PORT B -> xx xx 13 12 11 10 9 8
-//PORT D ->  7  6  5  4  3  2 1 0
+void BruteForceService::simulateButtonPress(int col,int line){
+  //le principe est de copier l'état de la colonne contenant la touche 0 sur la ligne de la touche 0.
+  //tant que la colonne 1 (colonne de la touche 0) est à l'état haut, on attends
+  while (digitalRead(col)) {}
+  //dès qu'elle passe à l'état bas, on fait passer la ligne 1 (ligne de la touche 0) à l'état bas
+  digitalWrite(line,LOW);
+  //tant que la colonne 1 est toujours à l'état bas, on attends
+  while (!digitalRead(col)) {}
+  //dès qu'elle repasse à l'état haut, on repasse la ligne 1 à l'état haut
+  digitalWrite(line,HIGH);
+}
+
 void BruteForceService::sendTouch(byte touch) {
     delay(1);
     switch (touch) {
         //press button 0
-        case 0: //button 0
-            //le principe est de copier l'état de la colonne contenant la touche 0 sur la ligne de la touche 0.
-            //tant que la colonne 1 (colonne de la touche 0) est à l'état haut, on attends
-            while (PINB & (0b00001000)) {}
-            //dès qu'elle passe à l'état bas, on fait passer la ligne 1 (ligne de la touche 0) à l'état bas
-            CLR(PORTD, 5);
-            //tant que la colonne 1 est toujours à l'état bas, on attends
-            while (!(PINB & (0b00001000))) {}
-            //dès qu'elle repasse à l'état haut, on repasse la ligne 1 à l'état haut
-            SET(PORTD, 5);
+        case 0: //button 0 col1 lin1
+            simulateButtonPress(COL1,LIN0);
             break;
         case 1: //button 1
-            while (PINB & (0b00010000)) {}
-            CLR(PORTB, 0);
-            while (!(PINB & (0b00010000))) {}
-            SET(PORTB, 0);
+            simulateButtonPress(COL0,LIN1);
             break;
         case 2: //button 2
-            while (PINB & (0b00001000)) {}
-            CLR(PORTB, 0);
-            while (!(PINB & (0b00001000))) {}
-            SET(PORTB, 0);
+            simulateButtonPress(COL1,LIN1);
             break;
         case 3: //button 3
-            while (PINB & (0b00000100)) {}
-            CLR(PORTB, 0);
-            while (!(PINB & (0b00000100))) {}
-            SET(PORTB, 0);
+            simulateButtonPress(COL2,LIN1);
             break;
         case 4: //button 4
-            while (PINB & (0b00010000)) {}
-            CLR(PORTD, 7);
-            while (!(PINB & (0b00010000))) {}
-            SET(PORTD, 7);
+            simulateButtonPress(COL0,LIN2);
             break;
         case 5: //button 5
-            while (PINB & (0b00001000)) {}
-            CLR(PORTD, 7);
-            while (!(PINB & (0b00001000))) {}
-            SET(PORTD, 7);
+            simulateButtonPress(COL1,LIN2);
             break;
         case 6: //button 6
-            while (PINB & (0b00000100)) {}
-            CLR(PORTD, 7);
-            while (!(PINB & (0b00000100))) {}
-            SET(PORTD, 7);
+            simulateButtonPress(COL2,LIN2);
             break;
         case 7: //button 7
-            while (PINB & (0b00010000)) {}
-            CLR(PORTD, 6);
-            while (!(PINB & (0b00010000))) {}
-            SET(PORTD, 6);
+            simulateButtonPress(COL0,LIN3);
             break;
         case 8: //button 8
-            while (PINB & (0b00001000)) {}
-            CLR(PORTD, 6);
-            while (!(PINB & (0b00001000))) {}
-            SET(PORTD, 6);
+            simulateButtonPress(COL1,LIN3);
             break;
         case 9: //button 9
-            while (PINB & (0b00000100)) {}
-            CLR(PORTD, 6);
-            while (!(PINB & (0b00000100))) {}
-            SET(PORTD, 6);
+            simulateButtonPress(COL2,LIN3);
             break;
         case 10: //button *
-            while (PINB & (0b00010000)) {}
-            CLR(PORTD, 5);
-            while (!(PINB & (0b00010000))) {}
-            SET(PORTD, 5);
+            simulateButtonPress(COL0,LIN0);
             break;
         case 11: //button #
-            while (PINB & (0b00000100)) {}
-            CLR(PORTD, 5);
-            while (!(PINB & (0b00000100))) {}
-            SET(PORTD, 5);
+            simulateButtonPress(COL2,LIN0);
             break;
     }
 }

@@ -20,7 +20,6 @@
 #include "HeistController.h"
 
 HeistController ctrl = HeistController();
-
 void setup(void) {
   ctrl.init();
 }
