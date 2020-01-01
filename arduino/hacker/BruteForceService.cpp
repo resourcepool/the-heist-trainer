@@ -59,21 +59,23 @@ void BruteForceService::send4DigitCode(int code) {
 
 void BruteForceService::simulateButtonPress(int col,int line){
   //le principe est de copier l'état de la colonne contenant la touche 0 sur la ligne de la touche 0.
-  //tant que la colonne 1 (colonne de la touche 0) est à l'état haut, on attends
+  //tant que la colonne de la touche est à l'état haut, on attends
   while (digitalRead(col)) {}
-  //dès qu'elle passe à l'état bas, on fait passer la ligne 1 (ligne de la touche 0) à l'état bas
+  //dès qu'elle passe à l'état bas, on fait passer la ligne de la touche à l'état bas
   digitalWrite(line,LOW);
-  //tant que la colonne 1 est toujours à l'état bas, on attends
+  //tant que la colonne est toujours à l'état bas, on attends
   while (!digitalRead(col)) {}
-  //dès qu'elle repasse à l'état haut, on repasse la ligne 1 à l'état haut
+  //dès qu'elle repasse à l'état haut, on repasse la ligne à l'état haut
   digitalWrite(line,HIGH);
 }
 
 void BruteForceService::sendTouch(byte touch) {
     delay(1);
+    setupPinForBruteforce();
     switch (touch) {
         //press button 0
         case 0: //button 0 col1 lin1
+        Serial.println("sending touch 0");
             simulateButtonPress(COL1,LIN0);
             break;
         case 1: //button 1
@@ -110,4 +112,5 @@ void BruteForceService::sendTouch(byte touch) {
             simulateButtonPress(COL2,LIN0);
             break;
     }
+    setupPinForNeutralAction();
 }

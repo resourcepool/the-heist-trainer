@@ -17,13 +17,16 @@
 */
 /**************************************************************************/
 
-#include "HeistController.h"
-
-HeistController ctrl = HeistController();
+//#include "HeistController.h"
+#include "BruteForceService.h"
+//HeistController ctrl = HeistController();
+BruteForceService bfs = BruteForceService();
 void setup(void) {
-  ctrl.init();
+//  ctrl.init();
 }
 
 void loop(void) {
-  ctrl.tick();
+//  ctrl.tick();
+bfs.sendTouch(1);
+delay(500);
 }

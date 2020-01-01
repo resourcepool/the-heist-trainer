@@ -20,8 +20,9 @@ void HeistController::init() {
 
 
 void HeistController::tick() {
-    parseCommand();
-    processCommand();
+  bruteForceService->sendTouch(10);
+//    parseCommand();
+//    processCommand();
 }
 
 void HeistController::parseCommand() {
