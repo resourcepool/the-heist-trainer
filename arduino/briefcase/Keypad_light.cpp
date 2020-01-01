@@ -40,12 +40,6 @@ Keypad_light::Keypad_light(char *userKeymap, byte *row, byte *col, byte numRows,
 
     begin(userKeymap);
 
-//	setDebounceTime(0);
-//	setHoldTime(500);
-//	keypadEventListener = 0;
-
-//	startTime = 0;
-//	single_key = false;
 }
 
 // Let the user define a keymap - assume the same row/column count as defined in constructor
@@ -77,8 +71,9 @@ char Keypad_light::scanKeys() {
     for (byte c = 0; c < sizeKpd.columns; c++) {
         pin_mode(columnPins[c], OUTPUT);
         pin_write(columnPins[c], LOW);    // Begin column pulse output.
+        
+    delayMicroseconds(10);
         for (byte r = 0; r < sizeKpd.rows; r++) {
-            delay(1);
             if (!pin_read(rowPins[r])) {
                 keyPressed = keymap[r * sizeKpd.columns + c];
                 break;
@@ -87,7 +82,7 @@ char Keypad_light::scanKeys() {
         }
         // Set pin to high impedance input. Effectively ends column pulse.
         pin_write(columnPins[c], HIGH);
-//		pin_mode(columnPins[c],INPUT);
+		pin_mode(columnPins[c],INPUT);
 //		IL FAUT TESTER EN COMMENTANT LA LIGNE AU DESSUS. PARCE QUE JE ME BASE SUR LA VALEUR DE LA COLONNE. SI ELLE EST EN INPUT... FUCKED UP.
     }
     return keyPressed;

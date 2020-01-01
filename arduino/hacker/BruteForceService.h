@@ -1,15 +1,15 @@
 #include <Arduino.h>
 
-#define COL0 25
-#define COL1 22
-#define COL2 21
+#define COL0 21
+#define COL1 19
+#define COL2 18
 #define COL3 17
 #define LIN0 16
 #define LIN1 15
 #define LIN2 14
 #define LIN3 13
 
-#define SUCCESS_PIN 26
+#define SUCCESS_PIN 25
 
 
 //#define CLR(x, y) (x&=(~(1<<y)))
@@ -21,7 +21,7 @@ public:
 
     void startBruteForce();
 
-    void sendTouch(unsigned char touch);
+    void sendTouch(byte touch);
 private:
 
     void setupPinForNeutralAction();

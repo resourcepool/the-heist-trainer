@@ -29,54 +29,73 @@ void setup() {
     pinMode(ledpin, OUTPUT);
     digitalWrite(ledpin, LOW);
     Serial.begin(115200);
+    pinMode(13,INPUT);
+    pinMode(14,INPUT);
+    pinMode(21,INPUT);
+    pinMode(19,INPUT);
+    pinMode(18,INPUT);
+    pinMode(17,INPUT);
+    pinMode(16,INPUT);
+    pinMode(15,INPUT);
 }
 
 boolean unlocked = false;
 
 void resetInMemoryUserCode();
 
+int lastCodeNum = 0;
 void loop() {
-//    delayMicroseconds(500);
-delay(200);
+    delayMicroseconds(50);
     char key = kpd.getKey();
-    if (key != '\0'){
-      Serial.println(key);
+
+    if (key){
+//      Serial.println(key);
+
+
+        if (unlocked) {
+            if (key == '#') {
+                unlocked = false;
+                resetInMemoryUserCode();
+                timeKeeper = millis();
+                Serial.println("RESET");
+                digitalWrite(ledpin, LOW);
+            }
+        } else {
+            if (key == '*') {
+              String strUserCode = "";
+              for (int i = 0; i<4; i++){
+                strUserCode+=userCode[i];
+              }
+              int codeNum = strUserCode.toInt();
+              if (codeNum != lastCodeNum+1){
+                Serial.println(codeNum);
+              }
+              lastCodeNum = codeNum;
+                if (userCode[0] == password[0]
+                    && userCode[1] == password[1]
+                    && userCode[2] == password[2]
+                    && userCode[3] == password[3]) {
+
+                    digitalWrite(ledpin, HIGH);
+                    Serial.println("BRIEFCASE UNLOCKED !!!!");
+                    Serial.print("CODE IS : ");
+                    Serial.println(userCode);
+                    Serial.println("time spent: ");
+                    Serial.println(millis() - timeKeeper);
+                    unlocked = true;
+                }else{
+                  resetInMemoryUserCode();
+                }
+
+            } else {
+                userCode[0] = userCode[1];
+                userCode[1] = userCode[2];
+                userCode[2] = userCode[3];
+                userCode[3] = key;
+            }
+        
     }
-//    if (key) { // Check for a valid key.
-//
-//        if (unlocked) {
-//            if (key == '#') {
-//                unlocked = false;
-//                resetInMemoryUserCode();
-//                timeKeeper = millis();
-//                Serial.println("RESET");
-//                digitalWrite(ledpin, LOW);
-//            }
-//        } else {
-//            if (key == '*') {
-//                Serial.println(userCode);
-//                if (userCode[0] == password[0]
-//                    && userCode[1] == password[1]
-//                    && userCode[2] == password[2]
-//                    && userCode[3] == password[3]) {
-//
-//                    digitalWrite(ledpin, HIGH);
-//                    Serial.println("BRIEFCASE UNLOCKED !!!!");
-//                    Serial.print("CODE IS : ");
-//                    Serial.println(userCode);
-//                    Serial.println("time spent: ");
-//                    Serial.println(millis() - timeKeeper);
-//                    unlocked = true;
-//                }
-//
-//            } else {
-//                userCode[0] = userCode[1];
-//                userCode[1] = userCode[2];
-//                userCode[2] = userCode[3];
-//                userCode[3] = key;
-//            }
-//        }
-//    }
+  }
 }
 
 void resetInMemoryUserCode() {
