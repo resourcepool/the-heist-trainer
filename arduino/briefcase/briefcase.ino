@@ -3,7 +3,7 @@
 #include <Arduino.h>
 
 char userCode[5] = {'0', '0', '0', '0'};
-const char password[5] = "6666";
+const char password[5] = "4242";
 const byte ROWS = 4; // Four rows
 const byte COLS = 4; // Three columns
 // Define the Keymap
@@ -21,6 +21,8 @@ byte colPins[COLS] = {21, 19, 18, 17};
 // Create the Keypad
 Keypad_light kpd = Keypad_light(makeKeymap(keys), rowPins, colPins, ROWS, COLS);
 long timeKeeper;
+
+#define HUMAN_MODE false
 
 
 #define ledpin 25
@@ -58,16 +60,23 @@ boolean unlocked = false;
 
 
 int lastCodeNum = 0;
-//char lastKeyPressed = ' ';
+#if HUMAN_MODE == true 
+char lastKeyPressed = ' ';
+#endif
 void loop() {
     delayMicroseconds(25);
     char key = kpd.getKey();
     
-    if (key ){
+#if HUMAN_MODE == true 
+    if (key && key != lastKeyPressed){
+#else
+    if (key){
+#endif
         if (unlocked) {
             if (key == '#') {
                 unlocked = false;
                 resetInMemoryUserCode();
+                displayUserCode.showNumberDec(0,true);
                 timeKeeper = millis();
                 Serial.println("RESET");
                 digitalWrite(ledpin, LOW);
@@ -104,7 +113,9 @@ void loop() {
         
     }
   }
-//  lastKeyPressed = key;
+#if HUMAN_MODE == true
+  lastKeyPressed = key;
+#endif
 }
 
 void resetInMemoryUserCode() {
