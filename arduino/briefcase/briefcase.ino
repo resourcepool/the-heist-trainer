@@ -23,16 +23,28 @@ Keypad_light kpd = Keypad_light(makeKeymap(keys), rowPins, colPins, ROWS, COLS);
 long timeKeeper;
 
 #define HUMAN_MODE false
+#define DISPLAY_TIME true
 
 
 #define ledpin 25
 #define I2C_SCL 23
 #define I2C_SDA 22
+#define I2C_SCL2 27
+#define I2C_SDA2 26
 
 
 TM1637Display displayUserCode(I2C_SCL, I2C_SDA); //set up the 4-Digit display displaying usercode.
+#if DISPLAY_TIME == true
+TM1637Display displayTime(I2C_SCL2, I2C_SDA2); //set up the 4-Digit display displaying usercode.
+#endif
 
 void resetInMemoryUserCode();
+#if DISPLAY_TIME == true
+void displayCurrentTime();
+#endif
+
+
+int currentTime = 0;
 
 void setup() {
     timeKeeper = millis();
@@ -53,6 +65,7 @@ void setup() {
                   
     //setup display
     displayUserCode.setBrightness(0x0a);
+    displayTime.setBrightness(0x0a);
     
 }
 
@@ -64,6 +77,10 @@ int lastCodeNum = 0;
 char lastKeyPressed = ' ';
 #endif
 void loop() {
+  
+#if DISPLAY_TIME == true
+    displayCurrentTime();
+#endif
     delayMicroseconds(25);
     char key = kpd.getKey();
     
@@ -117,6 +134,18 @@ void loop() {
   lastKeyPressed = key;
 #endif
 }
+#if DISPLAY_TIME == true
+void displayCurrentTime(){
+  
+    int timeSec = int(millis()- timeKeeper)/1000;
+    int timeMinSec = (100*(timeSec/60)) + timeSec%60;
+
+    if (timeMinSec != currentTime){
+      displayTime.showNumberDecEx(timeMinSec,0b01000000,true);
+    }
+    currentTime = timeMinSec;
+}
+#endif
 
 void resetInMemoryUserCode() {
     userCode[0] = '0';
