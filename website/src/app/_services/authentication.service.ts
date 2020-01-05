@@ -43,6 +43,7 @@ export class AuthenticationService {
   }
 
   logout() {
-    localStorage.removeItem('user');
+    console.log('remove logged user');
+    return localStorage.removeItem('user');
   }
 }

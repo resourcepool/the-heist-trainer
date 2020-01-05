@@ -14,6 +14,7 @@ import { FolderDetailComponent } from './folder-detail/folder-detail.component';
 import { FoldersComponent } from './folders/folders.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { TnsaEmployeesComponent } from './tnsa-employees/tnsa-employees.component';
+import { ResetComponent } from './reset/reset.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { TnsaEmployeesComponent } from './tnsa-employees/tnsa-employees.componen
     FoldersComponent,
     PageNotFoundComponent,
     TnsaEmployeesComponent,
+    ResetComponent,
   ],
   imports: [
     BrowserModule,

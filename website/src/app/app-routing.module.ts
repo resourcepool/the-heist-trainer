@@ -5,13 +5,29 @@ import { LoginComponent } from './login/login.component';
 import { HomeGuard } from './_guards/home.guard';
 import { LogoutGuard } from './_guards/logout.guard';
 import { FoldersComponent } from './folders/folders.component';
-import { FolderComponent } from './folders/folder/folder.component';
 import { FolderDetailComponent } from './folder-detail/folder-detail.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { TnsaEmployeesComponent } from './tnsa-employees/tnsa-employees.component';
+import { ResetGuard } from './_guards/reset.guard';
+import { ResetComponent } from './reset/reset.component';
 
 
 const routes: Routes = [
+  {
+    path: 'login',
+    component: LoginComponent,
+  },
+  {
+    path: 'logout',
+    canActivate: [LogoutGuard],
+    children: [],
+  },
+  {
+    path: 'reset',
+    canActivate: [ResetGuard],
+    component: ResetComponent,
+    pathMatch: 'full',
+  },
   {
     path: '',
     component: HomeComponent,
@@ -29,24 +45,11 @@ const routes: Routes = [
         path: 'folder/:folder',
         component: FolderDetailComponent,
       },
-      {
-        path: '**',
-        component: PageNotFoundComponent,
-      }
     ]
   },
   {
-    path: 'login',
-    component: LoginComponent,
-  },
-  {
-    path: 'logout',
-    redirectTo: 'login',
-    canActivate: [LogoutGuard],
-  },
-  {
     path: '**',
-    redirectTo: ''
+    component: PageNotFoundComponent,
   }
 ];
 
