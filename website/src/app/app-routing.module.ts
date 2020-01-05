@@ -26,7 +26,6 @@ const routes: Routes = [
     path: 'reset',
     canActivate: [ResetGuard],
     component: ResetComponent,
-    pathMatch: 'full',
   },
   {
     path: '',

@@ -1,1 +1,20 @@
-<p>reset works!</p>
+<h1>RESET BADGES</h1>
+<table class="table" *ngFor="let dump of employeeDumps | async">
+  <tbody>
+  <tr>
+    <td>{{ dump.firstName }}</td>
+    <td>{{ dump.lastName }}</td>
+    <!--<td>-->
+      <!--<button (click)="copyDump(dump.hexDump)">Copy hexdump</button>-->
+    <!--</td>-->
+  </tr>
+  <tr>
+    <td class="hexdump" colspan="3">
+      <textarea [id]="dump.lastName+dump.firstName"
+                [value]="dump.hexDump"
+                [readonly]="true"
+                (focus)="$event.target.select()"></textarea>
+    </td>
+  </tr>
+  </tbody>
+</table>

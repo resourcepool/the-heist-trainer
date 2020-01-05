@@ -1,24 +1,21 @@
-import {Controller, Get, Header, NotFoundException, Param, Response, ParseUUIDPipe} from '@nestjs/common';
+import { Controller, Get, Header, NotFoundException, Param, Response, ParseUUIDPipe } from '@nestjs/common';
 import { EmployeeService } from './employee.service';
 import { Employee } from '../_interface/employee.model';
 import { ApiUseTags } from '@nestjs/swagger';
-import {DumpDto} from './dto/dump.dto';
+import { DumpDto } from './dto/dump.dto';
 
 @Controller('employees')
 @ApiUseTags('employees')
 export class EmployeeController {
-    constructor(private readonly employeeService: EmployeeService) {}
+    constructor(private readonly employeeService: EmployeeService) {
+    }
 
     @Get()
     getEmployees(): Employee[] {
         return this.employeeService.getEmployees();
     }
 
-    // FIXME @Anto
-    // Les endpoints suivants sont pour les admins pour créer les hex dumps...
-    // Ce serait top d'avoir une page pour ça
-
-    @Get('/hexdumps')
+    @Get('hexdumps')
     getEmployeesCardDumps(): DumpDto[] {
         try {
             return this.employeeService.getEmployeesCardDumps();
@@ -27,7 +24,7 @@ export class EmployeeController {
         }
     }
 
-    @Get('/:userId')
+    @Get(':userId')
     getEmployee(@Param('userId', new ParseUUIDPipe({version: '4'})) userId): Employee {
         try {
             return this.employeeService.getEmployee(userId);
@@ -36,7 +33,7 @@ export class EmployeeController {
         }
     }
 
-    @Get('/:userId/hexdump')
+    @Get(':userId/hexdump')
     @Header(`Content-type`, 'text/plain')
     async getEmployeeCardDumpAsString(@Param('userId', new ParseUUIDPipe({version: '4'})) userId, @Response() res) {
         try {
