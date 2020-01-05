@@ -131,5 +131,5 @@ void BruteForceService::sendTouch(byte touch) {
     }
     
 //    setupPinForNeutralAction();
- delayMicroseconds(500); 
+ delayMicroseconds(50); 
 }
