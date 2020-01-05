@@ -46,5 +46,3 @@ autrement dit, il faut copier la valeur de la ligne de la touche voulue sur la c
 
 4- le fonctionnement à 2 codes permet simplement de vérifier que le mécanisme de bruteforce développé est suffisamment rapide et efficace. (la découverte du 2ème code étant soumise à un timer) mais la méthode est la même.
 
-
-

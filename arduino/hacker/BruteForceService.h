@@ -22,9 +22,8 @@ public:
     void startBruteForce();
 
     void sendTouch(byte touch);
-private:
-
     void setupPinForNeutralAction();
+private:
 
     void setupPinForBruteforce();
 

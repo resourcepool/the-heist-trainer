@@ -1,4 +1,5 @@
 #include "Keypad_light.h"
+#include <TM1637Display.h>
 #include <Arduino.h>
 
 char userCode[5] = {'0', '0', '0', '0'};
@@ -23,6 +24,13 @@ long timeKeeper;
 
 
 #define ledpin 25
+#define I2C_SCL 23
+#define I2C_SDA 22
+
+
+TM1637Display displayUserCode(I2C_SCL, I2C_SDA); //set up the 4-Digit display displaying usercode.
+
+void resetInMemoryUserCode();
 
 void setup() {
     timeKeeper = millis();
@@ -37,21 +45,25 @@ void setup() {
     pinMode(17,INPUT);
     pinMode(16,INPUT);
     pinMode(15,INPUT);
+
+
+    resetInMemoryUserCode();
+                  
+    //setup display
+    displayUserCode.setBrightness(0x0a);
+    
 }
 
 boolean unlocked = false;
 
-void resetInMemoryUserCode();
 
 int lastCodeNum = 0;
+//char lastKeyPressed = ' ';
 void loop() {
-    delayMicroseconds(50);
+    delayMicroseconds(25);
     char key = kpd.getKey();
-
-    if (key){
-//      Serial.println(key);
-
-
+    
+    if (key ){
         if (unlocked) {
             if (key == '#') {
                 unlocked = false;
@@ -66,11 +78,7 @@ void loop() {
               for (int i = 0; i<4; i++){
                 strUserCode+=userCode[i];
               }
-              int codeNum = strUserCode.toInt();
-              if (codeNum != lastCodeNum+1){
-                Serial.println(codeNum);
-              }
-              lastCodeNum = codeNum;
+              displayUserCode.showNumberDec(strUserCode.toInt(),true);
                 if (userCode[0] == password[0]
                     && userCode[1] == password[1]
                     && userCode[2] == password[2]
@@ -96,6 +104,7 @@ void loop() {
         
     }
   }
+//  lastKeyPressed = key;
 }
 
 void resetInMemoryUserCode() {

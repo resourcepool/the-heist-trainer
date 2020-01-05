@@ -31,6 +31,10 @@ void BruteForceService::setupPinForNeutralAction() {
     pinMode(LIN1, INPUT);
     pinMode(LIN2, INPUT);
     pinMode(LIN3, INPUT);
+    pinMode(COL0, INPUT_PULLUP);
+    pinMode(COL1, INPUT_PULLUP);
+    pinMode(COL2, INPUT_PULLUP);
+    pinMode(COL3, INPUT_PULLUP);
 }
 
 void BruteForceService::setupPinForBruteforce() {

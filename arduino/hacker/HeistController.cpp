@@ -16,6 +16,7 @@ void HeistController::init() {
     Serial.println("Enter command, and hit Return:");
     Serial.print(">");
     Serial.flush();
+    bruteForceService->setupPinForNeutralAction();
 }
 
 
