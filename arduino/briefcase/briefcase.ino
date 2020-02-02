@@ -5,32 +5,43 @@
 char userCode[5] = {'0', '0', '0', '0'};
 const char password[5] = "4242";
 const byte ROWS = 4; // Four rows
-const byte COLS = 4; // Three columns
+const byte COLS = 3; // Three columns
 // Define the Keymap
+//char keys[ROWS][COLS] = {
+//        {'1', '2', '3', 'A'},
+//        {'4', '5', '6', 'B'},
+//        {'7', '8', '9', 'C'},
+//        {'*', '0', '#', 'D'}
+//};
+
 char keys[ROWS][COLS] = {
-        {'1', '2', '3', 'A'},
-        {'4', '5', '6', 'B'},
-        {'7', '8', '9', 'C'},
-        {'*', '0', '#', 'D'}
+        {'1', '2', '3'},
+        {'4', '5', '6'},
+        {'7', '8', '9'},
+        {'*', '0', '#'}
 };
 // Connect keypad ROW0, ROW1, ROW2 and ROW3 to these Arduino pins.
-byte rowPins[ROWS] = {16, 15, 14, 13};
+//byte rowPins[ROWS] = {16, 15, 14, 13};
+byte rowPins[ROWS] = {12, 14, 21, 19};
+
 // Connect keypad COL0, COL1 and COL2 to these Arduino pins.
-byte colPins[COLS] = {21, 19, 18, 17};
+//byte colPins[COLS] = {21, 19, 18, 17};
+byte colPins[COLS] = {18,  16, 4};
 
 // Create the Keypad
 Keypad_light kpd = Keypad_light(makeKeymap(keys), rowPins, colPins, ROWS, COLS);
 long timeKeeper;
 
-#define HUMAN_MODE false
+#define HUMAN_MODE true
 #define DISPLAY_TIME true
 
-
-#define ledpin 25
+#define EM_COMMAND 17
+#define successPin 15
+#define failPin 2
 #define I2C_SCL 23
 #define I2C_SDA 22
-#define I2C_SCL2 27
-#define I2C_SDA2 26
+#define I2C_SCL2 26
+#define I2C_SDA2 27
 
 
 TM1637Display displayUserCode(I2C_SCL, I2C_SDA); //set up the 4-Digit display displaying usercode.
@@ -48,17 +59,18 @@ int currentTime = 0;
 
 void setup() {
     timeKeeper = millis();
-    pinMode(ledpin, OUTPUT);
-    digitalWrite(ledpin, LOW);
+    pinMode(successPin, OUTPUT);
+    digitalWrite(successPin, LOW);
+    pinMode(EM_COMMAND, OUTPUT);
+    digitalWrite(EM_COMMAND, LOW);
     Serial.begin(115200);
-    pinMode(13,INPUT);
+    pinMode(12,INPUT);
     pinMode(14,INPUT);
     pinMode(21,INPUT);
     pinMode(19,INPUT);
     pinMode(18,INPUT);
-    pinMode(17,INPUT);
     pinMode(16,INPUT);
-    pinMode(15,INPUT);
+    pinMode(4,INPUT);
 
 
     resetInMemoryUserCode();
@@ -66,6 +78,7 @@ void setup() {
     //setup display
     displayUserCode.setBrightness(0x0a);
     displayTime.setBrightness(0x0a);
+    displayUserCode.showNumberDec(0,true);
     
 }
 
@@ -86,6 +99,8 @@ void loop() {
     
 #if HUMAN_MODE == true 
     if (key && key != lastKeyPressed){
+      Serial.println(key);
+    
 #else
     if (key){
 #endif
@@ -96,7 +111,8 @@ void loop() {
                 displayUserCode.showNumberDec(0,true);
                 timeKeeper = millis();
                 Serial.println("RESET");
-                digitalWrite(ledpin, LOW);
+                digitalWrite(successPin, LOW);
+                digitalWrite(EM_COMMAND, LOW);
             }
         } else {
             if (key == '*') {
@@ -110,7 +126,8 @@ void loop() {
                     && userCode[2] == password[2]
                     && userCode[3] == password[3]) {
 
-                    digitalWrite(ledpin, HIGH);
+                    digitalWrite(successPin, HIGH);
+                    digitalWrite(EM_COMMAND, HIGH);
                     Serial.println("BRIEFCASE UNLOCKED !!!!");
                     Serial.print("CODE IS : ");
                     Serial.println(userCode);
