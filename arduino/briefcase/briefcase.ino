@@ -21,12 +21,12 @@ char keys[ROWS][COLS] = {
         {'*', '0', '#'}
 };
 // Connect keypad ROW0, ROW1, ROW2 and ROW3 to these Arduino pins.
-//byte rowPins[ROWS] = {16, 15, 14, 13};
-byte rowPins[ROWS] = {12, 14, 21, 19};
+byte rowPins[ROWS] = {13, 12, 14, 27};
+//byte rowPins[ROWS] = {12, 14, 21, 19};
 
 // Connect keypad COL0, COL1 and COL2 to these Arduino pins.
-//byte colPins[COLS] = {21, 19, 18, 17};
-byte colPins[COLS] = {18,  16, 4};
+byte colPins[COLS] = {26, 25, 33};
+//byte colPins[COLS] = {18,  16, 4};
 
 // Create the Keypad
 Keypad_light kpd = Keypad_light(makeKeymap(keys), rowPins, colPins, ROWS, COLS);
@@ -35,13 +35,13 @@ long timeKeeper;
 #define HUMAN_MODE true
 #define DISPLAY_TIME true
 
-#define EM_COMMAND 17
-#define successPin 15
-#define failPin 2
-#define I2C_SCL 23
-#define I2C_SDA 22
-#define I2C_SCL2 26
-#define I2C_SDA2 27
+#define EM_COMMAND 32
+#define successPin 18
+#define failPin 21
+#define I2C_SCL 22
+#define I2C_SDA 23
+#define I2C_SCL2 17
+#define I2C_SDA2 16
 
 
 TM1637Display displayUserCode(I2C_SCL, I2C_SDA); //set up the 4-Digit display displaying usercode.
