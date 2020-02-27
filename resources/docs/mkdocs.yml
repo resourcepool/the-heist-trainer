@@ -1,0 +1,8 @@
+site_name: The-Heist
+nav:
+  - Game Briefing: index.md
+  - Chapter 1: ch1-open-briefcase.md
+  - Chapter 2: ch2-surprise-surprise.md
+  - About: about.md
+theme:
+  name: 'material'
