@@ -15,23 +15,11 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>Michael</td>
-          <td>SCOFIELD</td>
-          <td>CONFIDENTIAL</td>
-          <td>KILLED</td>
-        </tr>
-        <tr>
-          <td>Didier</td>
-          <td>Marchand</td>
-          <td>AGENT</td>
-          <td>N/A</td>
-        </tr>
-        <tr>
-          <td>Loic</td>
-          <td>Ortola</td>
-          <td>AGENT</td>
-          <td>TOP SECRET</td>
+        <tr *ngFor="let employee of employees | async">
+          <td>{{ employee.firstName }}</td>
+          <td>{{ employee.lastName }}</td>
+          <td>{{ ACCESSLEVEL[employee.accessLevel] }}</td>
+          <td>{{ STATUS[employee.status] }}</td>
         </tr>
       </tbody>
     </table>

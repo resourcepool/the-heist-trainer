@@ -1,0 +1,113 @@
+const { v4: uuidv4 } = require('uuid');
+const moment = require('moment');
+const _ = require('lodash');
+
+const firstNames = [
+  {type: 'FR', value: 'Didier'},
+  {type: 'FR', value: 'Marc'},
+  {type: 'FR', value: 'Loic'},
+  {type: 'FR', value: 'Antoine'},
+  {type: 'FR', value: 'François'},
+  {type: 'FR', value: 'Jacques'},
+  {type: 'FR', value: 'Michel'},
+  {type: 'FR', value: 'Thomas'},
+  {type: 'FR', value: 'Ludovic'},
+  {type: 'US', value: 'Jack'},
+  {type: 'US', value: 'John'},
+  {type: 'US', value: 'Mike'},
+  {type: 'US', value: 'Steve'},
+  {type: 'US', value: 'Jeffrey'},
+  {type: 'RU', value: 'Anton'},
+  {type: 'RU', value: 'Marko'},
+  {type: 'RU', value: 'Gregor'},
+  {type: 'RU', value: 'Miroslav'},
+  {type: 'RU', value: 'Igor'},
+  {type: 'RU', value: 'Branislav'},
+  {type: 'RU', value: 'Luka'},
+  {type: 'RU', value: 'Ivan'},
+  {type: 'RU', value: 'Piotr'},
+  {type: 'ES', value: 'Javier'},
+  {type: 'ES', value: 'Pedro'},
+  {type: 'ES', value: 'Jose'},
+  {type: 'ES', value: 'Esteban'},
+  {type: 'ES', value: 'Ernesto'},
+  {type: 'ES', value: 'Andres'},
+  {type: 'ES', value: 'Sergio'},
+  {type: 'ES', value: 'Angel'},
+  {type: 'ES', value: 'Feliciano'},
+  {type: 'ES', value: 'Rodrigo'},
+  {type: 'ES', value: 'Fernando'},
+];
+
+const lastNames = [
+  {type: 'FR', value: 'Comolais'},
+  {type: 'FR', value: 'Francard'},
+  {type: 'FR', value: 'Hubert'},
+  {type: 'FR', value: 'Martin'},
+  {type: 'FR', value: 'De La Batte'},
+  {type: 'FR', value: 'Flantier'},
+  {type: 'FR', value: 'Delanoix'},
+  {type: 'FR', value: 'Georges'},
+  {type: 'FR', value: 'Denis'},
+  {type: 'FR', value: 'Brocard'},
+  {type: 'FR', value: 'Dubois'},
+  {type: 'FR', value: 'Dumont'},
+  {type: 'FR', value: 'Deschamps'},
+  {type: 'ES', value: 'Valverde'},
+  {type: 'ES', value: 'Ramos'},
+  {type: 'ES', value: 'Busquets'},
+  {type: 'ES', value: 'Itxeita'},
+  {type: 'ES', value: 'Alvarez'},
+  {type: 'ES', value: 'Lopez'},
+  {type: 'ES', value: 'Lopes'},
+  {type: 'ES', value: 'Braga'},
+  {type: 'ES', value: 'Ramirez'},
+  {type: 'ES', value: 'Roberto'},
+  {type: 'ES', value: 'Suarez'},
+  {type: 'ES', value: 'Avelinho'},
+  {type: 'ES', value: 'Ocones'},
+  {type: 'ES', value: 'Rosales'},
+  {type: 'US', value: 'Johnson'},
+  {type: 'US', value: 'Stevenson'},
+  {type: 'US', value: 'Michaels Jr.'},
+  {type: 'US', value: 'Specter'},
+  {type: 'US', value: 'Dent'},
+  {type: 'US', value: 'Hobbs'},
+  {type: 'US', value: 'Davids'},
+  {type: 'US', value: 'McCarthy'},
+  {type: 'US', value: 'Ford'},
+  {type: 'US', value: 'Forbes'},
+  {type: 'RU', value: 'Mitrovic'},
+  {type: 'RU', value: 'Rakitic'},
+  {type: 'RU', value: 'Jovanovic'},
+  {type: 'RU', value: 'Costic'},
+  {type: 'RU', value: 'Rubialev'},
+  {type: 'RU', value: 'Medvedev'},
+  {type: 'RU', value: 'Dimitrov'},
+  {type: 'RU', value: 'Rebic'},
+  {type: 'RU', value: 'Militovitch'},
+  {type: 'RU', value: 'Pavlov'},
+  {type: 'RU', value: 'Pavlovski'},
+  {type: 'RU', value: 'Akinfeiev'},
+  {type: 'RU', value: 'Milik'},
+];
+
+function generateUser(number) {
+  const result = [];
+  for (let i = 0; i < number; i++) {
+    const type = _.sample(['FR', 'US', 'ES', 'RU']);
+    result.push({
+      userId: uuidv4(),
+      firstName: _.sample(firstNames.filter(o => o.type === type).map(v => v.value)),
+      lastName: _.sample(lastNames.filter(o => o.type === type).map(v => v.value)),
+      accessLevel: _.random(6),
+      status: _.random(4),
+      dateOfBirth: moment(_.random(-373340452000, 447200348000)).toArray().slice(0, 3),
+      dateOfHiring: moment(_.random(794269148000, 1583274129000)).toArray().slice(0, 3),
+      lastLogin: moment(_.random(1580274129000, 1583274129000)).toArray().slice(0, 6),
+    });
+  }
+  return result;
+}
+
+console.log(generateUser(process.argv[2] || 0));
