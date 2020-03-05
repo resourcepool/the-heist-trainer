@@ -21,6 +21,10 @@ export class TnsaEmployeesComponent implements OnInit {
   ngOnInit() {
     this.employees = this.employeesService.getEmployees();
   }
+
+  getUserName(employee: Employee) {
+    return `${employee.firstName[0]}${employee.lastName.replace(/ /g, '')}`;
+  }
 }
 
 enum StatusEnum {
@@ -32,10 +36,10 @@ enum StatusEnum {
 }
 
 enum AccessLevelEnum {
-  '',
+  'NONE',
   'PUBLIC',
-  'TNSA EMPLOYEES',
-  'TNSA AGENTS',
+  'EMPLOYEE',
+  'AGENT',
   'CONFIDENTIAL',
   'SECRET',
   'TOP SECRET',

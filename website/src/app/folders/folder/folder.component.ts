@@ -19,7 +19,6 @@ export class FolderComponent implements OnInit {
   }
 
   onDblClick() {
-    console.log('navigate to ', this.url);
     return this._router.navigate(['folder', this.url]);
   }
 

@@ -62,7 +62,7 @@ export const data = [
     {
         userId: '58995265-b092-4e83-ba42-f2c4da2b35dc',
         firstName: 'Antoine',
-        lastName: 'Georges',
+        lastName: 'Hubert',
         accessLevel: 1,
         status: 0,
         dateOfBirth: [ 1975, 6, 10 ],
@@ -123,7 +123,7 @@ export const data = [
         userId: '1589148a-f5ca-456f-aaf4-281b50bf8559',
         firstName: 'Jacques',
         lastName: 'Georges',
-        accessLevel: 0,
+        accessLevel: 1,
         status: 0,
         dateOfBirth: [ 1966, 5, 4 ],
         dateOfHiring: [ 1999, 10, 17 ],
@@ -169,4 +169,104 @@ export const data = [
         dateOfHiring: [ 2019, 9, 4 ],
         lastLogin: [ 2020, 1, 9, 12, 36, 27 ]
     },
+    {
+        userId: 'b1e29380-4ad0-4610-be41-df0e0c517794',
+        firstName: 'Jose',
+        lastName: 'Ocones',
+        accessLevel: 3,
+        status: 1,
+        dateOfBirth: [ 1973, 4, 12 ],
+        dateOfHiring: [ 2015, 11, 24 ],
+        lastLogin: [ 2020, 1, 6, 11, 15, 50 ]
+    },
+    {
+        userId: '107d4cf2-958a-47c6-834b-342b08ce40ce',
+        firstName: 'Jacques',
+        lastName: 'Comolais',
+        accessLevel: 6,
+        status: 3,
+        dateOfBirth: [ 1974, 11, 1 ],
+        dateOfHiring: [ 2006, 8, 21 ],
+        lastLogin: [ 2020, 1, 1, 6, 15, 40 ]
+    },
+    {
+        userId: '450b88d4-3099-4903-a55c-a9e51f4fe1fd',
+        firstName: 'Igor',
+        lastName: 'Rubialev',
+        accessLevel: 3,
+        status: 0,
+        dateOfBirth: [ 1965, 9, 7 ],
+        dateOfHiring: [ 1998, 0, 8 ],
+        lastLogin: [ 2020, 0, 31, 8, 42, 49 ]
+    },
+    {
+        userId: '933e1fc1-fc54-4bb7-b01e-1ad0df294bc2',
+        firstName: 'Rodrigo',
+        lastName: 'Rosales',
+        accessLevel: 2,
+        status: 1,
+        dateOfBirth: [ 1966, 3, 13 ],
+        dateOfHiring: [ 2005, 8, 4 ],
+        lastLogin: [ 2020, 1, 5, 14, 15, 19 ]
+    },
+    {
+        userId: 'c358ced8-be61-4fc2-9605-eef82c1faf65',
+        firstName: 'Thomas',
+        lastName: 'Comolais',
+        accessLevel: 1,
+        status: 1,
+        dateOfBirth: [ 1969, 7, 24 ],
+        dateOfHiring: [ 2012, 6, 30 ],
+        lastLogin: [ 2020, 2, 2, 12, 4, 12 ]
+    },
+    {
+        userId: 'a80a0c60-c9fe-49ce-a428-5ccb6308e715',
+        firstName: 'Ivan',
+        lastName: 'Rubialev',
+        accessLevel: 4,
+        status: 4,
+        dateOfBirth: [ 1963, 3, 16 ],
+        dateOfHiring: [ 2015, 3, 5 ],
+        lastLogin: [ 2020, 1, 13, 6, 34, 6 ]
+    },
+    {
+        userId: '7898b98c-89ff-4dad-8afc-688c26d6e5de',
+        firstName: 'Didier',
+        lastName: 'Brocard',
+        accessLevel: 2,
+        status: 4,
+        dateOfBirth: [ 1980, 8, 24 ],
+        dateOfHiring: [ 2002, 0, 21 ],
+        lastLogin: [ 2020, 0, 31, 19, 6, 49 ]
+    },
+    {
+        userId: 'bbb5f787-e090-41bb-941e-535dbca8dad4',
+        firstName: 'Mike',
+        lastName: 'Ford',
+        accessLevel: 1,
+        status: 1,
+        dateOfBirth: [ 1980, 9, 31 ],
+        dateOfHiring: [ 1999, 11, 6 ],
+        lastLogin: [ 2020, 1, 9, 19, 4, 16 ]
+    },
+    {
+        userId: 'ba4c1dc3-8248-425f-943a-7d1d1255c730',
+        firstName: 'Noël',
+        lastName: 'De La Batte',
+        accessLevel: 4,
+        status: 0,
+        dateOfBirth: [ 1969, 1, 13 ],
+        dateOfHiring: [ 2018, 10, 17 ],
+        lastLogin: [ 2020, 1, 5, 9, 24, 35 ]
+    },
+    {
+        userId: '5feb83b1-1ceb-49bf-a0dc-cd25cdf78b38',
+        firstName: 'François',
+        lastName: 'Petit',
+        accessLevel: 3,
+        status: 0,
+        dateOfBirth: [ 1976, 9, 4 ],
+        dateOfHiring: [ 2002, 5, 17 ],
+        lastLogin: [ 2020, 1, 14, 20, 24, 50 ]
+    }
 ];

@@ -23,6 +23,15 @@ export const folders = {
       }
     ]
   },
+  "kardashian": {
+    files: [
+      {
+        type: 'url',
+        url: '/assets/folders/kardashian/source.mp4',
+        name: 'Private video'
+      }
+    ]
+  },
   "area-51": {
     files: [
       {

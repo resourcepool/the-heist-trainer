@@ -10,6 +10,7 @@
         <tr>
           <td>Firstname</td>
           <td>Lastname</td>
+          <td>Username</td>
           <td>Access Level</td>
           <td>Status</td>
         </tr>
@@ -18,6 +19,7 @@
         <tr *ngFor="let employee of employees | async">
           <td>{{ employee.firstName }}</td>
           <td>{{ employee.lastName }}</td>
+          <td>{{ getUserName(employee) | lowercase }}</td>
           <td>{{ ACCESSLEVEL[employee.accessLevel] }}</td>
           <td>{{ STATUS[employee.status] }}</td>
         </tr>
