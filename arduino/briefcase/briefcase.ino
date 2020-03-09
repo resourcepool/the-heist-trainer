@@ -62,13 +62,13 @@ void setup() {
     pinMode(EM_COMMAND, OUTPUT);
     digitalWrite(EM_COMMAND, LOW);
     Serial.begin(115200);
+    pinMode(13,INPUT);
     pinMode(12,INPUT);
     pinMode(14,INPUT);
-    pinMode(21,INPUT);
-    pinMode(19,INPUT);
-    pinMode(18,INPUT);
-    pinMode(16,INPUT);
-    pinMode(4,INPUT);
+    pinMode(27,INPUT);
+    pinMode(26,INPUT);
+    pinMode(25,INPUT);
+    pinMode(33,INPUT);
 
 
     resetInMemoryUserCode();
