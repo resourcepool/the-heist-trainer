@@ -23,8 +23,28 @@ void HeistController::init() {
 void HeistController::tick() {
   displayService->showWelcome();
   nfcService->waitForCard();
-  nfcService->readBlock(EMPLOYEE_ID_BLOCK, idBlock);
-  nfcService->readBlock(DATES_BLOCK, datesBlock);
+  byte buf[16];
+  // Read TLV Block (dispatched over two blocks)
+  nfcService->readBlock(EMPLOYEE_ID_FIRST_BLOCK, buf);
+  for (byte i = 0; i < 14; i++) {
+    idBlock[i] = buf[i+2];
+  }
+  nfcService->readBlock(EMPLOYEE_ID_SECOND_BLOCK, buf);
+  idBlock[14] = buf[0];
+  idBlock[15] = buf[1];
+  
+  nfcService->readBlock(DATES_FIRST_BLOCK, buf);
+  for (byte i = 0; i < 4; i++) {
+    datesBlock[i] = buf[i+4];
+  }
+  for (byte i = 0; i < 4; i++) {
+    datesBlock[i+4] = buf[i+10];
+  }
+  nfcService->readBlock(DATES_SECOND_BLOCK, buf);
+  for (byte i = 0; i < 4; i++) {
+    datesBlock[i+8] = buf[i];
+  }
+  
   displayService->showWIP();
   char employeeId[37];
   uuidToString(idBlock, employeeId);
