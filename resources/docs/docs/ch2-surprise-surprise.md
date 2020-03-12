@@ -36,22 +36,35 @@ For reference :
  * a database ID can be an integer (4, 8, or any number of bytes)
  * a UUID is encoded on 16-bytes
  * a String encoded in ASCII takes only one byte per character
- * a Timestamp can be encoded on 4 or 8 bytes. Timestamp of **January 1st 2020 12:00 AM** is **0x5E0BD2F0** in Hex, **1577833200** in decimal (epoch seconds)
+ * a Timestamp can be encoded on 4 or 8 bytes. Timestamp of 4 bytes for **January 1st 2020 12:00 AM** is **0x5E0BD2F0** in Hex, **1577833200** in decimal (epoch seconds)
 
-## Step 3 - Tapping into the Auth network
+## Step 3 - Find the right info
 
 The auth network is available on a wireless connection, with a hidden SSID.
 
 By scanning the available WiFi Networks with **airmon-ng**, we can easily determine which one it is.
 
-TODO
+Then, using **aircrack-ng** or **wifite** or any cracking software, we managed to crack it!
 
+Great: here are the credentials:
+
+`SSID: MEDUSA`
+`Key: E0E9542D44`
+
+After sniffing around, we found ARP requests going to `192.168.1.2`... Could this be our auth server?
+
+A quick portscan indicates ports `80` and `8080` are both listening on that IP... Seems that we're onto something.
+
+Why don't you go check with your browser what's on `http://192.168.1.2`
+
+Don't forget we're looking for someone with SC 6 and above...
+
+`Hint: Now may be the time to take a look on all those files in your briefcase...`
 
 ## Step 4 - Becoming SC 6
 
-Now that you have access to the wifi and know the URL of the Auth server, you might want to connect to it and see if you can get more info from there... If you need help, now would probably be a good moment to go through the documents in your Briefcase.
-
 Found what you needed? Then why don't you go ahead and change the content of your Badge's memory?
+
 Yeah, we thought you'd love it as well!
 
 Let's crack this safe!
