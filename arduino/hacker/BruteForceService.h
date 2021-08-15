@@ -1,15 +1,14 @@
 #include <Arduino.h>
 
-#define COL0 21
-#define COL1 19
-#define COL2 18
-#define COL3 17
-#define LIN0 16
-#define LIN1 15
+#define LIN0 13
+#define LIN1 12
 #define LIN2 14
-#define LIN3 13
+#define LIN3 27
+#define COL0 26
+#define COL1 25
+#define COL2 33
 
-#define SUCCESS_PIN 25
+#define SUCCESS_PIN 23
 
 
 //#define CLR(x, y) (x&=(~(1<<y)))

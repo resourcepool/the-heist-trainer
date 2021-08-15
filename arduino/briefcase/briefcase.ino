@@ -3,7 +3,7 @@
 #include <Arduino.h>
 
 char userCode[5] = {'0', '0', '0', '0'};
-const char password[5] = "4242";
+const char password[5] = "1234";
 const byte ROWS = 4; // Four rows
 const byte COLS = 3; // Three columns
 // Define the Keymap
@@ -48,6 +48,7 @@ TM1637Display displayTime(I2C_SCL2, I2C_SDA2); //set up the 4-Digit display disp
 #endif
 
 void resetInMemoryUserCode();
+void showUserCode();
 #if DISPLAY_TIME == true
 void displayCurrentTime();
 #endif
@@ -102,6 +103,7 @@ void loop() {
 #else
     if (key){
 #endif
+
         if (unlocked) {
             if (key == '#') {
                 unlocked = false;
@@ -113,12 +115,9 @@ void loop() {
                 digitalWrite(EM_COMMAND, LOW);
             }
         } else {
+
+        
             if (key == '*') {
-              String strUserCode = "";
-              for (int i = 0; i<4; i++){
-                strUserCode+=userCode[i];
-              }
-              displayUserCode.showNumberDec(strUserCode.toInt(),true);
                 if (userCode[0] == password[0]
                     && userCode[1] == password[1]
                     && userCode[2] == password[2]
@@ -132,6 +131,7 @@ void loop() {
                     Serial.println("time spent: ");
                     Serial.println(millis() - timeKeeper);
                     unlocked = true;
+                    showUserCode();
                 }else{
                   resetInMemoryUserCode();
                 }
@@ -141,6 +141,7 @@ void loop() {
                 userCode[1] = userCode[2];
                 userCode[2] = userCode[3];
                 userCode[3] = key;
+                showUserCode();
             }
         
     }
@@ -167,4 +168,12 @@ void resetInMemoryUserCode() {
     userCode[1] = '0';
     userCode[2] = '0';
     userCode[3] = '0';
+}
+
+void showUserCode(){
+    String strUserCode = "";
+    for (int i = 0; i<4; i++){
+      strUserCode+=userCode[i];
+    }
+    displayUserCode.showNumberDec(strUserCode.toInt(),true);
 }
