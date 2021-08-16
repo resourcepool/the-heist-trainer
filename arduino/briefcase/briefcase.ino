@@ -3,7 +3,7 @@
 #include <Arduino.h>
 
 char userCode[5] = {'0', '0', '0', '0'};
-const char password[5] = "1234";
+const char password[5] = "4242";
 const byte ROWS = 4; // Four rows
 const byte COLS = 3; // Three columns
 // Define the Keymap
@@ -63,13 +63,13 @@ void setup() {
     pinMode(EM_COMMAND, OUTPUT);
     digitalWrite(EM_COMMAND, LOW);
     Serial.begin(115200);
-    pinMode(13,INPUT);
-    pinMode(12,INPUT);
-    pinMode(14,INPUT);
-    pinMode(27,INPUT);
-    pinMode(26,INPUT);
-    pinMode(25,INPUT);
-    pinMode(33,INPUT);
+    pinMode(13,INPUT_PULLUP);
+    pinMode(12,INPUT_PULLUP);
+    pinMode(14,INPUT_PULLUP);
+    pinMode(27,INPUT_PULLUP);
+    pinMode(26,INPUT_PULLUP);
+    pinMode(25,INPUT_PULLUP);
+    pinMode(33,INPUT_PULLUP);
 
 
     resetInMemoryUserCode();
@@ -78,7 +78,6 @@ void setup() {
     displayUserCode.setBrightness(0x0a);
     displayTime.setBrightness(0x0a);
     displayUserCode.showNumberDec(0,true);
-    
 }
 
 boolean unlocked = false;
@@ -93,13 +92,11 @@ void loop() {
 #if DISPLAY_TIME == true
     displayCurrentTime();
 #endif
-    delayMicroseconds(25);
+
     char key = kpd.getKey();
     
 #if HUMAN_MODE == true 
-    if (key && key != lastKeyPressed){
-      Serial.println(key);
-    
+    if (key && key != lastKeyPressed){    
 #else
     if (key){
 #endif
@@ -133,6 +130,8 @@ void loop() {
                     unlocked = true;
                     showUserCode();
                 }else{
+                    Serial.println(userCode);
+                   showUserCode();
                   resetInMemoryUserCode();
                 }
 
@@ -141,7 +140,7 @@ void loop() {
                 userCode[1] = userCode[2];
                 userCode[2] = userCode[3];
                 userCode[3] = key;
-                showUserCode();
+//                showUserCode();
             }
         
     }

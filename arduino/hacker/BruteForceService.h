@@ -1,12 +1,12 @@
 #include <Arduino.h>
 
-#define LIN0 13
-#define LIN1 12
-#define LIN2 14
-#define LIN3 27
-#define COL0 26
-#define COL1 25
-#define COL2 33
+#define LIN0 5
+#define LIN1 18
+#define LIN2 19
+#define LIN3 21
+#define COL0 27
+#define COL1 26
+#define COL2 25
 
 #define SUCCESS_PIN 23
 
