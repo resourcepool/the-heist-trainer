@@ -1,11 +1,11 @@
 import { Controller, Get, Header, NotFoundException, Param, Response, ParseUUIDPipe } from '@nestjs/common';
 import { EmployeeService } from './employee.service';
 import { Employee } from '../_interface/employee.model';
-import { ApiUseTags } from '@nestjs/swagger';
+import { ApiTags } from '@nestjs/swagger';
 import { DumpDto } from './dto/dump.dto';
 
 @Controller('employees')
-@ApiUseTags('employees')
+@ApiTags('employees')
 export class EmployeeController {
     constructor(private readonly employeeService: EmployeeService) {
     }

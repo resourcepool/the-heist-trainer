@@ -1,9 +1,9 @@
 import { Controller, Get, Header, NotFoundException, Param, Response, ParseUUIDPipe } from '@nestjs/common';
-import { ApiUseTags } from '@nestjs/swagger';
+import { ApiTags } from '@nestjs/swagger';
 import {NfcService} from './nfc.service';
 
 @Controller('nfc')
-@ApiUseTags('nfc')
+@ApiTags('nfc')
 export class NfcController {
     constructor(private readonly nfcService: NfcService) {
     }

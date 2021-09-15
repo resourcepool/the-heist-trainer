@@ -1,17 +1,17 @@
-import { ApiModelProperty } from '@nestjs/swagger';
+import { ApiProperty } from '@nestjs/swagger';
 import { IsString } from 'class-validator';
 
 export class DumpDto {
 
-    @ApiModelProperty()
+    @ApiProperty()
     @IsString()
     firstName: string;
 
-    @ApiModelProperty()
+    @ApiProperty()
     @IsString()
     lastName: string;
 
-    @ApiModelProperty()
+    @ApiProperty()
     @IsString()
     hexDump: string;
 }

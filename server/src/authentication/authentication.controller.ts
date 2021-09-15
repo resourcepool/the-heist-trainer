@@ -1,12 +1,12 @@
 import { Body, Controller, HttpStatus, NotImplementedException, Post, Res, UnauthorizedException, } from '@nestjs/common';
 import { LoginDto } from './dto/login.dto';
 import { AuthenticationService } from './authentication.service';
-import { ApiUseTags } from '@nestjs/swagger';
+import { ApiTags } from '@nestjs/swagger';
 import { AuthorizationDto } from './dto/authorization.dto';
 import { Response } from 'express';
 
 @Controller('authentication')
-@ApiUseTags('authentication')
+@ApiTags('authentication')
 export class AuthenticationController {
 
     constructor(
