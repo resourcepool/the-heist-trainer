@@ -3,7 +3,7 @@ export const data = [
         userId: '9d4c659a-ebbd-4ea9-be3e-5f71a25e07b3',
         firstName: 'Danny',
         lastName: 'Ocean',
-        accessLevel: 2,
+        accessLevel: 4,
         status: 0,
         dateOfBirth: [2000, 1, 15],
         dateOfHiring: [2013, 1, 7],
