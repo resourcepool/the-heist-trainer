@@ -14,7 +14,7 @@ void BruteForceService::startBruteForce() {
     setupPinForBruteforce();
 
 
-    int i = 1000;
+    int i = 2999;
     while (!digitalRead(SUCCESS_PIN) && i < 10000) {
       if (i % 100 == 0){
         Serial.println(i);
