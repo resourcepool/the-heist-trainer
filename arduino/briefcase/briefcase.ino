@@ -3,7 +3,7 @@
 #include <Arduino.h>
 
 char userCode[5] = {'0', '0', '0', '0'};
-const char password[5] = "4242";
+char password[5];
 const byte ROWS = 4; // Four rows
 const byte COLS = 3; // Three columns
 // Define the Keymap
@@ -70,7 +70,9 @@ void setup() {
     pinMode(26,INPUT_PULLUP);
     pinMode(25,INPUT_PULLUP);
     pinMode(33,INPUT_PULLUP);
-
+  
+    //generate password
+    String(random(3000,4000)).toCharArray(password, 50);
 
     resetInMemoryUserCode();
                   
