@@ -1,0 +1,17 @@
+{
+  "name": "server",
+  "version": "0.0.1",
+  "description": "",
+  "author": "",
+  "type": "module",
+  "license": "MIT",
+  "scripts": {
+    "reset": "node reset.js",
+    "admin": "node admin.js"
+  },
+  "dependencies": {
+    "nfc-pcsc": "^0.8.1",
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {}
+}

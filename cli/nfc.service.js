@@ -1,17 +1,16 @@
 import {KEY_TYPE_A, NFC, TAG_ISO_14443_3} from 'nfc-pcsc';
-import {Injectable, NotFoundException} from '@nestjs/common';
-import {EmployeeService} from '../employee/employee.service';
-import {CardListener} from './CardListener';
+import {CardListener} from './CardListener.js';
+import {getEmployeeCardSectors} from "./user.utils.js";
+import {data} from "./data.js";
 
 const key = 'FFFFFFFFFFFF'; // key must be a 12-chars HEX string, an instance of Buffer, or array of bytes
 const keyType = KEY_TYPE_A;
 
-@Injectable()
 export class NfcService {
-    private nfc: any = new NFC();
-    private cardListener: CardListener = new CardListener();
+    nfc = new NFC();
+    cardListener = new CardListener();
 
-    constructor(private readonly employeeService: EmployeeService) {
+    constructor() {
         this.nfc.on('reader', (reader) => {
             reader.on('card', async (card) => {
                 // MIFARE Classic is ISO/IEC 14443-3 tag
@@ -21,7 +20,7 @@ export class NfcService {
                 }
                 console.log('Card detected');
                 try {
-                    const data: Buffer[] = this.cardListener.getSectors();
+                    const data = this.cardListener.getSectors();
                     if (!data) {
                         console.log('No User set');
                         return;
@@ -76,12 +75,13 @@ export class NfcService {
 
     updateCardListener(userId) {
         try {
+            const user = data.find(o => o.userId === userId)
             console.log('Setting card listener to new employee:');
-            console.log(this.employeeService.getEmployee(userId));
-            const sectors = this.employeeService.getEmployeeCardSectors(userId);
+            console.log(user);
+            const sectors = getEmployeeCardSectors(userId);
             this.cardListener.updateSectors(sectors);
         } catch (e) {
-            throw new NotFoundException(e);
+            throw new Error(e);
         }
     }
 }
