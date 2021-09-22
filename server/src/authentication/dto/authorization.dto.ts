@@ -6,5 +6,5 @@ export class AuthorizationDto {
     @ApiProperty()
     @IsUUID('4')
     userId: string;
-    lastLogin: bigint;
+    lastLogin: number;
 }

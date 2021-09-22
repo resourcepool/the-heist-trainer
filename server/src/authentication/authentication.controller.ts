@@ -32,7 +32,7 @@ export class AuthenticationController {
         try {
             const id = authorizationDto.userId;
             const result = {
-                isAuthorized: this.authenticationService.isSafeAuthorized(id),
+                isAuthorized: this.authenticationService.isSafeAuthorized(id, authorizationDto.lastLogin),
             };
             return res
                 .status(result.isAuthorized ? HttpStatus.OK : HttpStatus.UNAUTHORIZED)
