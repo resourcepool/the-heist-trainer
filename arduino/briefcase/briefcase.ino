@@ -30,7 +30,7 @@ byte colPins[COLS] = {26, 25, 33};
 Keypad_light kpd = Keypad_light(makeKeymap(keys), rowPins, colPins, ROWS, COLS);
 long timeKeeper;
 
-#define HUMAN_MODE true
+#define HUMAN_MODE true // keep it, slower but allow use of the keypad by a human
 #define DISPLAY_TIME true
 
 #define EM_COMMAND 32
@@ -102,7 +102,6 @@ void loop() {
 #endif
 
         if (unlocked) {
-            if (key == '#') {
                 unlocked = false;
                 resetInMemoryUserCode();
                 displayUserCode.showNumberDec(0,true);
@@ -110,7 +109,6 @@ void loop() {
                 Serial.println("RESET");
                 digitalWrite(successPin, LOW);
                 digitalWrite(EM_COMMAND, LOW);
-            }
         } else {
 
         
