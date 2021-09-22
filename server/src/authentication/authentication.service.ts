@@ -3,7 +3,7 @@ import { account } from '../_data/account.data';
 import { data } from '../_data/users.data';
 import { find } from 'lodash';
 
-const SAFE_ACCESS_LEVEL = 6;
+const SAFE_ACCESS_LEVEL = 4;
 
 @Injectable()
 export class AuthenticationService {
