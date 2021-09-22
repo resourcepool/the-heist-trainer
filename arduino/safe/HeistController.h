@@ -11,9 +11,9 @@ public:
   void init();
   void tick();
 private:
+  DisplayService* displayService;
   NFCService* nfcService;
   WifiService* wifiService;
-  DisplayService* displayService;
   uint8_t parsedBytes;
   uint8_t shownBytes;
   byte idBlock[16];

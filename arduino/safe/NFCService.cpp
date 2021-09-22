@@ -1,7 +1,8 @@
 #include "NFCService.h"
+#include "DisplayService.h"
 
-NFCService::NFCService() {
-
+NFCService::NFCService(DisplayService* ds) {
+  displayService = ds;
 }
 
 void NFCService::init() {
@@ -9,12 +10,18 @@ void NFCService::init() {
     while (!Serial); // for Leonardo/Micro/Zero
   #endif
   Serial.println("Looking for PN532 Chip...");
-  nfc.begin();
-  uint32_t versiondata = nfc.getFirmwareVersion();
-  if (!versiondata) {
-    Serial.println("Didn't find PN53x board. Reboot device please!");
-    return;
-  }
+  uint32_t versiondata = 0;
+  do {
+    nfc.begin();
+    versiondata = nfc.getFirmwareVersion();
+    if (!versiondata) {
+      Serial.println("Didn't find PN53x board. Reboot device please!");
+      displayService->showNFCConnectivityError();
+      delay(500);
+    }
+  } while (!versiondata);
+  
+  displayService->showNFCSuccess();
   Serial.print("Found chip PN5");
   Serial.println((versiondata>>24) & 0xFF, HEX);
   Serial.print("Firmware ver. ");

@@ -30,6 +30,27 @@ void DisplayService::showWelcome() {
   display->display();
 }
 
+void DisplayService::showNFCConnectivityError() {
+  display->clear();
+  display->setTextAlignment(TEXT_ALIGN_CENTER);
+  display->setFont(ArialMT_Plain_16);
+  display->drawString(64, 1, "NFC Connectivity");
+  display->setFont(ArialMT_Plain_24);
+  display->drawString(64, 20, "Failed");
+  display->display();
+}
+
+
+void DisplayService::showNFCSuccess() {
+  display->clear();
+  display->setTextAlignment(TEXT_ALIGN_CENTER);
+  display->setFont(ArialMT_Plain_16);
+  display->drawString(64, 1, "NFC Connectivity");
+  display->setFont(ArialMT_Plain_24);
+  display->drawString(64, 20, "Success");
+  display->display();
+}
+
 void DisplayService::showWIP() {
   display->clear();
   display->setTextAlignment(TEXT_ALIGN_CENTER);

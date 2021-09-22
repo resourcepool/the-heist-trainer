@@ -21,6 +21,7 @@ void WifiService::init() {
       if (WiFi.status() == WL_CONNECT_FAILED) {
         Serial.println("Failed to connect to Wifi. Wrong Password or SSID, or Both");
         displayService->showConnectivityError();
+        delay(5000);
       } else {
         Serial.println(F(" still trying to connect"));  
       }

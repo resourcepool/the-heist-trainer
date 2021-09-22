@@ -1,14 +1,13 @@
 #include "HeistController.h"
+#include "DisplayService.h"
 #include "NFCService.h"
 #include "WifiService.h"
-#include "DisplayService.h"
 #include "utils.h"
 
 HeistController::HeistController() {
-  nfcService = new NFCService();
   displayService = new DisplayService();
   wifiService = new WifiService(displayService);
-  
+  nfcService = new NFCService(displayService);
 }
 
 void HeistController::init() {
