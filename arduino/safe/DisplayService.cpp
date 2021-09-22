@@ -39,6 +39,27 @@ void DisplayService::showWIP() {
   display->display();
 }
 
+
+void DisplayService::showIP(String ip) {
+  display->clear();
+  display->setTextAlignment(TEXT_ALIGN_CENTER);
+  display->setFont(ArialMT_Plain_16);
+  display->drawString(64, 1, "IP Address is");
+  display->drawString(64, 20, ip);
+  display->display();
+}
+
+
+void DisplayService::showConnectivityError() {
+  display->clear();
+  display->setTextAlignment(TEXT_ALIGN_CENTER);
+  display->setFont(ArialMT_Plain_16);
+  display->drawString(64, 1, "Connectivity Error");
+  display->drawString(64, 20, "Please Restart");
+  display->display();
+}
+
+
 void DisplayService::showAccessGranted() {
   display->clear();
   display->setTextAlignment(TEXT_ALIGN_CENTER);

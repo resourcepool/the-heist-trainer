@@ -12,7 +12,6 @@ Here's how it works:
 Fortunately, the briefcases have two design flaws:
  * Hardware flaw: The keypad connectors are external
  * Software flaw: There is no **wait-before-retry** logic implemented on the briefcase system.
-
 ## Main Goal
 
 You need to find a way to open this briefcase, and Edward also gave you a hacking program written for ESP-32 microcontrolers.
@@ -20,9 +19,9 @@ You have no idea what a microcontroler is nor how to program this device, but yo
 
 ## Step 1 - Briefcase wiring
 
-In order to connect to the briefcase, you need to wire your microcontroler to replace the keypad...
+In order to connect to the briefcase, you need to wire your microcontroller to replace the keypad...
 
-TODO
+
 
 ## Step 2 - Briefcase wake signal
 

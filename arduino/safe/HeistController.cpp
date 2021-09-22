@@ -6,8 +6,9 @@
 
 HeistController::HeistController() {
   nfcService = new NFCService();
-  wifiService = new WifiService();
   displayService = new DisplayService();
+  wifiService = new WifiService(displayService);
+  
 }
 
 void HeistController::init() {

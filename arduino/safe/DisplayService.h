@@ -9,6 +9,8 @@ public:
   void init();
   void reset();
   void showWelcome();
+  void showIP(String ip);
+  void showConnectivityError();
   void showWIP();
   void showAccessGranted();
   void showAccessDenied();
