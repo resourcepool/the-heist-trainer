@@ -49,14 +49,7 @@ void Keypad_light::begin(char *userKeymap) {
 
 // Returns a single key only. Retained for backwards compatibility.
 char Keypad_light::getKey() {
-//	single_key = true;
-
-//    if (getKeys() && key[0].stateChanged && (key[0].kstate == PRESSED))
-//        return key[0].kchar;
     return scanKeys();
-//	single_key = false;
-
-//    return NO_KEY;
 }
 
 
@@ -67,22 +60,22 @@ char Keypad_light::scanKeys() {
         pin_mode(rowPins[r], INPUT_PULLUP);
     }
     char keyPressed = NO_KEY;
-    // bitMap stores ALL the keys that are being pressed.
     for (byte c = 0; c < sizeKpd.columns; c++) {
         pin_mode(columnPins[c], OUTPUT);
         pin_write(columnPins[c], LOW);    // Begin column pulse output.
-        
-    delayMicroseconds(10);
+        for (int i =0; i<11;i++){
+        __asm__ __volatile__ ("nop"); // insure that hacker has enough time to set the line
+        }
         for (byte r = 0; r < sizeKpd.rows; r++) {
             if (!pin_read(rowPins[r])) {
                 keyPressed = keymap[r * sizeKpd.columns + c];
                 break;
             }
-//			bitWrite(bitMap[r], c, !pin_read(rowPins[r]));  // keypress is active low so invert to high.
         }
         // Set pin to high impedance input. Effectively ends column pulse.
         pin_write(columnPins[c], HIGH);
-		pin_mode(columnPins[c],INPUT);
+		    pin_mode(columnPins[c],INPUT_PULLUP);
+//        delayMicroseconds(50);
 //		IL FAUT TESTER EN COMMENTANT LA LIGNE AU DESSUS. PARCE QUE JE ME BASE SUR LA VALEUR DE LA COLONNE. SI ELLE EST EN INPUT... FUCKED UP.
     }
     return keyPressed;

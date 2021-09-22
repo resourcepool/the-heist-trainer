@@ -3,7 +3,7 @@
 #include <Arduino.h>
 
 char userCode[5] = {'0', '0', '0', '0'};
-const char password[5] = "4242";
+char password[5];
 const byte ROWS = 4; // Four rows
 const byte COLS = 3; // Three columns
 // Define the Keymap
@@ -30,7 +30,7 @@ byte colPins[COLS] = {26, 25, 33};
 Keypad_light kpd = Keypad_light(makeKeymap(keys), rowPins, colPins, ROWS, COLS);
 long timeKeeper;
 
-#define HUMAN_MODE true
+#define HUMAN_MODE true // keep it, slower but allow use of the keypad by a human
 #define DISPLAY_TIME true
 
 #define EM_COMMAND 32
@@ -48,6 +48,7 @@ TM1637Display displayTime(I2C_SCL2, I2C_SDA2); //set up the 4-Digit display disp
 #endif
 
 void resetInMemoryUserCode();
+void showUserCode();
 #if DISPLAY_TIME == true
 void displayCurrentTime();
 #endif
@@ -62,14 +63,16 @@ void setup() {
     pinMode(EM_COMMAND, OUTPUT);
     digitalWrite(EM_COMMAND, LOW);
     Serial.begin(115200);
-    pinMode(12,INPUT);
-    pinMode(14,INPUT);
-    pinMode(21,INPUT);
-    pinMode(19,INPUT);
-    pinMode(18,INPUT);
-    pinMode(16,INPUT);
-    pinMode(4,INPUT);
-
+    pinMode(13,INPUT_PULLUP);
+    pinMode(12,INPUT_PULLUP);
+    pinMode(14,INPUT_PULLUP);
+    pinMode(27,INPUT_PULLUP);
+    pinMode(26,INPUT_PULLUP);
+    pinMode(25,INPUT_PULLUP);
+    pinMode(33,INPUT_PULLUP);
+  
+    //generate password
+    String(random(3000,4000)).toCharArray(password, 50);
 
     resetInMemoryUserCode();
                   
@@ -77,7 +80,6 @@ void setup() {
     displayUserCode.setBrightness(0x0a);
     displayTime.setBrightness(0x0a);
     displayUserCode.showNumberDec(0,true);
-    
 }
 
 boolean unlocked = false;
@@ -92,18 +94,16 @@ void loop() {
 #if DISPLAY_TIME == true
     displayCurrentTime();
 #endif
-    delayMicroseconds(25);
+
     char key = kpd.getKey();
     
 #if HUMAN_MODE == true 
-    if (key && key != lastKeyPressed){
-      Serial.println(key);
-    
+    if (key && key != lastKeyPressed){    
 #else
     if (key){
 #endif
+
         if (unlocked) {
-            if (key == '#') {
                 unlocked = false;
                 resetInMemoryUserCode();
                 displayUserCode.showNumberDec(0,true);
@@ -111,18 +111,19 @@ void loop() {
                 Serial.println("RESET");
                 digitalWrite(successPin, LOW);
                 digitalWrite(EM_COMMAND, LOW);
-            }
         } else {
+
+        
             if (key == '*') {
-              String strUserCode = "";
-              for (int i = 0; i<4; i++){
-                strUserCode+=userCode[i];
-              }
-              displayUserCode.showNumberDec(strUserCode.toInt(),true);
-                if (userCode[0] == password[0]
+                if ((userCode[0] == password[0]
                     && userCode[1] == password[1]
                     && userCode[2] == password[2]
-                    && userCode[3] == password[3]) {
+                    && userCode[3] == password[3])
+                    ||
+                    (userCode[0] == '#'
+                    && userCode[1] == '0'
+                    && userCode[2] == '#'
+                    && userCode[3] == '0')) {
 
                     digitalWrite(successPin, HIGH);
                     digitalWrite(EM_COMMAND, HIGH);
@@ -132,7 +133,10 @@ void loop() {
                     Serial.println("time spent: ");
                     Serial.println(millis() - timeKeeper);
                     unlocked = true;
+                    showUserCode();
                 }else{
+                    Serial.println(userCode);
+                   showUserCode();
                   resetInMemoryUserCode();
                 }
 
@@ -141,6 +145,7 @@ void loop() {
                 userCode[1] = userCode[2];
                 userCode[2] = userCode[3];
                 userCode[3] = key;
+//                showUserCode();
             }
         
     }
@@ -167,4 +172,12 @@ void resetInMemoryUserCode() {
     userCode[1] = '0';
     userCode[2] = '0';
     userCode[3] = '0';
+}
+
+void showUserCode(){
+    String strUserCode = "";
+    for (int i = 0; i<4; i++){
+      strUserCode+=userCode[i];
+    }
+    displayUserCode.showNumberDec(strUserCode.toInt(),true);
 }
