@@ -26,6 +26,7 @@ private:
   void parseCommand();
   void processCommand();
   void bruteforce();
+  void sendTouch(byte touch);
   void writeNFCBlock();
   void readNFCBlock();
   void resetNFCTag();
