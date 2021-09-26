@@ -59,6 +59,10 @@ void BruteForceService::simulateButtonPress(int col, int line) {
         GPIO.out_w1ts = ((uint32_t)1 << line);
 
         // and the cycle is complete
+
+        // last thing but not least, simulate the fact that you have released your finger from the key.
+        releaseFinger();
+
 }
 
 void releaseFinger() {
@@ -76,7 +80,7 @@ void releaseFinger() {
 void BruteForceService::sendTouch(int key) {
         setupPinForBruteforce();
         switch (key) {
-        case 0: //button 0 col1 lin1
+        case 0: //button 0 -> col1 lin3
                 simulateButtonPress(COL1, LIN3);
                 break;
         case 1: //button 1
@@ -113,7 +117,6 @@ void BruteForceService::sendTouch(int key) {
                 simulateButtonPress(COL2, LIN3);
                 break;
         }
-        releaseFinger();
 }
 
 
