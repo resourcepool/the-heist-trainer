@@ -1,4 +1,4 @@
-import {data} from "./data.js";
+import {data} from "../server/src/_data/data.js";
 import {bytesToPrettyHexString, hexStringToBytes} from "./utils.js";
 
 export function getEmployeeCardDump(userId) {

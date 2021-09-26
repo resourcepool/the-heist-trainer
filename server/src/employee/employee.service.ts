@@ -1,15 +1,16 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { Employee } from '../_interface/employee.model';
-import { data } from '../_data/users.data';
+import { data } from '../_data/data';
 import { find } from 'lodash';
 import { hexStringToBytes, bytesToPrettyHexString } from '../utils';
-import {DumpDto} from './dto/dump.dto';
+import { DumpDto } from './dto/dump.dto';
+import { Buffer } from "buffer";
 
 @Injectable()
 export class EmployeeService {
 
     getEmployees(): Employee[] {
-        return data;
+        return data as unknown as Employee[];
     }
 
     getEmployee(userId: string): Employee {
@@ -98,7 +99,7 @@ export class EmployeeService {
     }
 
     getEmployeesCardDumps(): DumpDto[] {
-        return data.map(e => {
+        return (data as unknown as Employee[]).map(e => {
             const dto = new DumpDto();
             dto.firstName = e.firstName;
             dto.lastName = e.lastName;
