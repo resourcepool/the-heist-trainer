@@ -41,6 +41,12 @@ Development release link: `https://raw.githubusercontent.com/espressif/arduino-e
 ### Clone this repository
 `git clone https://github.com/resourcepool/the-heist`
 
+### Add Arduino libraries
+
+Copy the content of the **libraries** directory to your Documents/Arduino/libraries folder
+
+Restart Arduino IDE.
+
 ## Game start
 
 Whenever the game master gives his go, you can go ahead and browse to the right game section. Start with **chapter one**.

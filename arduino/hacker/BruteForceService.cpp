@@ -46,7 +46,7 @@ void BruteForceService::setupPinForBruteforce() {
 
     pinMode(SUCCESS_PIN, INPUT_PULLUP);
 
-    // INPUT_PULLUP instead of simple INPUT makes things a lot better! (no false number)
+            // INPUT_PULLUP instead of simple INPUT makes things a lot better! (no false number)
     pinMode(COL0, INPUT_PULLUP);
     pinMode(COL1, INPUT_PULLUP);
     pinMode(COL2, INPUT_PULLUP);

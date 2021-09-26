@@ -7,9 +7,9 @@ Inside will be lots of documents, some interesting, some completely useless.
 Ohh wait. There's a badge! Quick, hurry-up and try to login onto the safe...  
 What? It didn't work?... Hmmm.
 
-Damn! The intel was wrong. The employee whose briefcase was stolen is only a SC 5...
+Damn! The intel was wrong. The employee whose briefcase was stolen is only a SC 3...
 
-Remember, you need to be Security Clearance level 6 or above in order to get access to the content of the safe.
+Remember, you need to be Security Clearance level 4 or above in order to get access to the content of the safe.
 
 You'll need to find another way.
 
@@ -38,6 +38,8 @@ For reference :
  * a String encoded in ASCII takes only one byte per character
  * a Timestamp can be encoded on 4 or 8 bytes. Timestamp of 4 bytes for **January 1st 2020 12:00 AM** is **0x5E0BD2F0** in Hex, **1577833200** in decimal (epoch seconds)
 
+Edit: We will do this step with you. 
+
 ## Step 3 - Find the right info
 
 The auth network is available on a wireless connection, with a hidden SSID.
@@ -57,11 +59,11 @@ A quick portscan indicates ports `80` and `8080` are both listening on that IP..
 
 Why don't you go check with your browser what's on `http://192.168.1.2`
 
-Don't forget we're looking for someone with SC 6 and above...
+Don't forget we're looking for someone with SC 4 and above...
 
 `Hint: Now may be the time to take a look on all those files in your briefcase...`
 
-## Step 4 - Becoming SC 6
+## Step 4 - Becoming SC 4
 
 Found what you needed? Then why don't you go ahead and change the content of your Badge's memory?
 
