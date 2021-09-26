@@ -7,20 +7,8 @@ void BruteForceService::startBruteForce() {
         // STEP 3
         // when send4DigitPassword is implemented, call it in a loop to try to bruteforce the briefcase.
         // Do not forget to check if the briefcase is open on each try...
-        Serial.println("start bruteforce");
-        long timeStart = millis();
-        setupPinForBruteforce();
 
-
-        int i = 2999;
-        while (!digitalRead(SUCCESS_PIN) && i < 4000) {
-                if (i % 100 == 0) {
-                        Serial.println(i);
-                }
-                send4DigitPassword(i);
-                sendTouch(10); // send * to validate password
-                i++;
-        }
+        // TODO Step 3 implement your solution HERE
 }
 
 void BruteForceService::setupPinForBruteforce() {
@@ -147,11 +135,8 @@ void BruteForceService::send4DigitPassword(int password) {
         // STEP 3
         // here you must split a 4 Digit password into single digits and call the sendTouch method for each of them.
         // multiple ways to do it.. recursion is only one of them.
-        if (password >= 10)
-                send4DigitPassword(password / 10);
 
-        int digit = password % 10;
-        sendTouch(digit);
+        // TODO Step 3 implement your solution HERE
 }
 
 
