@@ -1,7 +1,7 @@
 import {KEY_TYPE_A, NFC, TAG_ISO_14443_3} from 'nfc-pcsc';
 import {CardListener} from './CardListener.js';
 import {getEmployeeCardSectors} from "./user.utils.js";
-import {data} from "../server/src/_data/data.js";
+import {data} from "../server/src/_data/data.mjs";
 
 const key = 'FFFFFFFFFFFF'; // key must be a 12-chars HEX string, an instance of Buffer, or array of bytes
 const keyType = KEY_TYPE_A;
