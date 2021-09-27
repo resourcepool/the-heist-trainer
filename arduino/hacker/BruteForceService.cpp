@@ -56,6 +56,7 @@ void BruteForceService::setupPinForBruteforce() {
         digitalWrite(LIN2, HIGH);
         digitalWrite(LIN3, HIGH);
 
+
 }
 
 void releaseFinger() {

@@ -17,22 +17,22 @@ Fortunately, the briefcases have two design flaws:
 You need to find a way to open this briefcase, and Edward also gave you a hacking program written for ESP-32 microcontrolers.
 You have no idea what a microcontroller is nor how to program this device, but you'll have to find a way.
 
-## Step 1 - Briefcase wiring
+## Step 1.1 - Briefcase wiring
 
 In order to connect to the briefcase, you need to wire your microcontroller to replace the keypad...
 
 Fortunately, edward also found you some docs. Hopefully those docs can help you.
 
-## Step 2 - Briefcase wake signal
+## Step 1.2 - Briefcase number input
 
-The briefcase is programmed to wake whenever the **#** sign is pushed.
+The briefcase is programmed to wake whenever you push a button (**1**).
 You will have to programmatically wake it up that way.
 
 The program Edward gave you is a hacker-tool designed to provide many different utilities for hardware-hacking.
 
 The good thing about it is that the shell is already working, and that you will just have to fill-in the blanks!
 
-## Step 3 - Briefcase bruteforce
+## Step 2 - Briefcase bruteforce
 
 Now that you know the wiring works, you will need to perform a bruteforce attack on the pins.
 

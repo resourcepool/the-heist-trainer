@@ -1,4 +1,4 @@
-# Edward's hacking device
+# Edward's hacking Device: Getting Started
 
 ## About the device
 This device will allow you to:
@@ -32,6 +32,8 @@ SPI Connections should be wired to all slaves with 3 main bus:
 Additionnally, each slave should be connected to a specific GPIO output on the microcontroller, for **SS** (Slave Select), also called **CS** (Cable Select).
 All slave selectors should be indexed, using 0-based indices. For instance, your first slave cable select output should be named **CS0**.
 
-Most of the time, on ESP32 microcontrollers, SPI connections are using pins 18, 19 and 23, with the first CS0 on pin 5.  
+Most of the time, on ESP32 microcontrollers, SPI connections are using pins 18, 19 and 23, with the first CS0 on pin 5.
 
 Beware, your NFC board needs to be wired to "speak" the SPI Standard.
+
+**Warning**: In order for your NFC-Board to work, it also has to be powered on. You can use the VIN of your microcontroller (5V) and your GNC to make sure it has the necessary power to work properly. 

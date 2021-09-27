@@ -10,11 +10,16 @@ void NFCService::init() {
   #endif
   Serial.println("Looking for PN532 Chip...");
   nfc.begin();
-  uint32_t versiondata = nfc.getFirmwareVersion();
-  if (!versiondata) {
-    Serial.println("Didn't find PN53x board. Reboot device please!");
-    return;
-  }
+  uint32_t versiondata = 0;
+  do {
+    nfc.begin();
+    versiondata = nfc.getFirmwareVersion();
+    if (!versiondata) {
+      Serial.println("Didn't find PN53x board. Reboot device please!");
+      delay(500);
+    }
+  } while (!versiondata);
+  
   Serial.print("Found chip PN5");
   Serial.println((versiondata>>24) & 0xFF, HEX);
   Serial.print("Firmware ver. ");
