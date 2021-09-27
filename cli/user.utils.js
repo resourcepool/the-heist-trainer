@@ -4,7 +4,7 @@ import {bytesToPrettyHexString, hexStringToBytes} from "./utils.js";
 export function getEmployeeCardDump(userId) {
     const result = data.find(o => o.userId === userId);
     if (!result) {
-        throw new NotFoundException('user not found');
+        throw new Error('user not found');
     }
 
     const firstNameBuf = Buffer.alloc(32);
@@ -29,7 +29,7 @@ export function getEmployeeCardDump(userId) {
 export function getEmployeeCardSectors(userId) {
     const result = data.find(o => o.userId === userId);
     if (!result) {
-        throw new NotFoundException('user not found');
+        throw new Error('user not found');
     }
     const sector0 = Buffer.alloc(32);
     sector0.writeUInt8(0xFD, 0);

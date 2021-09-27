@@ -1,0 +1,25 @@
+<div id="tools">
+  <div class="content">
+    <h2>Hexa Converter Tool</h2>
+
+    <select name="converter" class="converter" [(ngModel)]="converter">
+      <option *ngFor="let converterType of converterTypes"
+              [value]="converterType.fn">
+        {{converterType.name}}
+      </option>
+    </select>
+
+    <div class="zone">
+      <textarea name="zone1" id="zone1" [(ngModel)]="zone1" (ngModelChange)="formatData('zone1')" placeholder="Write hexadecimal data to convert...">{{zone1}}</textarea>
+    </div>
+
+    <div class="buttons">
+      <button type="button" (click)="convert()">&#9660;&#9660;&#9660;&#9660;</button>
+      <button type="button" (click)="convert(true)">&#9650;&#9650;&#9650;&#9650;</button>
+    </div>
+
+    <div class="zone">
+      <textarea name="zone2" id="zone2" [(ngModel)]="zone2" placeholder="Write any-type data to convert..."></textarea>
+    </div>
+  </div>
+</div>

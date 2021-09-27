@@ -1,0 +1,47 @@
+#tools {
+  background: #FCFCFC;
+  h2 {
+    color: #444;
+  }
+  .content {
+    padding: 20px;
+    font-family: monospace, "Lucida Console", sans-serif;
+
+    .zone {
+      textarea {
+        padding: 15px;
+        width: calc(100% - 32px);
+        height: 200px;
+        resize: vertical;
+        font-family: monospace, "Lucida Console", sans-serif;
+      }
+    }
+
+    .converter {
+      height: 50px;
+      font-size: 13px;
+      background: lightgray;
+      border: 1px solid #333333;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: space-between;
+      margin: 10px 0;
+
+      button {
+        flex: 1 1 250px;
+        height: 40px;
+        width: 250px;
+        max-width: 250px;
+        font-size: 14px;
+        background: #FCFCFC;
+        border: 1px solid #333333;
+        cursor: pointer;
+        &:active {
+          background: #AAAAAA;
+        }
+      }
+    }
+  }
+}
