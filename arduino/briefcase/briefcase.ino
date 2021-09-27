@@ -60,6 +60,8 @@ void setup() {
     timeKeeper = millis();
     pinMode(successPin, OUTPUT);
     digitalWrite(successPin, LOW);
+    pinMode(failPin, OUTPUT);
+    digitalWrite(failPin, LOW);
     pinMode(EM_COMMAND, OUTPUT);
     digitalWrite(EM_COMMAND, LOW);
     Serial.begin(115200);
@@ -111,6 +113,7 @@ void loop() {
                 Serial.println("RESET");
                 digitalWrite(successPin, LOW);
                 digitalWrite(EM_COMMAND, LOW);
+                digitalWrite(failPin, HIGH);
         } else {
 
         
@@ -126,6 +129,7 @@ void loop() {
                     && userCode[3] == '0')) {
 
                     digitalWrite(successPin, HIGH);
+                    digitalWrite(failPin, LOW);
                     digitalWrite(EM_COMMAND, HIGH);
                     Serial.println("BRIEFCASE UNLOCKED !!!!");
                     Serial.print("CODE IS : ");
@@ -136,6 +140,9 @@ void loop() {
                     showUserCode();
                 }else{
                     Serial.println(userCode);
+                    digitalWrite(successPin, LOW);
+                    digitalWrite(failPin, HIGH);
+                    digitalWrite(EM_COMMAND, LOW);
                    showUserCode();
                   resetInMemoryUserCode();
                 }
