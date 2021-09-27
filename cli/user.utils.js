@@ -34,7 +34,7 @@ export function getEmployeeCardSectors(userId) {
     const sector0 = Buffer.alloc(32);
     sector0.writeUInt8(0xFD, 0);
     sector0.writeUInt8(0x3E, 1);
-    result.firstName.substr(0, 30).toUpperCase().split('').forEach((c, i) => sector0.writeUInt8(c.charCodeAt(0), i));
+    result.firstName.substr(0, 30).toUpperCase().split('').forEach((c, i) => sector0.writeUInt8(c.charCodeAt(0), i + 2));
     const sector1 = Buffer.alloc(48);
     result.firstName.substr(30, 62).toUpperCase().split('').forEach((c, i) => sector0.writeUInt8(c.charCodeAt(0), i));
     sector1.writeUInt8(0xFD, 32);
