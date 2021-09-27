@@ -29,6 +29,12 @@ void BruteForceService::setupPinForBruteforce() {
         // TODO Step 2 implement your solution HERE
 }
 
+void releaseFinger() {
+        // releasing the finger means waiting for the briefcase to scan every column, while we do absolutely nothing. Except waiting...
+
+        // TODO Step 2 implement your solution HERE
+}
+
 void BruteForceService::simulateButtonPress(int col, int line) {
 
         // STEP 2
@@ -43,12 +49,6 @@ void BruteForceService::simulateButtonPress(int col, int line) {
 
         // last thing but not least, simulate the fact that you have released your finger from the key.
         releaseFinger();
-}
-
-void releaseFinger() {
-        // releasing the finger means waiting for the briefcase to scan every column, while we do absolutely nothing. Except waiting...
-
-        // TODO Step 2 implement your solution HERE
 }
 
 void BruteForceService::sendTouch(int key) {

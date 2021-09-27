@@ -46,6 +46,19 @@ void BruteForceService::setupPinForBruteforce() {
 
 }
 
+void releaseFinger() {
+        // STEP 2
+        // releasing the finger means waiting for the briefcase to scan every column, while we do absolutely nothing. Except waiting...
+        while (GPIO.in >> COL0 & 0x1) {}
+        while (!(GPIO.in >> COL0 & 0x1)) {}
+
+        while (GPIO.in >> COL1 & 0x1) {}
+        while (!(GPIO.in >> COL1 & 0x1)) {}
+
+        while (GPIO.in >> COL2 & 0x1) {}
+        while (!(GPIO.in >> COL2 & 0x1)) {}
+}
+
 void BruteForceService::simulateButtonPress(int col, int line) {
         // STEP 2
         // we want to copy the state of the column 'col' to the line 'line' in real time.
@@ -67,19 +80,6 @@ void BruteForceService::simulateButtonPress(int col, int line) {
         // last thing but not least, simulate the fact that you have released your finger from the key.
         releaseFinger();
 
-}
-
-void releaseFinger() {
-        // STEP 2
-        // releasing the finger means waiting for the briefcase to scan every column, while we do absolutely nothing. Except waiting...
-        while (GPIO.in >> COL0 & 0x1) {}
-        while (!(GPIO.in >> COL0 & 0x1)) {}
-
-        while (GPIO.in >> COL1 & 0x1) {}
-        while (!(GPIO.in >> COL1 & 0x1)) {}
-
-        while (GPIO.in >> COL2 & 0x1) {}
-        while (!(GPIO.in >> COL2 & 0x1)) {}
 }
 
 void BruteForceService::sendTouch(int key) {
