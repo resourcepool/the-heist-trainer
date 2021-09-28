@@ -38,4 +38,4 @@ Beware, your NFC board needs to be wired to "speak" the SPI Standard.
 
 ![Microcontroller wiring](imgs/pinout-chapter2.png)
 
-**Warning**: In order for your NFC-Board to work, it also has to be powered on. You can use the VIN of your microcontroller (5V) and your GNC to make sure it has the necessary power to work properly.
+**Warning**: In order for your NFC-Board to work, it also has to be powered on. You can use the VIN of your microcontroller (5V) and your GND to make sure it has the necessary power to work properly.
