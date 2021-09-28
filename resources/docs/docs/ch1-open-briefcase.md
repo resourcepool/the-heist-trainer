@@ -23,6 +23,9 @@ In order to connect to the briefcase, you need to wire your microcontroller to r
 
 Fortunately, edward also found you some docs. Hopefully those docs can help you.
 
+
+
+
 ## Step 1.2 - Briefcase number input
 
 The briefcase is programmed to wake whenever you push a button (**1**).

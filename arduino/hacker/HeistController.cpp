@@ -47,6 +47,7 @@ void HeistController::parseCommand() {
 
 void HeistController::showHelp() {
     Serial.println("Commands available:");
+    Serial.println("'send-key': Simulate a button press on a keypad using Digital I/O");
     Serial.println("'bruteforce': Perform a bruteforce attack using Digital I/O");
     Serial.println("'nfc-dump': dump memory of MiFare Classic NFC Tag");
     Serial.println("'nfc-read': read a memory-block on a MiFare Classic NFC Tag");
@@ -55,13 +56,13 @@ void HeistController::showHelp() {
 }
 
 void HeistController::bruteforce() {
-    bruteForceService->setupPinForNeutralAction();
-    bruteForceService->startBruteForce();
+    bruteForceService->setupPinForBruteforce();
+    bruteForceService->startBruteforce();
     bruteForceService->setupPinForNeutralAction();
 }
 
 void HeistController::sendTouch(byte touch) {
-    bruteForceService->setupPinForNeutralAction();
+    bruteForceService->setupPinForBruteforce();
     Serial.println("key");
     Serial.print("> ");
     Serial.flush();
@@ -71,13 +72,14 @@ void HeistController::sendTouch(byte touch) {
     // read the incoming byte:
       key = Serial.parseInt();
       if (key>0 && key <=10){
-         bruteForceService->sendTouch(key);
-      }else{
-         bruteForceService->sendTouch(10);
+         bruteForceService->enterKey(key);
+      } else {
+         bruteForceService->enterKey(10);
       }
     }
     bruteForceService->setupPinForNeutralAction();
 }
+
 void HeistController::writeNFCBlock() {
     Serial.println("Which memory block would you like to write? (0-63)");
     Serial.print("> ");
@@ -186,7 +188,7 @@ void HeistController::processCommand() {
         showHelp();
     } else if (equals(cmdBuffer, "bruteforce", 10)) {
         bruteforce();
-    } else if (equals(cmdBuffer, "send-touch", 10)) {
+    } else if (equals(cmdBuffer, "send-key", 10)) {
         sendTouch(cmdBuffer[11]);
     } else if (equals(cmdBuffer, "nfc-dump", 8)) {
         nfcService->dumpCard();

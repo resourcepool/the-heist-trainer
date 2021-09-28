@@ -2,10 +2,10 @@
 #include <SPI.h>
 #include <Adafruit_PN532.h>
 
-#define PN532_SCK 18
-#define PN532_MOSI 23
-#define PN532_SS 5
-#define PN532_MISO 19
+#define PN532_SCK 14
+#define PN532_MOSI 13
+#define PN532_SS 15
+#define PN532_MISO 12
 #define MIFARE_KEY_A 0
 #define MIFARE_KEY_B 1
 
