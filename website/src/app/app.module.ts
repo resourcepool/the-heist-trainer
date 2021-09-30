@@ -16,6 +16,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { TnsaEmployeesComponent } from './tnsa-employees/tnsa-employees.component';
 import { ResetComponent } from './reset/reset.component';
 import {ToolsComponent} from "./tools/tools.component";
+import {ToolsService} from "./_services/tools.service";
 
 @NgModule({
   declarations: [
@@ -38,7 +39,7 @@ import {ToolsComponent} from "./tools/tools.component";
     AppRoutingModule,
     HttpClientModule,
   ],
-  providers: [AuthenticationService],
+  providers: [AuthenticationService, ToolsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

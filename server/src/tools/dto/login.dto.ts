@@ -1,10 +1,14 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsString } from 'class-validator';
+import {IsNumber, IsOptional, IsString} from 'class-validator';
 
 export class EntryDto {
 
     @ApiProperty()
-    @IsString()
     data: string;
+
+    @ApiProperty()
+    @IsNumber()
+    @IsOptional()
+    byteLength: number;
 
 }

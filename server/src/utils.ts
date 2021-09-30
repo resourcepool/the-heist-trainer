@@ -1,4 +1,4 @@
-const SEPARATORS = new RegExp('[-:]', 'g');
+const SEPARATORS = new RegExp('[-: ]', 'g');
 
 /**
  * Converts a Hex String or a Pretty Hex String to an array of bytes (Uint8Array)
