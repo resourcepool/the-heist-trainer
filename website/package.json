@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --watch",
-    "start:prod": "ng serve --host=0.0.0.0 --port=80",
+    "start:prod": "ng serve --host=0.0.0.0 --port=80 --configuration=production",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
