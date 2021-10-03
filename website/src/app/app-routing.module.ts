@@ -10,6 +10,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { TnsaEmployeesComponent } from './tnsa-employees/tnsa-employees.component';
 import { ResetGuard } from './_guards/reset.guard';
 import { ResetComponent } from './reset/reset.component';
+import {ToolsComponent} from "./tools/tools.component";
 
 
 const routes: Routes = [
@@ -26,6 +27,10 @@ const routes: Routes = [
     path: 'reset',
     canActivate: [ResetGuard],
     component: ResetComponent,
+  },
+  {
+    path: 'tools',
+    component: ToolsComponent,
   },
   {
     path: '',

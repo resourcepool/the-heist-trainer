@@ -47,6 +47,19 @@ Copy the content of the **libraries** directory to your **Documents/Arduino/libr
 
 Restart Arduino IDE.
 
+### Setup environment
+All you need to setup your environment is : 
+ * Compatible with Windows 8+ / Mac OSX / Linux
+ * 1 USB Port available
+ * Internet connection
+ 
+Then you can follow theses steps : 
+ * install pyserial avec pip et python3 :
+    * si vous n'avez pas pip installé : `sudo apt install python-is-python3` 
+    * installez pyserial `pip install pyserial`
+ * For Linux, you need to open your serial port with the following command and reboot your computer : 
+ `sudo usermod -aG dialout $USER`
+
 ## Game start
 
 Whenever the game master gives his go, you can go ahead and browse to the right game section. Start with **chapter one**.
