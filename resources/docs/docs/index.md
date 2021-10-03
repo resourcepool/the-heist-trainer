@@ -43,7 +43,7 @@ Development release link: `https://raw.githubusercontent.com/espressif/arduino-e
 
 ### Add Arduino libraries
 
-Copy the content of the **libraries** directory to your Documents/Arduino/libraries folder
+Copy the content of the **libraries** directory to your **Documents/Arduino/libraries** folder
 
 Restart Arduino IDE.
 

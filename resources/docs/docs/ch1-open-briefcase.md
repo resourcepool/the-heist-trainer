@@ -26,14 +26,32 @@ Fortunately, edward also found you some docs. Hopefully those docs can help you.
 
 
 
-## Step 1.2 - Briefcase number input
+## Step 1.2 - Flashing your Arduino Device
 
-The briefcase is programmed to wake whenever you push a button (**1**).
-You will have to programmatically wake it up that way.
+The program we gave you (in the `/hacker` directory of your repository) is an Arduino project.
+Once you have setup Arduino, you should be able to flash the device.
+
+By default, every Arduino Device contains a program. In order to flash it, you need to reset it into Bootloader mode each time you want to flash.
+
+To do this, follow the following steps:
+ * Push and hold the EN button (it means "ENABLE").
+ * Push and hold the BOOT button (it means "BOOTLOADER").
+ * Release the EN button. When you release the EN button, the device will reboot.
+ * After 1 second, release the BOOTLOADER button
 
 The program Edward gave you is a hacker-tool designed to provide many different utilities for hardware-hacking.
 
 The good thing about it is that the shell is already working, and that you will just have to fill-in the blanks!
+
+The program can be accessed using a Serial Monitor.
+
+To open your Serial Monitor
+
+
+## Step 1.3 - Coding
+
+You need to implement the method `BruteForceService::simulateButtonPressed`.  
+You can test it by launching the command
 
 ## Step 2 - Briefcase bruteforce
 
