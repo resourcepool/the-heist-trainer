@@ -61,7 +61,9 @@ Why don't you go check with your browser what's on `http://192.168.1.2`
 
 Don't forget we're looking for someone with SC 4 and above...
 
-`Hint: Now may be the time to take a look on all those files in your briefcase...`
+**Hint: Now may be the time to take a look on all those files in your briefcase...**
+
+**Hint 2 : You may need to use a tool to convert some data... visit _"/tools"_ page of the website**
 
 ## Step 4 - Becoming SC 4
 
