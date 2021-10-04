@@ -12,6 +12,7 @@ Here's how it works:
 Fortunately, the briefcases have two design flaws:
  * Hardware flaw: The keypad connectors are external
  * Software flaw: There is no **wait-before-retry** logic implemented on the briefcase system.
+
 ## Main Goal
 
 You need to find a way to open this briefcase, and Edward also gave you a hacking program written for ESP-32 microcontrolers.

@@ -48,10 +48,10 @@ void BruteForceService::startBruteforce() {
 
 
 
-
+/**
+ * Nothing to change here!
+ */
 void BruteForceService::releaseFinger() {
-    // STEP 2
-    // releasing the finger means waiting for the briefcase to scan every column, while we do absolutely nothing. Except waiting...
     simulateEmptyColumn(COL0);
     simulateEmptyColumn(COL1);
     simulateEmptyColumn(COL2);
@@ -60,7 +60,6 @@ void BruteForceService::releaseFinger() {
 
 /*
  * Nothing to change here!
- * ...but you can look at it to get some ideas for setupPinForBruteforce
  */
 void BruteForceService::setupPinForNeutralAction() {
         pinMode(ROW0, INPUT_PULLUP);
@@ -107,6 +106,7 @@ void BruteForceService::setupPinForBruteforce() {
 }
 
 /**
+ * Nothing to change here!
  * Returns true if briefcase is currently reading all the rows for the provided column, false otherwise.
  */
 bool BruteForceService::isBrowsingColumn(uint8_t col) {
@@ -114,6 +114,7 @@ bool BruteForceService::isBrowsingColumn(uint8_t col) {
 }
 
 /**
+ * Nothing to change here!
  * This method will wait for a column input to become idle (<=> to be set to HIGH)
  */
 void BruteForceService::blockWhileColumnIdle(uint8_t col) {
@@ -121,6 +122,7 @@ void BruteForceService::blockWhileColumnIdle(uint8_t col) {
 }
 
 /**
+ * Nothing to change here!
  * This method will wait for a column input to become active (<=> to be set to LOW)
  */
 void BruteForceService::blockWhileColumnActive(uint8_t col) {
@@ -128,6 +130,7 @@ void BruteForceService::blockWhileColumnActive(uint8_t col) {
 }
 
 /**
+ * Nothing to change here!
  * Set Digital Output GPIO to high or low
  * @param row the target row PIN
  * @param high true if high, false if low
@@ -144,6 +147,7 @@ void BruteForceService::fastDigitalWrite(uint8_t row, bool high) {
 
 
 /**
+ * Nothing to change here!
  * Browse column with all rows inactive (<=> not pressed)
  */
 void BruteForceService::simulateEmptyColumn(uint8_t col) {
