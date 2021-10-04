@@ -32,7 +32,6 @@ Make sure Arduino is installed on your computer [https://www.arduino.cc/en/main/
 Stable release link: `https://raw.githubusercontent.com/espressif/arduino-esp32/gh-pages/package_esp32_index.json`  
 Development release link: `https://raw.githubusercontent.com/espressif/arduino-esp32/gh-pages/package_esp32_dev_index.json`  
 
-
 - Start Arduino and open Preferences window.
 - Enter one of the release links above into *Additional Board Manager URLs* field. You can add multiple URLs, separating them with commas.
 - Open Boards Manager from Tools > Board menu and install *esp32* platform (and don't forget to select your ESP32 board from Tools > Board menu after installation).
@@ -43,26 +42,25 @@ Development release link: `https://raw.githubusercontent.com/espressif/arduino-e
 
 ### Add Arduino libraries
 
-Copy the content of the **libraries** directory to your **Documents/Arduino/libraries** folder
+Copy the content of the **libraries** directory to your **Arduino/libraries** folder.
+ * Windows: should be in `My Documents/Arduino/libraries`
+ * Linux: should be in the `libraries` subfolder of wherever you placed arduino
+ * Mac OS: should be in the `Documents/Arduino/libraries` folder 
 
 Restart Arduino IDE.
 
-### Setup environment
-All you need to setup your environment is : 
- * Compatible with Windows 8+ / Mac OSX / Linux
- * 1 USB Port available
- * Internet connection
+### Linux
  
-Then you can follow theses steps : 
- * install pyserial avec pip et python3 :
-    * si vous n'avez pas pip installé : `sudo apt install python-is-python3` 
+Additionally, if you are on Linux you need to follow theses extra steps : 
+ * install pyserial with pip & python3 :
+    * if pip is not installed : `sudo apt install python-is-python3` 
     * installez pyserial `pip install pyserial`
- * For Linux, you need to open your serial port with the following command and reboot your computer : 
+ * enter the following command and reboot your computer: 
  `sudo usermod -aG dialout $USER`
 
 ## Game start
 
-Whenever the game master gives his go, you can go ahead and browse to the right game section. Start with **chapter one**.
+Go ahead and browse to the right game section. Start with **chapter one**.
 
 **Open the briefcase**
 

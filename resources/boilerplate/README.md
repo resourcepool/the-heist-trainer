@@ -16,9 +16,7 @@ Make sure Arduino is installed on your computer [https://www.arduino.cc/en/main/
 
 ### Install ESP32 Espressif using Arduino IDE Boards Manager
 
-Stable release link: `https://raw.githubusercontent.com/espressif/arduino-esp32/gh-pages/package_esp32_index.json`  
-Development release link: `https://raw.githubusercontent.com/espressif/arduino-esp32/gh-pages/package_esp32_dev_index.json`  
-
+Stable release link: `https://raw.githubusercontent.com/espressif/arduino-esp32/gh-pages/package_esp32_index.json`   
 
 - Start Arduino and open Preferences window.
 - Enter one of the release links above into *Additional Board Manager URLs* field. You can add multiple URLs, separating them with commas.
@@ -28,11 +26,23 @@ Development release link: `https://raw.githubusercontent.com/espressif/arduino-e
 ### Clone this repository
 `git clone https://github.com/resourcepool/the-heist`
 
-### Copy libraries necessary to run all Arduino code
+### Add Arduino libraries
 
-Copy the content of the **libraries** directory to your Documents/Arduino/libraries folder
+Copy the content of the **libraries** directory to your **Arduino/libraries** folder.
+* Windows: should be in `My Documents/Arduino/libraries`
+* Linux: should be in the `libraries` subfolder of wherever you placed arduino
+* Mac OS: should be in the `Documents/Arduino/libraries` folder
 
 Restart Arduino IDE.
+
+### Linux
+
+Additionally, if you are on Linux you need to follow theses extra steps :
+* install pyserial with pip & python3 :
+    * if pip is not installed : `sudo apt install python-is-python3`
+    * installez pyserial `pip install pyserial`
+* enter the following command and reboot your computer:
+  `sudo usermod -aG dialout $USER`
 
 
 ## Game guide

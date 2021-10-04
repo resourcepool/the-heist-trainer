@@ -12,14 +12,19 @@ You should select ESP32-Dev Module, with the right Serial port, and an upload sp
 
 By default, every Arduino Device contains a program. In order to flash it, you need to reset it into Bootloader mode **each time** you want to flash.
 
-On most systems, the flashing is made automatically by Arduino. Sometimes though, it might not work.
-In that case, just do the following on your device:
+On most systems, the Arduino software automatically restarts and enables the bootloader. Sometimes though, it might not work.
 
-To do this, follow the following steps on your ESP-32:
-* Push and hold the EN button (it means "ENABLE").
+If your reset is not automatic, your software should display the following:
+**A fatal error occurred: Failed to connect to ESP32: Timed out… Connecting…**
+
+![ESP32 Boot button](imgs/boot.png)
+
+In that case, just do the following on your device:
 * Push and hold the BOOT button (it means "BOOTLOADER").
-* Release the EN button. When you release the EN button, the device will reboot.
-* After 1 second, release the BOOTLOADER button
+* Press the Upload button in Arduino
+* After you see the **“Connecting….”** message in your Arduino IDE, release the finger from the “BOOT” button
+* Press the Enable (EN) button on your ESP32 to reboot it.
+
 
 ## How to interact
 Your Hacker device uses the Serial Monitor to display and execute commands.
