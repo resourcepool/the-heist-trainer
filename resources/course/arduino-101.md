@@ -6,7 +6,7 @@
 
 You should select ESP32-Dev Module, with the right Serial port, and an upload speed of 115200 bps (or higher).
 
-![Arduino Device Settings](imgs/module-settings.jpg)
+<img src="imgs/module-settings.jpg" alt="Module Settings" width="400"/>
 
 ### Put your device into bootloader mode
 
