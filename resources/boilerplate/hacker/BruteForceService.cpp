@@ -10,7 +10,7 @@ BruteForceService::BruteForceService() {
  * If you succeed, the command will call the simulateButtonPressed method with the digit you provide.
  */
 void BruteForceService::simulateButtonPressed(uint8_t col, uint8_t row) {
-        // TODO STEP 1 you need to implement this method. Read all content of this class
+        // TODO STEP 1 you need to implement this method
         // we want to copy the state of the column 'col' to the row 'row' in real time.
         // so while column col is HIGH (idle), we wait...
         // as soon as column 'col' is LOW, we set the row 'row' to LOW state
@@ -27,7 +27,7 @@ void BruteForceService::simulateButtonPressed(uint8_t col, uint8_t row) {
  */
 void BruteForceService::startBruteforce() {
         Serial.println("Bruteforce started");
-        // TODO create your algorithm here!
+        // TODO STEP 2 create your algorithm here!
         Serial.println("Bruteforce finished");
 }
 

@@ -1,8 +1,7 @@
 #include "NFCService.h"
-#include "DisplayService.h"
 
-NFCService::NFCService(DisplayService* ds) {
-  displayService = ds;
+NFCService::NFCService() {
+
 }
 
 void NFCService::init() {
@@ -10,26 +9,30 @@ void NFCService::init() {
     while (!Serial); // for Leonardo/Micro/Zero
   #endif
   Serial.println("Looking for PN532 Chip...");
+  nfc.begin();
   uint32_t versiondata = 0;
+  uint8_t attempts = 0;
   do {
     nfc.begin();
     versiondata = nfc.getFirmwareVersion();
+    attempts++;
     if (!versiondata) {
       Serial.println("Didn't find PN53x board. Reboot device please!");
-      displayService->showNFCConnectivityError();
       delay(500);
     }
-  } while (!versiondata);
-
-  displayService->showNFCSuccess();
-  Serial.print("Found chip PN5");
-  Serial.println((versiondata>>24) & 0xFF, HEX);
-  Serial.print("Firmware ver. ");
-  Serial.print((versiondata>>16) & 0xFF, DEC);
-  Serial.print('.');
-  Serial.println((versiondata>>8) & 0xFF, DEC);
-  // configure board to read RFID tags
-  nfc.SAMConfig();
+  } while (!versiondata && attempts < 3);
+  if (!versiondata) {
+    Serial.println("Will continue with NFC Disabled");
+  } else {
+    Serial.print("Found chip PN5");
+    Serial.println((versiondata>>24) & 0xFF, HEX);
+    Serial.print("Firmware ver. ");
+    Serial.print((versiondata>>16) & 0xFF, DEC);
+    Serial.print('.');
+    Serial.println((versiondata>>8) & 0xFF, DEC);
+    // configure board to read RFID tags
+    nfc.SAMConfig();
+  }
 }
 
 bool NFCService::waitForCard() {
@@ -75,16 +78,12 @@ void NFCService::dumpCard() {
 }
 
 bool NFCService::readBlock(uint8_t block) {
-  return readBlock(block, data);
-}
-
-bool NFCService::readBlock(uint8_t block, uint8_t* dataBuffer) {
   if (!authenticateBlock(block)) {
     return false;
   }
   // Authenticated ... we should be able to read the block now
   // Dump the data into the 'data' array
-  success = nfc.mifareclassic_ReadDataBlock(block, dataBuffer);
+  success = nfc.mifareclassic_ReadDataBlock(block, data);
   if (success) {
     // Read successful
     Serial.print("Block ");
@@ -95,7 +94,7 @@ bool NFCService::readBlock(uint8_t block, uint8_t* dataBuffer) {
       Serial.print(" ");
     }
     // Dump the raw data
-    nfc.PrintHexChar(dataBuffer, 16);
+    nfc.PrintHexChar(data, 16);
   } else {
     // Oops ... something happened
     Serial.print("Block ");
