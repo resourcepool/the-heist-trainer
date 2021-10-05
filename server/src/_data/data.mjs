@@ -5,9 +5,9 @@ export const data = [
         lastName: 'Scofield',
         accessLevel: 3,
         status: 1,
-        dateOfBirth: [1989, 8, 27],
-        dateOfHiring: [2001, 8, 10],
-        lastLogin: [2019, 10, 20, 10, 20, 37],
+        dateOfBirth: '1989-09-27T00:00:00.000Z',
+        dateOfHiring: '2001-09-10T00:00:00.000Z',
+        lastLogin: '2019-11-20T10:20:37.000Z'
     },
     {
         userId: '532065b4-7873-420d-83e8-836d16242639',
@@ -15,9 +15,9 @@ export const data = [
         lastName: 'Ramirez',
         accessLevel: 2,
         status: 0,
-        dateOfBirth: [ 1970, 2, 1 ],
-        dateOfHiring: [ 2001, 10, 17 ],
-        lastLogin: [ 2020, 1, 10, 6, 8, 7 ]
+        dateOfBirth: '1970-03-01T00:00:00.000Z',
+        dateOfHiring: '2001-11-17T00:00:00.000Z',
+        lastLogin: '2020-02-10T06:08:07.000Z'
     },
     {
         userId: 'f15c671f-a35b-4fca-bb34-554fae33ccc8',
@@ -25,9 +25,9 @@ export const data = [
         lastName: 'Jovanovic',
         accessLevel: 3,
         status: 2,
-        dateOfBirth: [ 1965, 7, 2 ],
-        dateOfHiring: [ 2005, 8, 30 ],
-        lastLogin: [ 2020, 1, 12, 19, 16, 9 ]
+        dateOfBirth: '1965-08-02T00:00:00.000Z',
+        dateOfHiring: '2005-09-30T00:00:00.000Z',
+        lastLogin: '2020-02-12T19:16:09.000Z'
     },
     {
         userId: '7aa6f447-6d21-45a9-b419-5908a462b671',
@@ -35,9 +35,9 @@ export const data = [
         lastName: 'Flantier',
         accessLevel: 3,
         status: 2,
-        dateOfBirth: [ 1978, 0, 2 ],
-        dateOfHiring: [ 2011, 9, 13 ],
-        lastLogin: [ 2020, 1, 16, 9, 55, 54 ]
+        dateOfBirth: '1978-01-02T00:00:00.000Z',
+        dateOfHiring: '2011-10-13T00:00:00.000Z',
+        lastLogin: '2020-02-16T09:55:54.000Z'
     },
     {
         userId: '04ca909b-18b7-4607-8872-3b73288b2112',
@@ -45,9 +45,9 @@ export const data = [
         lastName: 'McCarthy',
         accessLevel: 1,
         status: 0,
-        dateOfBirth: [ 1979, 0, 8 ],
-        dateOfHiring: [ 2007, 0, 18 ],
-        lastLogin: [ 2020, 1, 7, 8, 49, 10 ]
+        dateOfBirth: '1979-01-08T00:00:00.000Z',
+        dateOfHiring: '2007-01-18T00:00:00.000Z',
+        lastLogin: '2020-02-07T08:49:10.000Z'
     },
     {
         userId: '58995265-b092-4e83-ba42-f2c4da2b35dc',
@@ -55,9 +55,9 @@ export const data = [
         lastName: 'Hubert',
         accessLevel: 1,
         status: 0,
-        dateOfBirth: [ 1975, 6, 10 ],
-        dateOfHiring: [ 2004, 0, 12 ],
-        lastLogin: [ 2020, 1, 10, 9, 28, 32 ]
+        dateOfBirth: '1975-07-10T00:00:00.000Z',
+        dateOfHiring: '2004-01-12T00:00:00.000Z',
+        lastLogin: '2020-02-10T09:28:32.000Z'
     },
     {
         userId: 'c7087f5e-16ee-4981-8d88-fde45ab26861',
@@ -65,9 +65,9 @@ export const data = [
         lastName: 'Francard',
         accessLevel: 5,
         status: 4,
-        dateOfBirth: [ 1977, 10, 22 ],
-        dateOfHiring: [ 1995, 4, 1 ],
-        lastLogin: [ 2020, 1, 19, 11, 28, 2 ]
+        dateOfBirth: '1977-11-22T00:00:00.000Z',
+        dateOfHiring: '1995-05-01T00:00:00.000Z',
+        lastLogin: '2020-02-19T11:28:02.000Z'
     },
     {
         userId: '6a65cec8-c5ff-48b3-9e7f-7f2b97aa584c',
@@ -75,9 +75,9 @@ export const data = [
         lastName: 'Dimitrov',
         accessLevel: 4,
         status: 0,
-        dateOfBirth: [ 1965, 5, 10 ],
-        dateOfHiring: [ 1995, 2, 8 ],
-        lastLogin: [ 2020, 1, 11, 1, 52, 11 ]
+        dateOfBirth: '1965-06-10T00:00:00.000Z',
+        dateOfHiring: '1995-03-08T00:00:00.000Z',
+        lastLogin: '2020-02-11T01:52:11.000Z'
     },
     {
         userId: 'a8c13b12-ee53-4f43-a83a-1931e068b3e1',
@@ -85,9 +85,9 @@ export const data = [
         lastName: 'Rakitic',
         accessLevel: 3,
         status: 2,
-        dateOfBirth: [ 1971, 9, 8 ],
-        dateOfHiring: [ 2006, 0, 23 ],
-        lastLogin: [ 2020, 1, 14, 0, 23, 59 ]
+        dateOfBirth: '1971-10-08T00:00:00.000Z',
+        dateOfHiring: '2006-01-23T00:00:00.000Z',
+        lastLogin: '2020-02-14T00:23:59.000Z'
     },
     {
         userId: '093e21ed-b64a-4929-9d76-142d14d5c30b',
@@ -95,9 +95,9 @@ export const data = [
         lastName: 'Medvedev',
         accessLevel: 4,
         status: 0,
-        dateOfBirth: [ 1983, 5, 11 ],
-        dateOfHiring: [ 2005, 9, 11 ],
-        lastLogin: [ 2020, 0, 29, 20, 7, 30 ]
+        dateOfBirth: '1983-06-11T00:00:00.000Z',
+        dateOfHiring: '2005-10-11T00:00:00.000Z',
+        lastLogin: '2020-01-29T20:07:30.000Z'
     },
     {
         userId: '4a686fae-8f74-4e77-9983-a2ef973b9e0a',
@@ -105,9 +105,9 @@ export const data = [
         lastName: 'Roberto',
         accessLevel: 2,
         status: 2,
-        dateOfBirth: [ 1970, 3, 14 ],
-        dateOfHiring: [ 2016, 1, 12 ],
-        lastLogin: [ 2020, 1, 18, 17, 39, 4 ]
+        dateOfBirth: '1970-04-14T00:00:00.000Z',
+        dateOfHiring: '2016-02-12T00:00:00.000Z',
+        lastLogin: '2020-02-18T17:39:04.000Z'
     },
     {
         userId: '1589148a-f5ca-456f-aaf4-281b50bf8559',
@@ -115,9 +115,9 @@ export const data = [
         lastName: 'Georges',
         accessLevel: 1,
         status: 0,
-        dateOfBirth: [ 1966, 5, 4 ],
-        dateOfHiring: [ 1999, 10, 17 ],
-        lastLogin: [ 2020, 1, 6, 21, 50, 39 ]
+        dateOfBirth: '1966-06-04T00:00:00.000Z',
+        dateOfHiring: '1999-11-17T00:00:00.000Z',
+        lastLogin: '2020-02-06T21:50:39.000Z'
     },
     {
         userId: 'b8cb0a8b-f587-49fd-9a63-36b83a30ea88',
@@ -125,9 +125,9 @@ export const data = [
         lastName: 'Akinfeiev',
         accessLevel: 2,
         status: 0,
-        dateOfBirth: [ 1958, 8, 4 ],
-        dateOfHiring: [ 1995, 8, 12 ],
-        lastLogin: [ 2020, 2, 1, 6, 52, 56 ]
+        dateOfBirth: '1958-09-04T00:00:00.000Z',
+        dateOfHiring: '1995-09-12T00:00:00.000Z',
+        lastLogin: '2020-03-01T06:52:56.000Z'
     },
     {
         userId: 'a5383974-e39e-4fd0-8505-b6e6b4882ba4',
@@ -135,9 +135,9 @@ export const data = [
         lastName: 'Dumont',
         accessLevel: 3,
         status: 4,
-        dateOfBirth: [ 1963, 0, 4 ],
-        dateOfHiring: [ 2003, 5, 27 ],
-        lastLogin: [ 2020, 1, 15, 16, 53, 3 ]
+        dateOfBirth: '1963-01-04T00:00:00.000Z',
+        dateOfHiring: '2003-06-27T00:00:00.000Z',
+        lastLogin: '2020-02-15T16:53:03.000Z'
     },
     {
         userId: 'd7961922-f741-4cae-a577-1e50b6db500d',
@@ -145,9 +145,9 @@ export const data = [
         lastName: 'Mitrovic',
         accessLevel: 2,
         status: 1,
-        dateOfBirth: [ 1960, 9, 27 ],
-        dateOfHiring: [ 2002, 8, 8 ],
-        lastLogin: [ 2020, 1, 7, 4, 37, 11 ]
+        dateOfBirth: '1960-10-27T00:00:00.000Z',
+        dateOfHiring: '2002-09-08T00:00:00.000Z',
+        lastLogin: '2020-02-07T04:37:11.000Z'
     },
     {
         userId: '071e6c6d-452c-4036-836f-563ef049875c',
@@ -155,9 +155,9 @@ export const data = [
         lastName: 'Pavlovski',
         accessLevel: 2,
         status: 3,
-        dateOfBirth: [ 1968, 1, 6 ],
-        dateOfHiring: [ 2019, 9, 4 ],
-        lastLogin: [ 2020, 1, 9, 12, 36, 27 ]
+        dateOfBirth: '1968-02-06T00:00:00.000Z',
+        dateOfHiring: '2019-10-04T00:00:00.000Z',
+        lastLogin: '2020-02-09T12:36:27.000Z'
     },
     {
         userId: 'b1e29380-4ad0-4610-be41-df0e0c517794',
@@ -165,9 +165,9 @@ export const data = [
         lastName: 'Ocones',
         accessLevel: 3,
         status: 1,
-        dateOfBirth: [ 1973, 4, 12 ],
-        dateOfHiring: [ 2015, 11, 24 ],
-        lastLogin: [ 2020, 1, 6, 11, 15, 50 ]
+        dateOfBirth: '1973-05-12T00:00:00.000Z',
+        dateOfHiring: '2015-12-24T00:00:00.000Z',
+        lastLogin: '2020-02-06T11:15:50.000Z'
     },
     {
         userId: '107d4cf2-958a-47c6-834b-342b08ce40ce',
@@ -175,9 +175,9 @@ export const data = [
         lastName: 'Comolais',
         accessLevel: 3,
         status: 3,
-        dateOfBirth: [ 1974, 11, 1 ],
-        dateOfHiring: [ 2006, 8, 21 ],
-        lastLogin: [ 2020, 1, 1, 6, 15, 40 ]
+        dateOfBirth: '1974-12-01T00:00:00.000Z',
+        dateOfHiring: '2006-09-21T00:00:00.000Z',
+        lastLogin: '2020-02-01T06:15:40.000Z'
     },
     {
         userId: '450b88d4-3099-4903-a55c-a9e51f4fe1fd',
@@ -185,9 +185,9 @@ export const data = [
         lastName: 'Rubialev',
         accessLevel: 3,
         status: 0,
-        dateOfBirth: [ 1965, 9, 7 ],
-        dateOfHiring: [ 1998, 0, 8 ],
-        lastLogin: [ 2020, 0, 31, 8, 42, 49 ]
+        dateOfBirth: '1965-10-07T00:00:00.000Z',
+        dateOfHiring: '1998-01-08T00:00:00.000Z',
+        lastLogin: '2020-01-31T08:42:49.000Z'
     },
     {
         userId: '933e1fc1-fc54-4bb7-b01e-1ad0df294bc2',
@@ -195,9 +195,9 @@ export const data = [
         lastName: 'Rosales',
         accessLevel: 2,
         status: 1,
-        dateOfBirth: [ 1966, 3, 13 ],
-        dateOfHiring: [ 2005, 8, 4 ],
-        lastLogin: [ 2020, 1, 5, 14, 15, 19 ]
+        dateOfBirth: '1966-04-13T00:00:00.000Z',
+        dateOfHiring: '2005-09-04T00:00:00.000Z',
+        lastLogin: '2020-02-05T14:15:19.000Z'
     },
     {
         userId: '9d4c659a-ebbd-4ea9-be3e-5f71a25e07b3',
@@ -205,9 +205,9 @@ export const data = [
         lastName: 'Ocean',
         accessLevel: 4,
         status: 0,
-        dateOfBirth: [2000, 1, 15],
-        dateOfHiring: [2013, 1, 7],
-        lastLogin: [2019, 11, 23, 15, 19, 25],
+        dateOfBirth: '2000-02-15T00:00:00.000Z',
+        dateOfHiring: '2013-02-07T00:00:00.000Z',
+        lastLogin: '2019-12-23T15:19:25.000Z'
     },
     {
         userId: 'c358ced8-be61-4fc2-9605-eef82c1faf65',
@@ -215,9 +215,9 @@ export const data = [
         lastName: 'Comolais',
         accessLevel: 1,
         status: 1,
-        dateOfBirth: [ 1969, 7, 24 ],
-        dateOfHiring: [ 2012, 6, 30 ],
-        lastLogin: [ 2020, 2, 2, 12, 4, 12 ]
+        dateOfBirth: '1969-08-24T00:00:00.000Z',
+        dateOfHiring: '2012-07-30T00:00:00.000Z',
+        lastLogin: '2020-03-02T12:04:12.000Z'
     },
     {
         userId: 'a80a0c60-c9fe-49ce-a428-5ccb6308e715',
@@ -225,9 +225,9 @@ export const data = [
         lastName: 'Rubialev',
         accessLevel: 1,
         status: 2,
-        dateOfBirth: [ 1963, 3, 16 ],
-        dateOfHiring: [ 2015, 3, 5 ],
-        lastLogin: [ 2020, 1, 13, 6, 34, 6 ]
+        dateOfBirth: '1963-04-16T00:00:00.000Z',
+        dateOfHiring: '2015-04-05T00:00:00.000Z',
+        lastLogin: '2020-02-13T06:34:06.000Z'
     },
     {
         userId: '7898b98c-89ff-4dad-8afc-688c26d6e5de',
@@ -235,9 +235,9 @@ export const data = [
         lastName: 'Brocard',
         accessLevel: 2,
         status: 4,
-        dateOfBirth: [ 1980, 8, 24 ],
-        dateOfHiring: [ 2002, 0, 21 ],
-        lastLogin: [ 2020, 0, 31, 19, 6, 49 ]
+        dateOfBirth: '1980-09-24T00:00:00.000Z',
+        dateOfHiring: '2002-01-21T00:00:00.000Z',
+        lastLogin: '2020-01-31T19:06:49.000Z'
     },
     {
         userId: 'bbb5f787-e090-41bb-941e-535dbca8dad4',
@@ -245,9 +245,9 @@ export const data = [
         lastName: 'Ford',
         accessLevel: 1,
         status: 1,
-        dateOfBirth: [ 1980, 9, 31 ],
-        dateOfHiring: [ 1999, 11, 6 ],
-        lastLogin: [ 2020, 1, 9, 19, 4, 16 ]
+        dateOfBirth: '1980-10-31T00:00:00.000Z',
+        dateOfHiring: '1999-12-06T00:00:00.000Z',
+        lastLogin: '2020-02-09T19:04:16.000Z'
     },
     {
         userId: 'ba4c1dc3-8248-425f-943a-7d1d1255c730',
@@ -255,9 +255,9 @@ export const data = [
         lastName: 'De La Batte',
         accessLevel: 2,
         status: 0,
-        dateOfBirth: [ 1969, 1, 13 ],
-        dateOfHiring: [ 2018, 10, 17 ],
-        lastLogin: [ 2020, 1, 5, 9, 24, 35 ]
+        dateOfBirth: '1969-02-13T00:00:00.000Z',
+        dateOfHiring: '2018-11-17T00:00:00.000Z',
+        lastLogin: '2020-02-05T09:24:35.000Z'
     },
     {
         userId: '5feb83b1-1ceb-49bf-a0dc-cd25cdf78b38',
@@ -265,8 +265,8 @@ export const data = [
         lastName: 'Petit',
         accessLevel: 3,
         status: 0,
-        dateOfBirth: [ 1976, 9, 4 ],
-        dateOfHiring: [ 2002, 5, 17 ],
-        lastLogin: [ 2020, 1, 14, 20, 24, 50 ]
+        dateOfBirth: '1976-10-04T00:00:00.000Z',
+        dateOfHiring: '2002-06-17T00:00:00.000Z',
+        lastLogin: '2020-02-14T20:24:50.000Z'
     }
 ];

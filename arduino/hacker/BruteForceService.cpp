@@ -75,7 +75,6 @@ void BruteForceService::setupPinForNeutralAction() {
  * Nothing to change here!
  */
 void BruteForceService::setupPinForBruteforce() {
-        // STEP 1
         // configure the esp32 to read on column pins and write on ROWe pins.
         // a few hints:
         // there are 3 kinds of state for a pin : OUTPUT, INPUT and INPUT_PULLUP.

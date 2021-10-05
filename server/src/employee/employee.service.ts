@@ -6,6 +6,14 @@ import { hexStringToBytes, bytesToPrettyHexString } from '../utils';
 import { DumpDto } from './dto/dump.dto';
 import { Buffer } from "buffer";
 
+function mapToDate(dateOfBirth) {
+    const d = new Date();
+    d.setUTCFullYear(dateOfBirth[0], dateOfBirth[1], dateOfBirth[2]);
+    console.log(dateOfBirth);
+    d.setUTCHours(dateOfBirth[3] || 0, dateOfBirth[4] || 0, dateOfBirth[5] || 0, 0);
+    return d.toISOString();
+}
+
 @Injectable()
 export class EmployeeService {
 
@@ -34,12 +42,11 @@ export class EmployeeService {
         const employeeIdBuf = Buffer.from(hexStringToBytes(result.userId));
         const datesBuf = Buffer.alloc(16);
         const dateOfBirthTimestamp = Math.round(
-            new Date(result.dateOfBirth[0], result.dateOfBirth[1], result.dateOfBirth[2], 0, 0, 0, 0).getTime() / 1000);
-        const dateOfHiringTimestamp = Math.round(
-            new Date(result.dateOfHiring[0], result.dateOfHiring[1], result.dateOfHiring[2], 9, 30, 0, 0).getTime() / 1000);
-        const lastLoginTimestamp = Math.round(
-            new Date(result.lastLogin[0], result.lastLogin[1], result.lastLogin[2], result.lastLogin[3],
-                result.lastLogin[4], result.lastLogin[5], 0).getTime() / 1000);
+            new Date(result.dateOfBirth).getTime() / 1000);
+        const doh = new Date(result.dateOfHiring);
+        doh.setUTCHours(9, 30, 0, 0);
+        const dateOfHiringTimestamp = Math.round(doh.getTime() / 1000);
+        const lastLoginTimestamp = Math.round(new Date(result.lastLogin).getTime() / 1000);
         datesBuf.writeInt32LE(dateOfBirthTimestamp, 0);
         datesBuf.writeInt32LE(dateOfHiringTimestamp, 4);
         datesBuf.writeInt32LE(lastLoginTimestamp, 8);
@@ -69,12 +76,11 @@ export class EmployeeService {
         endTLVHeader.fill(0);
         endTLVHeader.writeUInt8(0xFE, 0);
         const dateOfBirthTimestamp = Math.round(
-            new Date(result.dateOfBirth[0], result.dateOfBirth[1], result.dateOfBirth[2], 0, 0, 0, 0).getTime() / 1000);
-        const dateOfHiringTimestamp = Math.round(
-            new Date(result.dateOfHiring[0], result.dateOfHiring[1], result.dateOfHiring[2], 9, 30, 0, 0).getTime() / 1000);
-        const lastLoginTimestamp = Math.round(
-            new Date(result.lastLogin[0], result.lastLogin[1], result.lastLogin[2], result.lastLogin[3],
-                result.lastLogin[4], result.lastLogin[5], 0).getTime() / 1000);
+            new Date(result.dateOfBirth).getTime() / 1000);
+        const doh = new Date(result.dateOfHiring);
+        doh.setUTCHours(9, 30, 0, 0);
+        const dateOfHiringTimestamp = Math.round(doh.getTime() / 1000);
+        const lastLoginTimestamp = Math.round(new Date(result.lastLogin).getTime() / 1000);
         const dateOfBirthBuffer = Buffer.alloc(4);
         dateOfBirthBuffer.writeInt32LE(dateOfBirthTimestamp, 0);
         const dateOfHiringBuffer = Buffer.alloc(4);

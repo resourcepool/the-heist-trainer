@@ -3,6 +3,7 @@ import { EmployeeService } from './employee.service';
 import { Employee } from '../_interface/employee.model';
 import { ApiTags } from '@nestjs/swagger';
 import { DumpDto } from './dto/dump.dto';
+import {EmployeeDto} from './dto/employee.dto';
 
 @Controller('employees')
 @ApiTags('employees')
@@ -11,8 +12,21 @@ export class EmployeeController {
     }
 
     @Get()
-    getEmployees(): Employee[] {
-        return this.employeeService.getEmployees();
+    getEmployees(): EmployeeDto[] {
+        return this.employeeService.getEmployees().map(e => {
+            return {
+                userId: e.userId,
+                firstName: e.firstName,
+                lastName: e.lastName,
+                accessLevel: e.accessLevel,
+                dateOfBirth: e.dateOfBirth,
+                dateOfHiring: e.dateOfHiring,
+                lastLogin: e.lastLogin,
+                dateOfBirthTimestamp: Math.floor(new Date(e.dateOfBirth).getTime() / 1000),
+                dateOfHiringTimestamp: Math.floor(new Date(e.dateOfHiring).getTime() / 1000),
+                lastLoginTimestamp: Math.floor(new Date(e.lastLogin).getTime() / 1000),
+            };
+        });
     }
 
     @Get('hexdumps')

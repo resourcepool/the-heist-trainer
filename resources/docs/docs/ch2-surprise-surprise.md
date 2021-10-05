@@ -22,25 +22,10 @@ Just so you know, the Arduino uses a SPI Connection in order to communicate with
 
 **Hint:** Everything should be written on the card itself, if you can't read it well, look into the Datasheet in your docs ;)
 
-## Step 2 - Find and decode data stored on the badge
 
-Now, we need to find a way to understand which data is stored on the badge and how it is stored.
+## Step 2 - Find the right info, write it on the NFC-card, open the safe
 
-For this, you need to quickly understand how memory is organized and how TLV payloads are encoded.
-
-Fortunately, we have provided you with the official documentation of MiFARE!
-
-What could help is to understand which "kind" of data is stored on the card.
-
-For reference :
- * a database ID can be an integer (4, 8, or any number of bytes)
- * a UUID is encoded on 16-bytes
- * a String encoded in ASCII takes only one byte per character
- * a Timestamp can be encoded on 4 or 8 bytes. Timestamp of 4 bytes for **January 1st 2020 12:00 AM** is **0x5E0BD2F0** in Hex, **1577833200** in decimal (epoch seconds)
-
-Edit: We will do this step with you. 
-
-## Step 3 - Find the right info
+### About the MEDUSA network
 
 The auth network is available on a wireless connection, with a hidden SSID.
 
@@ -65,10 +50,29 @@ Don't forget we're looking for someone with SC 4 and above...
 
 **Hint 2 : You may need to use a tool to convert some data... visit _"/tools"_ page of the website**
 
-## Step 4 - Becoming SC 4
 
-Found what you needed? Then why don't you go ahead and change the content of your Badge's memory?
+### Understanding all data stored on the badge
 
-Yeah, we thought you'd love it as well!
+We have taught you to understand the data stored on the badge.
+
+You understand how memory is organized and how TLV payloads are encoded.
+(if you don't remember, we have provided you with the official documentation of MiFARE!)
+
+What could help is to understand how data is encoded on the card.
+
+**Remember:** Only the Employee UUID and Last Login Timestamp are to be changed.
+
+For reference :
+ * a UUID is encoded on 16-bytes, 2 characters per byte (should not require any specific encoding)
+ * a String encoded in ASCII takes only one byte per character
+ * a Timestamp can be encoded on 4 or 8 bytes. Timestamp of 4 bytes for **January 1st 2020 12:00 AM** is **0x5E0BD2F0** in Hex, **1577833200** in decimal (epoch seconds)
+
+In our case, you can consider that the timestamp is written as **little-endian**.
+
+### Becoming SC 4
+
+If you found the right data by hacking on the website, and understood which blocks you should change on sector 3, you only need to manually write the blocks using your microcontroller interface.
+
+The command should be **nfc-write**, don't forget to initialize the NFC Reader by using the **nfc-en** command
 
 Let's crack this safe!

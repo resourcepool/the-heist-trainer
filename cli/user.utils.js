@@ -49,12 +49,12 @@ export function getEmployeeCardSectors(userId) {
     endTLVHeader.fill(0);
     endTLVHeader.writeUInt8(0xFE, 0);
     const dateOfBirthTimestamp = Math.round(
-        new Date(result.dateOfBirth[0], result.dateOfBirth[1], result.dateOfBirth[2], 0, 0, 0, 0).getTime() / 1000);
+        new Date(result.dateOfBirth).getTime() / 1000);
+    const doh = new Date(result.dateOfHiring);
+    doh.setUTCHours(9, 30, 0, 0);
     const dateOfHiringTimestamp = Math.round(
-        new Date(result.dateOfHiring[0], result.dateOfHiring[1], result.dateOfHiring[2], 9, 30, 0, 0).getTime() / 1000);
-    const lastLoginTimestamp = Math.round(
-        new Date(result.lastLogin[0], result.lastLogin[1], result.lastLogin[2], result.lastLogin[3],
-            result.lastLogin[4], result.lastLogin[5], 0).getTime() / 1000);
+        doh.getTime() / 1000);
+    const lastLoginTimestamp = Math.round(new Date(result.lastLogin).getTime() / 1000);
     const dateOfBirthBuffer = Buffer.alloc(4);
     dateOfBirthBuffer.writeInt32LE(dateOfBirthTimestamp, 0);
     const dateOfHiringBuffer = Buffer.alloc(4);

@@ -11,7 +11,6 @@ HeistController::HeistController() {
 void HeistController::init() {
     bruteForceService->setupPinForNeutralAction();
     Serial.begin(115200);
-    nfcService->init();
     Serial.println("\r\nWelcome to our Heist Hacking Device!");
     showHelp();
     Serial.println("Enter command, and hit Return:");
@@ -47,8 +46,9 @@ void HeistController::parseCommand() {
 
 void HeistController::showHelp() {
     Serial.println("Commands available:");
-    Serial.println("'send-key': Simulate a button press on a keypad using Digital I/O");
+    Serial.println("'send-key(d)': Simulate a button press of digit 'd' (0-9) on a keypad using Digital I/O");
     Serial.println("'bruteforce': Perform a bruteforce attack using Digital I/O");
+    Serial.println("'nfc-en': enable NFC Card Reader");
     Serial.println("'nfc-dump': dump memory of MiFare Classic NFC Tag");
     Serial.println("'nfc-read': read a memory-block on a MiFare Classic NFC Tag");
     Serial.println("'nfc-write': write a memory-block on a MiFare Classic NFC Tag");
@@ -61,21 +61,16 @@ void HeistController::bruteforce() {
     bruteForceService->setupPinForNeutralAction();
 }
 
-void HeistController::sendTouch(byte touch) {
+void HeistController::sendTouch(byte asciiKey) {
+    uint8_t key = asciiKey - 48;
+    Serial.print("Will enter key ");
     bruteForceService->setupPinForBruteforce();
-    Serial.println("key");
-    Serial.print("> ");
-    Serial.flush();
-    int key; // for incoming serial data
-    while (Serial.available() == 0);
-    while (Serial.available() > 0) {
-    // read the incoming byte:
-      key = Serial.parseInt();
-      if (key>0 && key <=10){
-         bruteForceService->enterKey(key);
-      } else {
-         bruteForceService->enterKey(10);
-      }
+    if (key > 0 && key < 10) {
+        Serial.println(key);
+        bruteForceService->enterKey(key);
+    } else {
+        Serial.println("*");
+        bruteForceService->enterKey(10);
     }
     bruteForceService->setupPinForNeutralAction();
 }
@@ -188,16 +183,33 @@ void HeistController::processCommand() {
         showHelp();
     } else if (equals(cmdBuffer, "bruteforce", 10)) {
         bruteforce();
-    } else if (equals(cmdBuffer, "send-key", 10)) {
-        sendTouch(cmdBuffer[11]);
+    } else if (equals(cmdBuffer, "send-key", 8)) {
+        sendTouch(cmdBuffer[9]);
     } else if (equals(cmdBuffer, "nfc-dump", 8)) {
         nfcService->dumpCard();
+    } else if (equals(cmdBuffer, "nfc-en", 6)) {
+        if (!nfcInitialized) {
+            nfcService->init();
+            nfcInitialized = true;
+        }
     } else if (equals(cmdBuffer, "nfc-read", 8)) {
-        readNFCBlock();
+        if (!nfcInitialized) {
+            Serial.println("Please enable the NFC reader first using the 'nfc-en' command.");
+        } else {
+            readNFCBlock();
+        }
     } else if (equals(cmdBuffer, "nfc-write", 9)) {
-        writeNFCBlock();
+        if (!nfcInitialized) {
+            Serial.println("Please enable the NFC reader first using the 'nfc-en' command.");
+        } else {
+            writeNFCBlock();
+        }
     } else if (equals(cmdBuffer, "reset-tag", 9)) {
-        resetNFCTag();
+        if (!nfcInitialized) {
+            Serial.println("Please enable the NFC reader first using the 'nfc-en' command.");
+        } else {
+            resetNFCTag();
+        }
     } else {
         Serial.println("This command is not valid. Type 'help' for available commands.");
     }

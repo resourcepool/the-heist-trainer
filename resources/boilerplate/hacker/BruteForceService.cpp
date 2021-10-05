@@ -10,7 +10,7 @@ BruteForceService::BruteForceService() {
  * If you succeed, the command will call the simulateButtonPressed method with the digit you provide.
  */
 void BruteForceService::simulateButtonPressed(uint8_t col, uint8_t row) {
-        // TODO implement the content here! Read the code ;)
+        // TODO STEP 1 you need to implement this method. Read all content of this class
         // we want to copy the state of the column 'col' to the row 'row' in real time.
         // so while column col is HIGH (idle), we wait...
         // as soon as column 'col' is LOW, we set the row 'row' to LOW state
@@ -37,7 +37,6 @@ void BruteForceService::startBruteforce() {
  * Nothing to change here!
  */
 void BruteForceService::releaseFinger() {
-    // releasing the finger means waiting for the briefcase to scan every column, while we do absolutely nothing. Except waiting...
     simulateEmptyColumn(COL0);
     simulateEmptyColumn(COL1);
     simulateEmptyColumn(COL2);
@@ -46,7 +45,6 @@ void BruteForceService::releaseFinger() {
 
 /*
  * Nothing to change here!
- * ...but you can look at it to get some ideas for setupPinForBruteforce
  */
 void BruteForceService::setupPinForNeutralAction() {
         pinMode(ROW0, INPUT_PULLUP);

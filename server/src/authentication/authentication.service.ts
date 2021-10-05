@@ -17,7 +17,7 @@ export class AuthenticationService {
 
     isSafeAuthorized(userId: string, lastLogin: number) {
         const user = find(data, u => u.userId === userId);
-        const lastLoginDate = new Date(user.lastLogin[0], user.lastLogin[1], user.lastLogin[2], user.lastLogin[3], user.lastLogin[4], user.lastLogin[5]).getTime() / 1000;
+        const lastLoginDate = new Date(user.lastLogin).getTime() / 1000;
         if (!user) {
             throw new NotFoundException('User not found');
         }

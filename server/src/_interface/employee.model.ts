@@ -5,7 +5,7 @@ export interface Employee {
     firstName: string;
     lastName: string;
     accessLevel: AccessLevelEnum;
-    dateOfBirth: number[];
-    dateOfHiring: number[];
-    lastLogin: number[];
+    dateOfBirth: string;
+    dateOfHiring: string;
+    lastLogin: string;
 }

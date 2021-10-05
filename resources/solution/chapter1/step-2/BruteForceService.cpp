@@ -5,7 +5,7 @@ BruteForceService::BruteForceService() {
 
 
 /**
- * TODO STEP 1 you need to implement this method
+ * STEP 1 you need to implement this method
  * You can test your code by using the hacker "send-key" command.
  * If you succeed, the command will call the simulateButtonPressed method with the digit you provide.
  */
@@ -26,13 +26,12 @@ void BruteForceService::simulateButtonPressed(uint8_t col, uint8_t row) {
 }
 
 /**
- * TODO STEP 2 You need to implement this method
+ * STEP 2 You need to implement this method
  * This method is the bruteforce algorithm.
  * Remember: we want to perform a bruteforce attack, and we also have high assumptions that the first digit is a 3.
  */
 void BruteForceService::startBruteforce() {
         Serial.println("Bruteforce started");
-        // TODO create your algorithm here!
         long timeStart = millis();
         int i = 2999;
         while (!digitalRead(SUCCESS_PIN) && i < 4000) {
@@ -75,7 +74,6 @@ void BruteForceService::setupPinForNeutralAction() {
  * Nothing to change here!
  */
 void BruteForceService::setupPinForBruteforce() {
-        // STEP 1
         // configure the esp32 to read on column pins and write on ROWe pins.
         // a few hints:
         // there are 3 kinds of state for a pin : OUTPUT, INPUT and INPUT_PULLUP.

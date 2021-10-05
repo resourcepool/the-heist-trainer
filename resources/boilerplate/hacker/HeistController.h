@@ -21,6 +21,7 @@ private:
   BruteForceService* bruteForceService;
   uint8_t parsedBytes;
   uint8_t shownBytes;
+  bool nfcInitialized = false;
   char cmdBuffer[200];
   void showHelp();
   void parseCommand();

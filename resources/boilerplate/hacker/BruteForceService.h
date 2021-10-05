@@ -27,7 +27,8 @@ void setupPinForBruteforce();
 void setupPinForNeutralAction();
 
 private:
-void fastDigitalWrite(uint8_t row, bool high);
+void fastDigitalWrite(uint8_t pin, bool high);
+bool fastDigitalRead(uint8_t pin);
 bool isBrowsingColumn(uint8_t col);
 void blockWhileColumnIdle(uint8_t col);
 void blockWhileColumnActive(uint8_t col);
