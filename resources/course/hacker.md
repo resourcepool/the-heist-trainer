@@ -17,9 +17,11 @@ Keypads are usually wired this way:
 Most of the time, keypad controllers also render a direct feedback to tell if key-combination was right or wrong.
 This can either be software or hardware (i.e. a green or red LED), this means you have to physically connect to the LED, to read its value.
 
-Therefore, a target wiring may look like this (the GPIO pins match an ESP32 controller):
+Therefore, a target wiring may look like this:
 
-![Microcontroller wiring](imgs/pinout-chapter1.png)
+![Microcontroller wiring](imgs/pinout-chapter1.jpg)
+
+As of "where should I connect the pins", the developer must have put it somewhere in the code... Maybe in **BruteForceService.h**?
 
 ## Chapter 2. NFC-wiring
 In order to use NFC devices, the hacking microcontroller has to be wired to the NFC board using a SPI connection.
@@ -36,6 +38,6 @@ Most of the time, on ESP32 microcontrollers, SPI connections are using pins 12, 
 
 Beware, your NFC board needs to be wired to "speak" the SPI Standard.
 
-![Microcontroller wiring](imgs/pinout-chapter2.png)
+![Microcontroller wiring](imgs/pinout-chapter2.jpg)
 
 **Warning**: In order for your NFC-Board to work, it also has to be powered on. You can use the VIN of your microcontroller (5V) and your GND to make sure it has the necessary power to work properly.
