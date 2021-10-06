@@ -68,7 +68,6 @@ void HeistController::sendTouch(byte asciiKey) {
     if (key > 0 && key < 10) {
         Serial.println(key);
         bruteForceService->enterKey(key);
-        bruteForceService->enterKey(10);
     } else {
         Serial.println("*");
         bruteForceService->enterKey(10);
