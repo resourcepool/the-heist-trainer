@@ -1,4 +1,4 @@
-<div class="folder" (dblclick)="onDblClick()">
+<div class="folder" [ngClass]="{'forbidden': forbidden}" (dblclick)="onDblClick()">
   <div class="folder_icon"></div>
   <div class="title">{{title}}</div>
 </div>

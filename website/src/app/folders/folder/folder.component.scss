@@ -7,6 +7,13 @@
     padding: 20px;
     border: 1px solid transparent;
 
+    &.forbidden, &:active.forbidden{
+      .folder_icon {
+        background: url('/assets/folder_icon_forbidden.png') center center;
+        background-size: contain;
+      }
+    }
+
     .folder_icon {
       margin: auto;
       width: 100px;

@@ -10,6 +10,7 @@ export class FolderComponent implements OnInit {
 
   @Input() title: string;
   @Input() url: string;
+  @Input() forbidden = false;
 
   constructor(
     private _router: Router,
