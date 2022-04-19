@@ -6,6 +6,8 @@ char userCode[5] = {'0', '0', '0', '0'};
 char password[5];
 const byte ROWS = 4; // Four rows
 const byte COLS = 3; // Three columns
+long debounceTimer = millis();
+const long DEBOUNCE_TIME_THRESHOLD = 150;
 // Define the Keymap
 //char keys[ROWS][COLS] = {
 //        {'1', '2', '3', 'A'},
@@ -30,7 +32,6 @@ byte colPins[COLS] = {26, 25, 33};
 Keypad_light kpd = Keypad_light(makeKeymap(keys), rowPins, colPins, ROWS, COLS);
 long timeKeeper;
 
-#define HUMAN_MODE true // keep it, slower but allow use of the keypad by a human
 #define DISPLAY_TIME true
 
 #define EM_COMMAND 32
@@ -76,6 +77,8 @@ void setup() {
     //generate password
     String(random(3000,4000)).toCharArray(password, 50);
 
+    Serial.print("password is : ");
+    Serial.println(password);
     resetInMemoryUserCode();
                   
     //setup display
@@ -88,9 +91,8 @@ boolean unlocked = false;
 
 
 int lastCodeNum = 0;
-#if HUMAN_MODE == true 
 char lastKeyPressed = ' ';
-#endif
+bool disableDebounce = false;
 void loop() {
   
 #if DISPLAY_TIME == true
@@ -98,13 +100,13 @@ void loop() {
 #endif
 
     char key = kpd.getKey();
-    
-#if HUMAN_MODE == true 
-    if (key && key != lastKeyPressed){    
-#else
-    if (key){
-#endif
 
+    if (millis() - debounceTimer > DEBOUNCE_TIME_THRESHOLD && !disableDebounce){
+        showUserCode();
+    }
+     
+    if (key && key != lastKeyPressed){    
+        debounceTimer = millis();
         if (unlocked) {
                 unlocked = false;
                 resetInMemoryUserCode();
@@ -118,48 +120,48 @@ void loop() {
 
         
             if (key == '*') {
-                if ((userCode[0] == password[0]
-                    && userCode[1] == password[1]
-                    && userCode[2] == password[2]
-                    && userCode[3] == password[3])
-                    ||
-                    (userCode[0] == '#'
-                    && userCode[1] == '0'
-                    && userCode[2] == '#'
-                    && userCode[3] == '0')) {
+              disableDebounce = true;
+              if ((userCode[0] == password[0]
+                  && userCode[1] == password[1]
+                  && userCode[2] == password[2]
+                  && userCode[3] == password[3])
+                  ||
+                  (userCode[0] == '#'
+                  && userCode[1] == '0'
+                  && userCode[2] == '#'
+                  && userCode[3] == '0')) {
 
-                    digitalWrite(successPin, HIGH);
-                    digitalWrite(failPin, LOW);
-                    digitalWrite(EM_COMMAND, HIGH);
-                    Serial.println("BRIEFCASE UNLOCKED !!!!");
-                    Serial.print("CODE IS : ");
-                    Serial.println(userCode);
-                    Serial.println("time spent: ");
-                    Serial.println(millis() - timeKeeper);
-                    unlocked = true;
-                    showUserCode();
-                }else{
-                    Serial.println(userCode);
-                    digitalWrite(successPin, LOW);
-                    digitalWrite(failPin, HIGH);
-                    digitalWrite(EM_COMMAND, LOW);
-                   showUserCode();
-                  resetInMemoryUserCode();
-                }
+                digitalWrite(successPin, HIGH);
+                digitalWrite(failPin, LOW);
+                digitalWrite(EM_COMMAND, HIGH);
+                Serial.println("BRIEFCASE UNLOCKED !!!!");
+                Serial.print("CODE IS : ");
+                Serial.println(userCode);
+                Serial.println("time spent: ");
+                Serial.println(millis() - timeKeeper);
+                unlocked = true;
+                showUserCode();
+              }else{
+                Serial.println(userCode);
+                digitalWrite(successPin, LOW);
+                digitalWrite(failPin, HIGH);
+                digitalWrite(EM_COMMAND, LOW);
+                showUserCode();
+                resetInMemoryUserCode();
+              }
 
             } else {
-                userCode[0] = userCode[1];
-                userCode[1] = userCode[2];
-                userCode[2] = userCode[3];
-                userCode[3] = key;
-//                showUserCode();
+              
+              disableDebounce = false;
+              userCode[0] = userCode[1];
+              userCode[1] = userCode[2];
+              userCode[2] = userCode[3];
+              userCode[3] = key;
             }
         
     }
   }
-#if HUMAN_MODE == true
   lastKeyPressed = key;
-#endif
 }
 #if DISPLAY_TIME == true
 void displayCurrentTime(){

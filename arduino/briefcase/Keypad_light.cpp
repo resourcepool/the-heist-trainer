@@ -63,7 +63,7 @@ char Keypad_light::scanKeys() {
     for (byte c = 0; c < sizeKpd.columns; c++) {
         pin_mode(columnPins[c], OUTPUT);
         pin_write(columnPins[c], LOW);    // Begin column pulse output.
-        for (int i =0; i<11;i++){
+        for (int i =0; i<13;i++){
         __asm__ __volatile__ ("nop"); // insure that hacker has enough time to set the line
         }
         for (byte r = 0; r < sizeKpd.rows; r++) {
