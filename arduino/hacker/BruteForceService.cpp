@@ -114,7 +114,8 @@ bool BruteForceService::isBrowsingColumn(uint8_t col) {
 
 /**
  * Nothing to change here!
- * This method will wait for a column input to become idle (<=> to be set to HIGH)
+ * This method will wait and pause the execution while the specified column is not beeing read.
+ * ie. it waits for a column input to become active (<=> to be set to LOW)
  */
 void BruteForceService::blockWhileColumnIdle(uint8_t col) {
     while (isBrowsingColumn(col)) {}
@@ -122,7 +123,8 @@ void BruteForceService::blockWhileColumnIdle(uint8_t col) {
 
 /**
  * Nothing to change here!
- * This method will wait for a column input to become active (<=> to be set to LOW)
+ * This method will wait and pause the execution till the column is not beeing read anymore. 
+ * it waits for the column input to become idle (<=> to be set to HIGH)
  */
 void BruteForceService::blockWhileColumnActive(uint8_t col) {
     while (!isBrowsingColumn(col)) {}
