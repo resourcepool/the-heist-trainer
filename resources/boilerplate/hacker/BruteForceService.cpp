@@ -18,6 +18,10 @@ void BruteForceService::simulateButtonPressed(uint8_t col, uint8_t row) {
         // as soon as column 'col' is HIGH, we set back the row 'row' to HIGH state
         // and the cycle will be complete
         // last thing but not least, simulate the fact that you have released your finger from the key.
+        
+        // IMPORTANT : You don't have to reimplement the wheel. Look just under the startBruteForce method. A bunch of Utilitary method is provided. 
+        // You do not need to change their implementation. and you do not need to use the Technical methods defined at the end of this file
+        // the comments explain what each method does.
 }
 
 /**
@@ -31,10 +35,49 @@ void BruteForceService::startBruteforce() {
         Serial.println("Bruteforce finished");
 }
 
-
+/*************************************************
+** -------------- UTILITARY METHODS ----------- **
+**************************************************/
 
 /**
- * Nothing to change here!
+ * Implementation doesn't need to be changed
+ *
+ * This method will wait and pause the execution while the specified column is not beeing read.
+ * ie. it waits for a column input to become active (<=> to be set to LOW)
+ */
+void BruteForceService::blockWhileColumnIdle(uint8_t col) {
+    while (isBrowsingColumn(col)) {}
+}
+
+/**
+ * Implementation doesn't need to be changed
+ *
+ * This method will wait and pause the execution till the column is not beeing read anymore. 
+ * it waits for the column input to become idle (<=> to be set to HIGH)
+ */
+void BruteForceService::blockWhileColumnActive(uint8_t col) {
+    while (!isBrowsingColumn(col)) {}
+}
+
+/**
+ * Implementation doesn't need to be changed
+ *
+ * Set Digital Output GPIO to high or low
+ * @param row the target row PIN
+ * @param high true if high, false if low
+ * Note: this uses registers to make the process faster.
+ * Usually, people would use digitalWrite(PIN, HIGH|LOW); instead
+ */
+void BruteForceService::fastDigitalWrite(uint8_t row, bool high) {
+    if (high) {
+        GPIO.out_w1ts = ((uint32_t)1 << row);
+    } else {
+        GPIO.out_w1tc = ((uint32_t)1 << row);
+    }
+}
+
+/**
+ * Implementation doesn't need to be changed
  */
 void BruteForceService::releaseFinger() {
     simulateEmptyColumn(COL0);
@@ -42,6 +85,26 @@ void BruteForceService::releaseFinger() {
     simulateEmptyColumn(COL2);
 }
 
+/**
+ * Implementation doesn't need to be changed
+ *
+ * This method will enter each digit of the provided PIN.
+ * Implementation is recursive to make things easier.
+ * if code is 1234, must simulate 1-2-3-4
+ * pin validation character is not sent by this method.
+ */
+void BruteForceService::enterPIN(int pin) {
+        if (pin >= 10) {
+            enterPIN(pin / 10);
+        }
+        int digit = pin % 10;
+        enterKey(digit);
+}
+
+/*************************************************
+** -------------- TECHNICAL METHODS ----------- **
+**                 NOT TO BE USED               **
+**************************************************/
 
 /*
  * Nothing to change here!
@@ -96,39 +159,6 @@ void BruteForceService::setupPinForBruteforce() {
 bool BruteForceService::isBrowsingColumn(uint8_t col) {
     return GPIO.in >> col & 0x1;
 }
-
-/**
- * Nothing to change here!
- * This method will wait for a column input to become idle (<=> to be set to HIGH)
- */
-void BruteForceService::blockWhileColumnIdle(uint8_t col) {
-    while (isBrowsingColumn(col)) {}
-}
-
-/**
- * Nothing to change here!
- * This method will wait for a column input to become active (<=> to be set to LOW)
- */
-void BruteForceService::blockWhileColumnActive(uint8_t col) {
-    while (!isBrowsingColumn(col)) {}
-}
-
-/**
- * Nothing to change here!
- * Set Digital Output GPIO to high or low
- * @param row the target row PIN
- * @param high true if high, false if low
- * Note: this uses registers to make the process faster.
- * Usually, people would use digitalWrite(PIN, HIGH|LOW); instead
- */
-void BruteForceService::fastDigitalWrite(uint8_t row, bool high) {
-    if (high) {
-        GPIO.out_w1ts = ((uint32_t)1 << row);
-    } else {
-        GPIO.out_w1tc = ((uint32_t)1 << row);
-    }
-}
-
 
 /**
  * Nothing to change here!
@@ -187,18 +217,4 @@ void BruteForceService::enterKey(uint8_t key) {
                 simulateButtonPressed(COL2, ROW3);
                 break;
         }
-}
-
-/**
- * Nothing to change here!
- * This method will enter each digit of the provided PIN.
- * Implementation is recursive to make things easier.
- * if code is 1234, must simulate 1-2-3-4
- */
-void BruteForceService::enterPIN(int pin) {
-        if (pin >= 10) {
-            enterPIN(pin / 10);
-        }
-        int digit = pin % 10;
-        enterKey(digit);
 }
